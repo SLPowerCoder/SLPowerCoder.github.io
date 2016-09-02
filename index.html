@@ -196,7 +196,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
                     </div>
                 </section>
                 
@@ -276,6 +276,76 @@
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-iOS你可能不知道的小技巧" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/09/02/iOS你可能不知道的小技巧/" class="article-date">
+      <time datetime="2016-09-02T09:48:56.000Z" itemprop="datePublished">2016-09-02</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/02/iOS你可能不知道的小技巧/">iOS你可能不知道的小技巧</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>####1.根据十六进制色值返回一个UIColor对象的宏<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">#define USERCOLOR(string) [UIColor colorWithRed:((float)((string &amp; 0xFF0000) &gt;&gt; 16))/255.0 green:((float)((string &amp; 0xFF00) &gt;&gt; 8))/255.0 blue:((float)(string &amp; 0xFF))/255.0 alpha:1.0]</div></pre></td></tr></table></figure></p>
+<p>####2.控制屏幕是否锁屏<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//值为yes的时候可以防止屏幕黑屏，注意在程序结束点时候要设置为no</div><div class="line">[[UIApplication sharedApplication] setIdleTimerDisabled:YES];</div></pre></td></tr></table></figure></p>
+<p>####3.防止自定义导航栏返回按钮时，返回手势失效<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">self.navigationController.interactivePopGestureRecognizer.enabled = YES;</div></pre></td></tr></table></figure></p>
+<p>####4.打印函数，可以打印所在的函数，行数，以及你要打印的值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">#define DLog(fmt, ...) NSLog((@&quot;%s [Line %d] &quot; fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);</div></pre></td></tr></table></figure>
+<p>####5.判读当前系统的是否大于7<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//判断版本是ios7以后版本</div><div class="line">#define IOS_CURRENT_VERSION_IOS7 ([[UIDevice currentDevice].systemVersion floatValue] &lt; 7.0 ? NO : YES)</div></pre></td></tr></table></figure></p>
+<p>####6.单例宏<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">//单利宏 .h文件中声明部分</div><div class="line">#define OBJC_DEF_SINGLETON(className) \</div><div class="line">+ (className*) shared##className ;\</div><div class="line">+ (instancetype) alloc __attribute__((unavailable(&quot;alloc not available, call instance instead&quot;)));\</div><div class="line">+ (instancetype) new __attribute__((unavailable(&quot;new not available, call instance instead&quot;)));</div><div class="line">//单例宏 .m文件实现部分</div><div class="line">#define OBJC_IMPL_SINGLETON(className) \</div><div class="line">\</div><div class="line">+ (className *)shared##className  &#123; \</div><div class="line">static className *shared##className = nil; \</div><div class="line">static dispatch_once_t onceToken; \</div><div class="line">dispatch_once(&amp;onceToken, ^&#123; \</div><div class="line">shared##className = [[super alloc] init]; \</div><div class="line">&#125;); \</div><div class="line">return shared##className; \</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-test" class="article article-type-post" itemscope itemprop="blogPost">
   
