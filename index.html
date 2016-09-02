@@ -48,7 +48,7 @@
 
 
     <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
-    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/yellow/pace-theme-minimal.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="/css/style.css">
@@ -76,7 +76,7 @@
         isCategory: false,
         fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
         scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
-        search: undefined
+        search: true
     }
 </script>
 
@@ -110,6 +110,13 @@
         <p class="header-subtitle">枫叶</p>
         
 
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="false" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
         
 
 
@@ -174,13 +181,13 @@
                     <nav class="header-nav">
                         <ul class="social">
                             
+                                <a class="fa CSDN" href="http://blog.csdn.net/u014041012" title="CSDN"></a>
+                            
                                 <a class="fa Email" href="mailto:sunlei_1030@126.com" title="Email"></a>
                             
                                 <a class="fa GitHub" href="https://github.com/SLPowerCoder" title="GitHub"></a>
                             
                                 <a class="fa 简书" href="http://www.jianshu.com/users/baaa48a4b911/latest_articles" title="简书"></a>
-                            
-                                <a class="fa CSDN" href="http://blog.csdn.net/u014041012" title="CSDN"></a>
                             
                         </ul>
                     </nav>
@@ -212,7 +219,7 @@
                 
                 <section class="switch-part switch-part4">
                 
-                    <div id="js-aboutme">专注于前端</div>
+                    <div id="js-aboutme">枫叶</div>
                 </section>
                 
             </div>
@@ -254,13 +261,13 @@
             <nav class="header-nav">
                         <ul class="social">
                             
+                                <a class="fa CSDN" target="_blank" href="http://blog.csdn.net/u014041012" title="CSDN"></a>
+                            
                                 <a class="fa Email" target="_blank" href="mailto:sunlei_1030@126.com" title="Email"></a>
                             
                                 <a class="fa GitHub" target="_blank" href="https://github.com/SLPowerCoder" title="GitHub"></a>
                             
                                 <a class="fa 简书" target="_blank" href="http://www.jianshu.com/users/baaa48a4b911/latest_articles" title="简书"></a>
-                            
-                                <a class="fa CSDN" target="_blank" href="http://blog.csdn.net/u014041012" title="CSDN"></a>
                             
                         </ul>
             </nav>
@@ -299,7 +306,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        
+        <h2 id="test"><a href="#test" class="headerlink" title="test"></a>test</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">int main()&#123;</div><div class="line">	int x;</div><div class="line">	int y = 1;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
       
     </div>
     
@@ -429,6 +436,27 @@
 
 
 
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
 <div class="scroll" id="scroll">
     <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
     <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
@@ -455,6 +483,23 @@
         }
     
 </script>
+
+    <script>
+        var originTitle = document.title;
+        var titleTime;
+        document.addEventListener("visibilitychange", function() {
+            if (document.hidden) {
+                document.title = "(つェ⊂) 我藏好了哦~ " + originTitle;
+                clearTimeout(titleTime);
+            }
+            else {
+                document.title = "(*´∇｀*) 被你发现啦~ " + originTitle;
+                titleTime = setTimeout(function() {
+                    document.title = originTitle;
+                }, 2000);
+            }
+        })
+    </script>
 
 <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
 </script>
