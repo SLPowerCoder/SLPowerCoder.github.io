@@ -21,7 +21,7 @@
 <meta property="og:url" content="https://slpowercoder.github.io/2016/09/02/iOS你可能不知道的小技巧/index.html">
 <meta property="og:site_name" content="枫叶">
 <meta property="og:description" content="####1.根据十六进制色值返回一个UIColor对象的宏1#define USERCOLOR(string) [UIColor colorWithRed:((float)((string &amp;amp; 0xFF0000) &amp;gt;&amp;gt; 16))/255.0 green:((float)((string &amp;amp; 0xFF00) &amp;gt;&amp;gt; 8))/255.0 blue:((float)">
-<meta property="og:updated_time" content="2016-09-02T09:53:36.000Z">
+<meta property="og:updated_time" content="2016-09-02T10:00:36.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS你可能不知道的小技巧">
 <meta name="twitter:description" content="####1.根据十六进制色值返回一个UIColor对象的宏1#define USERCOLOR(string) [UIColor colorWithRed:((float)((string &amp;amp; 0xFF0000) &amp;gt;&amp;gt; 16))/255.0 green:((float)((string &amp;amp; 0xFF00) &amp;gt;&amp;gt; 8))/255.0 blue:((float)">
@@ -317,6 +317,7 @@
           
         <p>####1.根据十六进制色值返回一个UIColor对象的宏<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">#define USERCOLOR(string) [UIColor colorWithRed:((float)((string &amp; 0xFF0000) &gt;&gt; 16))/255.0 green:((float)((string &amp; 0xFF00) &gt;&gt; 8))/255.0 blue:((float)(string &amp; 0xFF))/255.0 alpha:1.0]</div></pre></td></tr></table></figure></p>
 <p>####2.控制屏幕是否锁屏<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//值为yes的时候可以防止屏幕黑屏，注意在程序结束点时候要设置为no</div><div class="line">[[UIApplication sharedApplication] setIdleTimerDisabled:YES];</div></pre></td></tr></table></figure></p>
+<a id="more"></a>
 <p>####3.防止自定义导航栏返回按钮时，返回手势失效<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">self.navigationController.interactivePopGestureRecognizer.enabled = YES;</div></pre></td></tr></table></figure></p>
 <p>####4.打印函数，可以打印所在的函数，行数，以及你要打印的值</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">#define DLog(fmt, ...) NSLog((@&quot;%s [Line %d] &quot; fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);</div></pre></td></tr></table></figure>
@@ -333,7 +334,7 @@
         <p><span>本文标题:</span><a href="/2016/09/02/iOS你可能不知道的小技巧/">iOS你可能不知道的小技巧</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">枫叶</a></p>
         <p><span>发布时间:</span>2016-09-02, 17:48:56</p>
-        <p><span>最后更新:</span>2016-09-02, 17:53:36</p>
+        <p><span>最后更新:</span>2016-09-02, 18:00:36</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/09/02/iOS你可能不知道的小技巧/" title="iOS你可能不知道的小技巧">https://slpowercoder.github.io/2016/09/02/iOS你可能不知道的小技巧/</a>
             <span class="copy-path" data-clipboard-text="原文: https://slpowercoder.github.io/2016/09/02/iOS你可能不知道的小技巧/　　作者: 枫叶" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
