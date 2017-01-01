@@ -44,8 +44,8 @@
 <blockquote>
 <p>[pure = true] (Boolean): 如果为 true，connector 将执行 shouldComponentUpdate 并且浅对比 mergeProps 的结果，避免不必要的更新，前提是当前组件是一个“纯”组件，它不依赖于任何的输入或 state 而只依赖于 props 和 Redux store 的 state。默认值为 true。<br>[withRef = false] (Boolean): 如果为 true，connector 会保存一个对被包装组件实例的引用，该引用通过 getWrappedInstance() 方法获得。默认值为 false。</p>
 </blockquote>
-<h2 id="redux-redux使用"><a href="#redux-redux使用" class="headerlink" title="redux-redux使用"></a>redux-redux使用</h2><h3 id="1、react-native-组件的生命周期"><a href="#1、react-native-组件的生命周期" class="headerlink" title="1、react native 组件的生命周期"></a>1、react native 组件的生命周期</h3><p><img src="http://7xqg0d.com1.z0.glb.clouddn.com/hexoBlog/react-native%E5%A3%B0%E6%98%8E%E5%91%A8%E6%9C%9F.PNG" alt="redux flow"></p>
-<h3 id="2、react-redux-数据流向"><a href="#2、react-redux-数据流向" class="headerlink" title="2、react-redux 数据流向"></a>2、react-redux 数据流向</h3><blockquote>
+<h2 id="redux-redux使用"><a href="#redux-redux使用" class="headerlink" title="redux-redux使用"></a>redux-redux使用</h2><h3 id="react-native-组件的生命周期"><a href="#react-native-组件的生命周期" class="headerlink" title="react native 组件的生命周期"></a>react native 组件的生命周期</h3><p><img src="http://7xqg0d.com1.z0.glb.clouddn.com/hexoBlog/react-native%E5%A3%B0%E6%98%8E%E5%91%A8%E6%9C%9F.PNG" alt="redux flow"></p>
+<h3 id="react-redux-数据流向"><a href="#react-redux-数据流向" class="headerlink" title="react-redux 数据流向"></a>react-redux 数据流向</h3><blockquote>
 <p>redux是不允许用户来管理state的，而是交给redux管理，redux中有一个全局唯一的store来存放和管理state树。用户通过界面（或者网络请求等）来dispatch一个action，store接收到action后根据action的类型找到reducer中对应的逻辑进行数据处理，reducer处理后会返回一个新的state对象，然后程序根据store.subscribe订阅监听state的变化进行界面更新。</p>
 </blockquote>
 <p><img src="http://7xqg0d.com1.z0.glb.clouddn.com/hexoBlog/redux-flow.JPG" alt="redux flow"></p>
