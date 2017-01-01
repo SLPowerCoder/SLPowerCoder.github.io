@@ -17,15 +17,15 @@
 
 <meta name="description" content="redux基础actionAction ：一般我们是不允许用户直接操作类的state，而是通过触发消息来执行对应的操作，用户或后台服务器通过store.dispatch()来向store发送一个消息（消息至少一个标识该消息的字段type，还可以添加其他字段用户数据传送），store会在内部根据消息的类型type去reducer中执行相应的处理，这个消息我们就叫他为Action，Action本质上是">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ieact-redux学习笔记">
+<meta property="og:title" content="react-redux学习笔记">
 <meta property="og:url" content="https://slpowercoder.github.io/2016/12/30/react-redux笔记/index.html">
 <meta property="og:site_name" content="枫叶">
 <meta property="og:description" content="redux基础actionAction ：一般我们是不允许用户直接操作类的state，而是通过触发消息来执行对应的操作，用户或后台服务器通过store.dispatch()来向store发送一个消息（消息至少一个标识该消息的字段type，还可以添加其他字段用户数据传送），store会在内部根据消息的类型type去reducer中执行相应的处理，这个消息我们就叫他为Action，Action本质上是">
 <meta property="og:image" content="http://7xqg0d.com1.z0.glb.clouddn.com/hexoBlog/react-native%E5%A3%B0%E6%98%8E%E5%91%A8%E6%9C%9F.PNG">
 <meta property="og:image" content="http://7xqg0d.com1.z0.glb.clouddn.com/hexoBlog/redux-flow.JPG">
-<meta property="og:updated_time" content="2017-01-01T05:02:30.000Z">
+<meta property="og:updated_time" content="2017-01-01T15:20:43.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ieact-redux学习笔记">
+<meta name="twitter:title" content="react-redux学习笔记">
 <meta name="twitter:description" content="redux基础actionAction ：一般我们是不允许用户直接操作类的state，而是通过触发消息来执行对应的操作，用户或后台服务器通过store.dispatch()来向store发送一个消息（消息至少一个标识该消息的字段type，还可以添加其他字段用户数据传送），store会在内部根据消息的类型type去reducer中执行相应的处理，这个消息我们就叫他为Action，Action本质上是">
 <meta name="twitter:image" content="http://7xqg0d.com1.z0.glb.clouddn.com/hexoBlog/react-native%E5%A3%B0%E6%98%8E%E5%91%A8%E6%9C%9F.PNG">
 
@@ -59,7 +59,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>ieact-redux学习笔记 | 枫叶</title>
+<title>react-redux学习笔记 | 枫叶</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -188,7 +188,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react-native/">react-native</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react-native/">react-native</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react-redux/">react-redux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redux/">redux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a></li></ul>
                     </div>
                 </section>
                 
@@ -274,7 +274,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      ieact-redux学习笔记
+      react-redux学习笔记
     </h1>
   
 
@@ -289,7 +289,7 @@
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react-native/">react-native</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react-native/">react-native</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react-redux/">react-redux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redux/">redux</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -354,12 +354,12 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2016/12/30/react-redux笔记/">ieact-redux学习笔记</a></p>
+        <p><span>本文标题:</span><a href="/2016/12/30/react-redux笔记/">react-redux学习笔记</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">枫叶</a></p>
         <p><span>发布时间:</span>2016-12-30, 16:44:42</p>
-        <p><span>最后更新:</span>2017-01-01, 13:02:30</p>
+        <p><span>最后更新:</span>2017-01-01, 23:20:43</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2016/12/30/react-redux笔记/" title="ieact-redux学习笔记">https://slpowercoder.github.io/2016/12/30/react-redux笔记/</a>
+            <span>原始链接:</span><a class="post-url" href="/2016/12/30/react-redux笔记/" title="react-redux学习笔记">https://slpowercoder.github.io/2016/12/30/react-redux笔记/</a>
             <span class="copy-path" data-clipboard-text="原文: https://slpowercoder.github.io/2016/12/30/react-redux笔记/　　作者: 枫叶" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -423,7 +423,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"ieact-redux学习笔记　| 枫叶　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"react-redux学习笔记　| 枫叶　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -439,7 +439,7 @@
     
       <div class="duoshuo" id="comments">
     <div id="comment-box" ></div>
-    <div class="ds-thread" id="ds-thread" data-thread-key="2016/12/30/react-redux笔记/" data-title="ieact-redux学习笔记" data-url="https://slpowercoder.github.io/2016/12/30/react-redux笔记/"></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2016/12/30/react-redux笔记/" data-title="react-redux学习笔记" data-url="https://slpowercoder.github.io/2016/12/30/react-redux笔记/"></div>
     <script>
         var duoshuoQuery = {short_name:"null"};
         var loadComment = function(){
@@ -474,7 +474,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/12/30/react-redux笔记/">ieact-redux学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/02/iOS你可能不知道的小技巧/">iOS你可能不知道的小技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/02/hexo的安装和配置/">Mac上 Hexo安装与配置</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/12/30/react-redux笔记/">react-redux学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/02/iOS你可能不知道的小技巧/">iOS你可能不知道的小技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/02/hexo的安装和配置/">Mac上 Hexo安装与配置</a></li></ul>
 
 
 
