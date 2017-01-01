@@ -6,7 +6,7 @@
     <entry>
       <title><![CDATA[ieact-redux学习笔记]]></title>
       <url>https://slpowercoder.github.io/2016/12/30/react-redux%E7%AC%94%E8%AE%B0/</url>
-      <content type="html"><![CDATA[<h2 id="一、-redux"><a href="#一、-redux" class="headerlink" title="一、 redux"></a>一、 redux</h2><h2 id="1、action"><a href="#1、action" class="headerlink" title="1、action"></a>1、action</h2><p><strong>Action</strong> ：一般我们是不允许用户直接操作类的state，而是通过触发消息来执行对应的操作，用户或后台服务器通过store.dispatch()来向store发送一个消息（消息至少一个标识该消息的字段type，还可以添加其他字段用户数据传送），store会在内部根据消息的类型type去reducer中执行相应的处理，这个消息我们就叫他为Action，Action本质上是一个JavaScript对象。<br><a id="more"></a><br>实际编码中一般会把整个应用的消息类型统一放在一个文件ActionTypes.js中<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="keyword">const</span> ADD_TODO = <span class="string">'ADD_TODO'</span></div></pre></td></tr></table></figure></p>
+      <content type="html"><![CDATA[<h2 id="一、-redux基础"><a href="#一、-redux基础" class="headerlink" title="一、 redux基础"></a>一、 redux基础</h2><h2 id="1、action"><a href="#1、action" class="headerlink" title="1、action"></a>1、action</h2><p><strong>Action</strong> ：一般我们是不允许用户直接操作类的state，而是通过触发消息来执行对应的操作，用户或后台服务器通过store.dispatch()来向store发送一个消息（消息至少一个标识该消息的字段type，还可以添加其他字段用户数据传送），store会在内部根据消息的类型type去reducer中执行相应的处理，这个消息我们就叫他为Action，Action本质上是一个JavaScript对象。<br><a id="more"></a><br>实际编码中一般会把整个应用的消息类型统一放在一个文件ActionTypes.js中<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="keyword">const</span> ADD_TODO = <span class="string">'ADD_TODO'</span></div></pre></td></tr></table></figure></p>
 <p>Action的结构如下，各个字段的key的名字可以随意命名，但是类型的key一般都是type，数据类型最好为字符串<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  type: ADD_TODO,</div><div class="line">  text: <span class="string">'Build my first Redux app'</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>随着程序越来越大，你会发现action太多太乱了，所以我们也会把action按业务分类放在各个指定的文件中，但是又有一个问题，若果每个action的字段都有五六个，我们在如下写法岂不是太乱了<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">store.dispatch(</div><div class="line">	&#123;</div><div class="line">  type: ADD_TODO,</div><div class="line">  text: <span class="string">'Build my first Redux app'</span></div><div class="line">&#125;</div><div class="line">)</div></pre></td></tr></table></figure></p>
 <p>于是乎我们就想起来可以将action封装在函数中，这个函数返回一个action对象，这个返回一个action对象的函数我们就称之为ActionCreator，如下所示<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="keyword">let</span> todo = ()=&gt; &#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">	 	type: ADD_TODO,</div><div class="line">  		text: <span class="string">'Build my first Redux app'</span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
@@ -26,7 +26,7 @@
 <li><p><strong>replaceReducer(nextReducer)</strong><br> 替换 store 当前用来计算 state 的 reducer。<br> 这是一个高级 API。只有在你需要实现代码分隔，而且需要立即加载一些 reducer 的时候才可能会用到它。在实现 Redux 热加载机制的时候也可能会用到。</p>
 </li>
 </ul>
-<h2 id="二、-redux-redux"><a href="#二、-redux-redux" class="headerlink" title="二、 redux-redux"></a>二、 redux-redux</h2><p><strong>react-redux</strong>:有两宝，provider和connect<br><strong>Provider</strong>：有一个store属性，我们要将应用的根标签放到Provider标签中，这样应用的所有标签就可以通过context来获取store对象了，但是我们一般不会通过此法来获取store对象，Provider标签是为了给connect函数使用的。</p>
+<h2 id="二、-redux-redux基础"><a href="#二、-redux-redux基础" class="headerlink" title="二、 redux-redux基础"></a>二、 redux-redux基础</h2><p><strong>react-redux</strong>:有两宝，provider和connect<br><strong>Provider</strong>：有一个store属性，我们要将应用的根标签放到Provider标签中，这样应用的所有标签就可以通过context来获取store对象了，但是我们一般不会通过此法来获取store对象，Provider标签是为了给connect函数使用的。</p>
 <p><strong>connect([mapStateToProps], [mapDispatchToProps], [mergeProps], [options])</strong></p>
 <p>参数一：[mapStateToProps(state, [ownProps]): stateProps] (Function)</p>
 <blockquote>
@@ -43,6 +43,15 @@
 <p>参数四：[options] (Object) 如果指定这个参数，可以定制 connector 的行为。</p>
 <blockquote>
 <p>[pure = true] (Boolean): 如果为 true，connector 将执行 shouldComponentUpdate 并且浅对比 mergeProps 的结果，避免不必要的更新，前提是当前组件是一个“纯”组件，它不依赖于任何的输入或 state 而只依赖于 props 和 Redux store 的 state。默认值为 true。<br>[withRef = false] (Boolean): 如果为 true，connector 会保存一个对被包装组件实例的引用，该引用通过 getWrappedInstance() 方法获得。默认值为 false。</p>
+</blockquote>
+<h2 id="二、-redux-redux使用"><a href="#二、-redux-redux使用" class="headerlink" title="二、 redux-redux使用"></a>二、 redux-redux使用</h2><p>###1、react native 组件的生命周期<br><img src="http://7xqg0d.com1.z0.glb.clouddn.com/hexoBlog/react-native%E5%A3%B0%E6%98%8E%E5%91%A8%E6%9C%9F.PNG" alt="redux flow"></p>
+<p>###2、react-redux 数据流向</p>
+<blockquote>
+<p>redux是不允许用户来管理state的，而是交给redux管理，redux中有一个全局唯一的store来存放和管理state树。用户通过界面（或者网络请求等）来dispatch一个action，store接收到action后根据action的类型找到reducer中对应的逻辑进行数据处理，reducer处理后会返回一个新的state对象，然后程序根据store.subscribe订阅监听state的变化进行界面更新。</p>
+</blockquote>
+<p><img src="http://7xqg0d.com1.z0.glb.clouddn.com/hexoBlog/redux-flow.JPG" alt="redux flow"></p>
+<blockquote>
+<p>react-redux是redux的作者为react native封装的一个库，原理和redux一样，只是使用起来更方便了。</p>
 </blockquote>
 ]]></content>
     </entry>
