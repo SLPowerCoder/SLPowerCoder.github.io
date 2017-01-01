@@ -23,7 +23,7 @@
 <meta property="og:description" content="一、 redux基础1、actionAction ：一般我们是不允许用户直接操作类的state，而是通过触发消息来执行对应的操作，用户或后台服务器通过store.dispatch()来向store发送一个消息（消息至少一个标识该消息的字段type，还可以添加其他字段用户数据传送），store会在内部根据消息的类型type去reducer中执行相应的处理，这个消息我们就叫他为Action，Actio">
 <meta property="og:image" content="http://7xqg0d.com1.z0.glb.clouddn.com/hexoBlog/react-native%E5%A3%B0%E6%98%8E%E5%91%A8%E6%9C%9F.PNG">
 <meta property="og:image" content="http://7xqg0d.com1.z0.glb.clouddn.com/hexoBlog/redux-flow.JPG">
-<meta property="og:updated_time" content="2017-01-01T04:52:47.000Z">
+<meta property="og:updated_time" content="2017-01-01T04:55:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ieact-redux学习笔记">
 <meta name="twitter:description" content="一、 redux基础1、actionAction ：一般我们是不允许用户直接操作类的state，而是通过触发消息来执行对应的操作，用户或后台服务器通过store.dispatch()来向store发送一个消息（消息至少一个标识该消息的字段type，还可以添加其他字段用户数据传送），store会在内部根据消息的类型type去reducer中执行相应的处理，这个消息我们就叫他为Action，Actio">
@@ -337,15 +337,15 @@
 <blockquote>
 <p>[pure = true] (Boolean): 如果为 true，connector 将执行 shouldComponentUpdate 并且浅对比 mergeProps 的结果，避免不必要的更新，前提是当前组件是一个“纯”组件，它不依赖于任何的输入或 state 而只依赖于 props 和 Redux store 的 state。默认值为 true。<br>[withRef = false] (Boolean): 如果为 true，connector 会保存一个对被包装组件实例的引用，该引用通过 getWrappedInstance() 方法获得。默认值为 false。</p>
 </blockquote>
-<h2 id="二、-redux-redux使用"><a href="#二、-redux-redux使用" class="headerlink" title="二、 redux-redux使用"></a>二、 redux-redux使用</h2><p>###1、react native 组件的生命周期<br><img src="http://7xqg0d.com1.z0.glb.clouddn.com/hexoBlog/react-native%E5%A3%B0%E6%98%8E%E5%91%A8%E6%9C%9F.PNG" alt="redux flow"></p>
-<p>###2、react-redux 数据流向</p>
-<blockquote>
+<h2 id="二、-redux-redux使用"><a href="#二、-redux-redux使用" class="headerlink" title="二、 redux-redux使用"></a>二、 redux-redux使用</h2><h3 id="1、react-native-组件的生命周期"><a href="#1、react-native-组件的生命周期" class="headerlink" title="1、react native 组件的生命周期"></a>1、react native 组件的生命周期</h3><p><img src="http://7xqg0d.com1.z0.glb.clouddn.com/hexoBlog/react-native%E5%A3%B0%E6%98%8E%E5%91%A8%E6%9C%9F.PNG" alt="redux flow"></p>
+<h3 id="2、react-redux-数据流向"><a href="#2、react-redux-数据流向" class="headerlink" title="2、react-redux 数据流向"></a>2、react-redux 数据流向</h3><blockquote>
 <p>redux是不允许用户来管理state的，而是交给redux管理，redux中有一个全局唯一的store来存放和管理state树。用户通过界面（或者网络请求等）来dispatch一个action，store接收到action后根据action的类型找到reducer中对应的逻辑进行数据处理，reducer处理后会返回一个新的state对象，然后程序根据store.subscribe订阅监听state的变化进行界面更新。</p>
 </blockquote>
 <p><img src="http://7xqg0d.com1.z0.glb.clouddn.com/hexoBlog/redux-flow.JPG" alt="redux flow"></p>
 <blockquote>
 <p>react-redux是redux的作者为react native封装的一个库，原理和redux一样，只是使用起来更方便了。</p>
 </blockquote>
+<p><em>注：图片来源于互联网，如有侵权，请告知</em></p>
 
       
     </div>
@@ -357,7 +357,7 @@
         <p><span>本文标题:</span><a href="/2016/12/30/react-redux笔记/">ieact-redux学习笔记</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">枫叶</a></p>
         <p><span>发布时间:</span>2016-12-30, 16:44:42</p>
-        <p><span>最后更新:</span>2017-01-01, 12:52:47</p>
+        <p><span>最后更新:</span>2017-01-01, 12:55:50</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/12/30/react-redux笔记/" title="ieact-redux学习笔记">https://slpowercoder.github.io/2016/12/30/react-redux笔记/</a>
             <span class="copy-path" data-clipboard-text="原文: https://slpowercoder.github.io/2016/12/30/react-redux笔记/　　作者: 枫叶" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -387,7 +387,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、-redux基础"><span class="toc-number">1.</span> <span class="toc-text">一、 redux基础</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1、action"><span class="toc-number">2.</span> <span class="toc-text">1、action</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、reducer"><span class="toc-number">3.</span> <span class="toc-text">2、reducer</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、store"><span class="toc-number">4.</span> <span class="toc-text">3、store</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、-redux-redux基础"><span class="toc-number">5.</span> <span class="toc-text">二、 redux-redux基础</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、-redux-redux使用"><span class="toc-number">6.</span> <span class="toc-text">二、 redux-redux使用</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、-redux基础"><span class="toc-number">1.</span> <span class="toc-text">一、 redux基础</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1、action"><span class="toc-number">2.</span> <span class="toc-text">1、action</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、reducer"><span class="toc-number">3.</span> <span class="toc-text">2、reducer</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、store"><span class="toc-number">4.</span> <span class="toc-text">3、store</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、-redux-redux基础"><span class="toc-number">5.</span> <span class="toc-text">二、 redux-redux基础</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、-redux-redux使用"><span class="toc-number">6.</span> <span class="toc-text">二、 redux-redux使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、react-native-组件的生命周期"><span class="toc-number">6.1.</span> <span class="toc-text">1、react native 组件的生命周期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、react-redux-数据流向"><span class="toc-number">6.2.</span> <span class="toc-text">2、react-redux 数据流向</span></a></li></ol></li></ol>
         
     </div>
     <style>

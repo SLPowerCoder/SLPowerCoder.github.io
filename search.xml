@@ -44,15 +44,15 @@
 <blockquote>
 <p>[pure = true] (Boolean): 如果为 true，connector 将执行 shouldComponentUpdate 并且浅对比 mergeProps 的结果，避免不必要的更新，前提是当前组件是一个“纯”组件，它不依赖于任何的输入或 state 而只依赖于 props 和 Redux store 的 state。默认值为 true。<br>[withRef = false] (Boolean): 如果为 true，connector 会保存一个对被包装组件实例的引用，该引用通过 getWrappedInstance() 方法获得。默认值为 false。</p>
 </blockquote>
-<h2 id="二、-redux-redux使用"><a href="#二、-redux-redux使用" class="headerlink" title="二、 redux-redux使用"></a>二、 redux-redux使用</h2><p>###1、react native 组件的生命周期<br><img src="http://7xqg0d.com1.z0.glb.clouddn.com/hexoBlog/react-native%E5%A3%B0%E6%98%8E%E5%91%A8%E6%9C%9F.PNG" alt="redux flow"></p>
-<p>###2、react-redux 数据流向</p>
-<blockquote>
+<h2 id="二、-redux-redux使用"><a href="#二、-redux-redux使用" class="headerlink" title="二、 redux-redux使用"></a>二、 redux-redux使用</h2><h3 id="1、react-native-组件的生命周期"><a href="#1、react-native-组件的生命周期" class="headerlink" title="1、react native 组件的生命周期"></a>1、react native 组件的生命周期</h3><p><img src="http://7xqg0d.com1.z0.glb.clouddn.com/hexoBlog/react-native%E5%A3%B0%E6%98%8E%E5%91%A8%E6%9C%9F.PNG" alt="redux flow"></p>
+<h3 id="2、react-redux-数据流向"><a href="#2、react-redux-数据流向" class="headerlink" title="2、react-redux 数据流向"></a>2、react-redux 数据流向</h3><blockquote>
 <p>redux是不允许用户来管理state的，而是交给redux管理，redux中有一个全局唯一的store来存放和管理state树。用户通过界面（或者网络请求等）来dispatch一个action，store接收到action后根据action的类型找到reducer中对应的逻辑进行数据处理，reducer处理后会返回一个新的state对象，然后程序根据store.subscribe订阅监听state的变化进行界面更新。</p>
 </blockquote>
 <p><img src="http://7xqg0d.com1.z0.glb.clouddn.com/hexoBlog/redux-flow.JPG" alt="redux flow"></p>
 <blockquote>
 <p>react-redux是redux的作者为react native封装的一个库，原理和redux一样，只是使用起来更方便了。</p>
 </blockquote>
+<p><em>注：图片来源于互联网，如有侵权，请告知</em></p>
 ]]></content>
     </entry>
     
