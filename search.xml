@@ -10,7 +10,7 @@
 <blockquote>
 <p>我目前的RN版本是0.39，命令行的版本是react-native-cli:2.0.1</p>
 </blockquote>
-<p>###解决办法：</p>
+<h3 id="解决办法："><a href="#解决办法：" class="headerlink" title="解决办法："></a>解决办法：</h3><a id="more"></a>
 <p>情况一：如果npm install安装失败的话<br><br>1、git checkout 0.xx-stable切换到稳定的分支，我切换的是0.41-stable版本，安装运行成功。<br><br>2、npm install<br><br>3、找到Examples，里面有四个例子，可以用Xcode打开运行<br></p>
 <p>情况二：npm install 安装成功，但运行失败<br><br>1、git checkout 0.xx-stable切换到稳定的分支<br><br>2、fm -rf node_modules &amp;&amp; npm install<br><br>3、找到Examples，里面有四个例子，可以用Xcode打开运行<br></p>
 ]]></content>
