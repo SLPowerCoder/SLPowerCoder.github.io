@@ -8,10 +8,9 @@
       <url>https://slpowercoder.github.io/2017/01/07/%E8%BF%90%E8%A1%8Creact%20native%20%E5%AE%98%E6%96%B9%E4%BE%8B%E5%AD%90%E5%87%BA%E9%94%99/</url>
       <content type="html"><![CDATA[<p>学习一样新的东西官网文档和官方源码例子无疑是最好的选择，所以今天clone了官方的例子，100多兆，如果网速不好的话会等待很长时间 ~_~!!，然后直接cd到根目录执行了npm install安装了依赖，可是安装的过程中出错了（也有可能安装成功了，但是运行失败了），估计例子上的版本跟我安装的rn版本不兼容吧。</p>
 <blockquote>
-<p>我目前的RN版本是0.39，命令行的版本是react-native-cli:2.0.1</p>
+<p>我目前的RN版本是0.39，命令行的版本是react-native-cli:2.0.1<br><a id="more"></a><br>先上官方运行效果图：<br><img src="http://upload-images.jianshu.io/upload_images/1229960-edb9d9b477259960.gif?imageMogr2/auto-orient/strip" alt="官方效果图"></p>
+<h3 id="解决办法："><a href="#解决办法：" class="headerlink" title="解决办法："></a>解决办法：</h3><p>情况一：如果npm install安装失败的话<br><br>1、git checkout 0.xx-stable切换到稳定的分支，我切换的是0.41-stable版本，安装运行成功。<br><br>2、npm install<br><br>3、找到Examples，里面有四个例子，可以用Xcode打开运行<br></p>
 </blockquote>
-<h3 id="解决办法："><a href="#解决办法：" class="headerlink" title="解决办法："></a>解决办法：</h3><a id="more"></a>
-<p>情况一：如果npm install安装失败的话<br><br>1、git checkout 0.xx-stable切换到稳定的分支，我切换的是0.41-stable版本，安装运行成功。<br><br>2、npm install<br><br>3、找到Examples，里面有四个例子，可以用Xcode打开运行<br></p>
 <p>情况二：npm install 安装成功，但运行失败<br><br>1、git checkout 0.xx-stable切换到稳定的分支<br><br>2、fm -rf node_modules &amp;&amp; npm install<br><br>3、找到Examples，里面有四个例子，可以用Xcode打开运行<br></p>
 ]]></content>
     </entry>
