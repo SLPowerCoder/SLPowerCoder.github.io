@@ -48,13 +48,14 @@
 <li><p>(NSString *)name<br>{<br>// 根据关联的key，获取关联的值。<br>return objc_getAssociatedObject(self, key);<br>}</p>
 </li>
 <li><p>(void)setName:(NSString *)name<br>{<br>// 参数一：目标对象<br>// 参数二：关联的key，可以通过这个key获取<br>// 参数三：关联的value<br>// 参数四：关联的策略<br>objc_setAssociatedObject(self, key, name, OBJC_ASSOCIATION_RETAIN_NONATOMIC);<br>}<br>@end</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">看到这里你也许就会说，这TMD不是把变量给添加上去了吗？我表示默默一笑，如果你打印IVarList你就会发现并没有这个变量，只能打印出添加的属性。</div><div class="line">其实**对象关联**只是关联上去了，并没有把变量添加进去，说了这么多这回你该信了吧。</div><div class="line">***原因就是分类不是类，他没有ISA指针，下面是ISA指针，可以看出他本质上是一个结构体（只是换了个马甲被称之为Class类型，怕你迷糊，再说明白一点，ISA指针就是Class类型），通过ISA指针才能找指向变量的ivars，也就是说你都不知道变量的家，你怎么去给它生猴子啊，但是奇怪了，ISA指针里没有指向属性数组的指针，没有是对的，要不然这一段的解释就废了，可是讲真，属性指针在哪啊？？？有知道的小伙伴请告诉我一下 &gt;_&lt; !!!***</div></pre></td></tr></table></figure>
 </li>
 </ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">看到这里你也许就会说，这TMD不是把变量给添加上去了吗？我表示默默一笑，如果你打印IVarList你就会发现并没有这个变量，只能打印出添加的属性。</div><div class="line">其实**对象关联**只是关联上去了，并没有把变量添加进去，说了这么多这回你该信了吧。</div><div class="line">***原因就是分类不是类，他没有ISA指针，下面是ISA指针，可以看出他本质上是一个结构体（只是换了个马甲被称之为Class类型，怕你迷糊，再说明白一点，ISA指针就是Class类型），通过ISA指针才能找指向变量的ivars，也就是说你都不知道变量的家，你怎么去给它生猴子啊，但是奇怪了，ISA指针里没有指向属性数组的指针，没有是对的，要不然这一段的解释就废了，可是讲真，属性指针在哪啊？？？有知道的小伙伴请告诉我一下 &gt;_&lt; !!!***</div></pre></td></tr></table></figure>
 <p>struct objc_class {<br>    Class isa  OBJC_ISA_AVAILABILITY;</p>
 <p>#if !<strong>OBJC2</strong><br>    Class super_class                                        OBJC2_UNAVAILABLE;<br>    const char <em>name                                         OBJC2_UNAVAILABLE;<br>    long version                                             OBJC2_UNAVAILABLE;<br>    long info                                                OBJC2_UNAVAILABLE;<br>    long instance_size                                       OBJC2_UNAVAILABLE;<br>    struct objc_ivar_list </em>ivars                             OBJC2_UNAVAILABLE;<br>    struct objc_method_list <em>*methodLists                    OBJC2_UNAVAILABLE;<br>    struct objc_cache </em>cache                                 OBJC2_UNAVAILABLE;<br>    struct objc_protocol_list *protocols                     OBJC2_UNAVAILABLE;</p>
 <p>#endif</p>
-<p>} OBJC2_UNAVAILABLE;<br>/<em> Use <code>Class</code> instead of `struct objc_class </em>` */<br>```</p>
+<p>} OBJC2_UNAVAILABLE;<br>/<em> Use <code>Class</code> instead of `struct objc_class </em>` */</p>
+<p>```</p>
 <h5 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h5><p>分类中可以给一个对象（类也是对象）添加属性，但是不能添加成员变量，只能<strong>关联</strong>上去。<br><strong>注意：</strong>如果不信，你可以自己再打印一遍吧，会发现只能打印出添加的属性，打印不出变量。</p>
 ]]></content>
     </entry>
