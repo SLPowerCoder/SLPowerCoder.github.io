@@ -14,19 +14,23 @@
 <meta name="author" content="枫叶" />
 
 
-    
-    
 
-
-<meta name="description" content="坐看云起时">
-<meta property="og:type" content="website">
-<meta property="og:title" content="枫叶">
-<meta property="og:url" content="https://slpowercoder.github.io/index.html">
+<meta name="description" content="想必大家都知道在分类中能扩展属性，而对于能不能扩展属性，能不能扩展成员变量是不是有点模糊，今天元宵节，我就清清嗓子说上两句吧
+论点1.分类中是能扩展属性的2.分类是不能给一个类扩展成员变量的
+先唠唠嗑强调一下，分类不是类，它只是对类的一个扩展，没有ISA指针，我们知道我们可以通过runtime在不影响原来模块的情况下给模块扩展方法，有没有感觉这一句话好像也可以描述分类，所以你可以认为分类是实现这一">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS中为什么非要用runtime才能在分类中扩展属性呢">
+<meta property="og:url" content="https://slpowercoder.github.io/2017/02/11/iOS中为什么非要用runtime才能在分类中扩展属性呢/index.html">
 <meta property="og:site_name" content="枫叶">
-<meta property="og:description" content="坐看云起时">
+<meta property="og:description" content="想必大家都知道在分类中能扩展属性，而对于能不能扩展属性，能不能扩展成员变量是不是有点模糊，今天元宵节，我就清清嗓子说上两句吧
+论点1.分类中是能扩展属性的2.分类是不能给一个类扩展成员变量的
+先唠唠嗑强调一下，分类不是类，它只是对类的一个扩展，没有ISA指针，我们知道我们可以通过runtime在不影响原来模块的情况下给模块扩展方法，有没有感觉这一句话好像也可以描述分类，所以你可以认为分类是实现这一">
+<meta property="og:updated_time" content="2017-02-11T15:36:36.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="枫叶">
-<meta name="twitter:description" content="坐看云起时">
+<meta name="twitter:title" content="iOS中为什么非要用runtime才能在分类中扩展属性呢">
+<meta name="twitter:description" content="想必大家都知道在分类中能扩展属性，而对于能不能扩展属性，能不能扩展成员变量是不是有点模糊，今天元宵节，我就清清嗓子说上两句吧
+论点1.分类中是能扩展属性的2.分类是不能给一个类扩展成员变量的
+先唠唠嗑强调一下，分类不是类，它只是对类的一个扩展，没有ISA指针，我们知道我们可以通过runtime在不影响原来模块的情况下给模块扩展方法，有没有感觉这一句话好像也可以描述分类，所以你可以认为分类是实现这一">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -54,13 +58,11 @@
 <link rel="stylesheet" href="/css/style.css">
 
 
-    <style> .article { opacity: 0;} </style>
-
 
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>枫叶</title>
+<title>iOS中为什么非要用runtime才能在分类中扩展属性呢 | 枫叶</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -69,8 +71,8 @@
     var yiliaConfig = {
         fancybox: true,
         animate: true,
-        isHome: true,
-        isPost: false,
+        isHome: false,
+        isPost: true,
         isArchive: false,
         isTag: false,
         isCategory: false,
@@ -256,24 +258,13 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap">
-  
-    <article id="post-iOS中为什么非要用runtime才能在分类中扩展属性呢" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-iOS中为什么非要用runtime才能在分类中扩展属性呢" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2017/02/11/iOS中为什么非要用runtime才能在分类中扩展属性呢/" class="article-date">
       <time datetime="2017-02-11T15:36:36.000Z" itemprop="datePublished">2017-02-11</time>
 </a>
 
- 
-    <a href="/2017/02/11/iOS中为什么非要用runtime才能在分类中扩展属性呢/#comments" title="查看评论">
-        <i class="fa fa-comments-o" aria-hidden="true"></i>
-        <span class="count-comment"></span>
-        
-            <span class="ds-thread-count"  data-thread-key="2017/02/11/iOS中为什么非要用runtime才能在分类中扩展属性呢/" ></span>
-        
-        
-    </a>
 
     </div>
   
@@ -285,12 +276,27 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/11/iOS中为什么非要用runtime才能在分类中扩展属性呢/">iOS中为什么非要用runtime才能在分类中扩展属性呢</a>
+    <h1 class="article-title" itemprop="name">
+      iOS中为什么非要用runtime才能在分类中扩展属性呢
     </h1>
   
 
       </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/category/">category</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/runtime/">runtime</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
       
     
     <div class="article-entry" itemprop="articleBody">
@@ -318,352 +324,138 @@
       
     </div>
     
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/iOS/">iOS</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/category/">category</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/runtime/">runtime</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
   </div>
   
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-运行react native 官方例子出错" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/01/07/运行react native 官方例子出错/" class="article-date">
-      <time datetime="2017-01-07T12:07:16.000Z" itemprop="datePublished">2017-01-07</time>
-</a>
-
- 
-    <a href="/2017/01/07/运行react native 官方例子出错/#comments" title="查看评论">
-        <i class="fa fa-comments-o" aria-hidden="true"></i>
-        <span class="count-comment"></span>
-        
-            <span class="ds-thread-count"  data-thread-key="2017/01/07/运行react native 官方例子出错/" ></span>
-        
-        
-    </a>
-
-    </div>
-  
-  <div class="article-inner">
     
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/07/运行react native 官方例子出错/">运行react native 官方例子出错的解决办法</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <p>学习一样新的东西官网文档和官方源码例子无疑是最好的选择，所以今天clone了官方的例子，100多兆，如果网速不好的话会等待很长时间 ~_~!!，然后直接cd到根目录执行了npm install安装了依赖，可是安装的过程中出错了（也有可能安装成功了，但是运行失败了），估计例子上的版本跟我安装的rn版本不兼容吧。</p>
-<blockquote>
-<p>我目前的RN版本是0.39，命令行的版本是react-native-cli:2.0.1</p>
-</blockquote>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/react-native/">react-native</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react-native/">react-native</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2017/01/07/运行react native 官方例子出错/#more">阅读全文 >></a>
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/02/11/iOS中为什么非要用runtime才能在分类中扩展属性呢/">iOS中为什么非要用runtime才能在分类中扩展属性呢</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">枫叶</a></p>
+        <p><span>发布时间:</span>2017-02-11, 23:36:36</p>
+        <p><span>最后更新:</span>2017-02-11, 23:36:36</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/02/11/iOS中为什么非要用runtime才能在分类中扩展属性呢/" title="iOS中为什么非要用runtime才能在分类中扩展属性呢">https://slpowercoder.github.io/2017/02/11/iOS中为什么非要用runtime才能在分类中扩展属性呢/</a>
+            <span class="copy-path" data-clipboard-text="原文: https://slpowercoder.github.io/2017/02/11/iOS中为什么非要用runtime才能在分类中扩展属性呢/　　作者: 枫叶" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-react-redux入门" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/12/30/react-redux入门/" class="article-date">
-      <time datetime="2016-12-30T08:44:42.000Z" itemprop="datePublished">2016-12-30</time>
-</a>
-
- 
-    <a href="/2016/12/30/react-redux入门/#comments" title="查看评论">
-        <i class="fa fa-comments-o" aria-hidden="true"></i>
-        <span class="count-comment"></span>
-        
-            <span class="ds-thread-count"  data-thread-key="2016/12/30/react-redux入门/" ></span>
-        
-        
-    </a>
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/12/30/react-redux入门/">react-redux入门</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <h2 id="redux基础"><a href="#redux基础" class="headerlink" title="redux基础"></a>redux基础</h2><h3 id="action"><a href="#action" class="headerlink" title="action"></a>action</h3><p><strong>Action</strong> ：一般我们是不允许用户直接操作类的state，而是通过触发消息来执行对应的操作，用户或后台服务器通过store.dispatch()来向store发送一个消息（消息至少一个标识该消息的字段type，还可以添加其他字段用户数据传送），store会在内部根据消息的类型type去reducer中执行相应的处理，这个消息我们就叫他为Action，Action本质上是一个JavaScript对象。<br>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/react-native/">react-native</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react-native/">react-native</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react-redux/">react-redux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redux/">redux</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2016/12/30/react-redux入门/#more">阅读全文 >></a>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
         </p>
-      
-      <div class="clearfix"></div>
     </div>
-    
-  </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2017/01/07/运行react native 官方例子出错/">
+                    运行react native 官方例子出错的解决办法
+                </a>
+            </div>
+        
+    </nav>
+
   
 </article>
 
-
-
-
-
-
-
-
-
-  
-    <article id="post-iOS你可能不知道的小技巧" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/09/02/iOS你可能不知道的小技巧/" class="article-date">
-      <time datetime="2016-09-02T09:48:56.000Z" itemprop="datePublished">2016-09-02</time>
-</a>
-
- 
-    <a href="/2016/09/02/iOS你可能不知道的小技巧/#comments" title="查看评论">
-        <i class="fa fa-comments-o" aria-hidden="true"></i>
-        <span class="count-comment"></span>
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
         
-            <span class="ds-thread-count"  data-thread-key="2016/09/02/iOS你可能不知道的小技巧/" ></span>
+            <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#论点"><span class="toc-number">1.</span> <span class="toc-text">论点</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#先唠唠嗑"><span class="toc-number">2.</span> <span class="toc-text">先唠唠嗑</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#论据"><span class="toc-number">3.</span> <span class="toc-text">论据</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#结论"><span class="toc-number">4.</span> <span class="toc-text">结论</span></a></li></ol>
         
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"iOS中为什么非要用runtime才能在分类中扩展属性呢　| 枫叶　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <div id="comment-box" ></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2017/02/11/iOS中为什么非要用runtime才能在分类中扩展属性呢/" data-title="iOS中为什么非要用runtime才能在分类中扩展属性呢" data-url="https://slpowercoder.github.io/2017/02/11/iOS中为什么非要用runtime才能在分类中扩展属性呢/"></div>
+    <script>
+        var duoshuoQuery = {short_name:"null"};
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            s.async = true; s.charset = 'UTF-8';
+            (d.head || d.body).appendChild(s);
+        }
+
         
-    </a>
+    </script>
+    
+    <script> loadComment(); </script>
 
-    </div>
-  
-  <div class="article-inner">
+</div>
     
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+
+
+
+
+    <div class="scroll" id="post-nav-button">
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/02/iOS你可能不知道的小技巧/">iOS你可能不知道的小技巧</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <ol>
-<li><p>去掉按钮的高亮黑</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[funcImgBtn setAdjustsImageWhenHighlighted:NO];</div></pre></td></tr></table></figure>
-</li>
-<li><p>设置视图属性防止背景图片变形<br>关于UIViewContentMode的详解<br><a href="http://blog.csdn.net/iunion/article/details/7494511">http://blog.csdn.net/iunion/article/details/7494511</a>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/iOS/">iOS</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2016/09/02/iOS你可能不知道的小技巧/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-hexo的安装和配置" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/09/02/hexo的安装和配置/" class="article-date">
-      <time datetime="2016-09-01T16:03:34.000Z" itemprop="datePublished">2016-09-02</time>
-</a>
-
- 
-    <a href="/2016/09/02/hexo的安装和配置/#comments" title="查看评论">
-        <i class="fa fa-comments-o" aria-hidden="true"></i>
-        <span class="count-comment"></span>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
-            <span class="ds-thread-count"  data-thread-key="2016/09/02/hexo的安装和配置/" ></span>
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
         
+            <a href="/2017/01/07/运行react native 官方例子出错/" title="下一篇: 运行react native 官方例子出错的解决办法">
+                <i class="fa fa-angle-right"></i>
+            </a>
         
-    </a>
-
     </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/02/11/iOS中为什么非要用runtime才能在分类中扩展属性呢/">iOS中为什么非要用runtime才能在分类中扩展属性呢</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/07/运行react native 官方例子出错/">运行react native 官方例子出错的解决办法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/30/react-redux入门/">react-redux入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/02/iOS你可能不知道的小技巧/">iOS你可能不知道的小技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/02/hexo的安装和配置/">Mac上 Hexo安装与配置</a></li></ul>
+
+
+
+
+    <script>
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/02/hexo的安装和配置/">Mac上 Hexo安装与配置</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><h4 id="1-安装node-js传送"><a href="#1-安装node-js传送" class="headerlink" title="1. 安装node.js传送"></a>1. 安装node.js<a href="https://nodejs.org/en/">传送</a></h4><p>下载node的pkg包，点击直接安装，安装的过程下一步下一步就行了，新版的node.js包含有npm（npm用来安装hexo）<br>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/hexo/">hexo</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/博客/">博客</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2016/09/02/hexo的安装和配置/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-  
+    </script>
 </div>
       <footer id="footer">
     <div class="outer">
@@ -701,31 +493,6 @@
     
 <script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
 
-
-    
-        <script>
-            if ($(".left-col").is(":visible")) {
-                var duoshuoQuery = {short_name:"null"};
-                (function() {
-                    var d = document, s = d.createElement('script');
-                    s.src = 'http://static.duoshuo.com/embed.js';
-                    s.async = true; s.charset = 'UTF-8';
-                    (d.head || d.body).appendChild(s);
-                })();
-
-                $(document).ready(function(){
-                    var $duoshuoCount = $(".ds-thread-count");
-                    $duoshuoCount.bind("DOMNodeInserted", function(e) {
-                        var num = $(this).text().replace(/[^0-9]/ig,"");
-                        $(this).siblings(".count-comment").text(num);
-                        $(this).remove();
-                    })
-                })
-            }
-        </script>
-    
-
-     
 
 
 
