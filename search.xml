@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title><![CDATA[iOS中assign与weak，retain与strong的区别]]></title>
+      <url>https://slpowercoder.github.io/2017/02/11/iOS%E4%B8%ADassign%E4%B8%8Eweak%EF%BC%8Cretain%E4%B8%8Estrong%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
+      <content type="html"><![CDATA[<blockquote>
+<p>以前在没有ARC的时候我们使用assign与retain来修饰属性，后来引入了更安全的weak和strong来修饰属性</p>
+</blockquote>
+<ul>
+<li>assign与weak<br>两者都是弱引用，assign通常用于普通类型属性（如int,NSInteger），还有代理属性的修饰，基本上来说两者是可以通用的。<br>只是后者比前者多了一个功能，后者会在引用被释放的时候将该属性置为nil，而前者就会变成野指针（或者空对象）。在oc中你给你一个nil对象发送消息不会crash，但是给一个空对象发送消息是会crash的，所以总的来说weak要比assign安全一些。<a id="more"></a></li>
+<li>retain和strong<br>他俩都是强引用，除了某些情况下不一样，其他的时候也是可以通用的。<br>在修饰block属性的时候，相信大家都知道要用copy吧，因为如果不copy的话，block是存放在栈连里面的，他的生命周期会随着函数的出栈而结束的，copy之后会放在堆里面。<br>strong在修饰block的时候就相当于copy，而retain修饰block的时候就相当于assign，这样block会出现提前被释放掉的危险。</li>
+</ul>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[iOS中为什么非要用runtime才能在分类中扩展属性呢]]></title>
       <url>https://slpowercoder.github.io/2017/02/11/iOS%E4%B8%AD%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9D%9E%E8%A6%81%E7%94%A8runtime%E6%89%8D%E8%83%BD%E5%9C%A8%E5%88%86%E7%B1%BB%E4%B8%AD%E6%89%A9%E5%B1%95%E5%B1%9E%E6%80%A7%E5%91%A2/</url>
       <content type="html"><![CDATA[<p>想必大家都知道在分类中能扩展属性，而对于能不能扩展属性，能不能扩展成员变量是不是有点模糊，今天元宵节，我就清清嗓子说上两句吧</p>
