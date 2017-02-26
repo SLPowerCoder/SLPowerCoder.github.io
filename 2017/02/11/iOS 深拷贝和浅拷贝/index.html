@@ -88,18 +88,36 @@
 
 
 <meta name="description" content="浅拷贝只是增加了一个对被引用对象的一个指向，拷贝出的对象与原对象共用一块内存区域。
-retain：只是retainCount加一，实际上还是共用一块内存copy：不论拷贝的是不是集合对象，只要被拷贝的对象是不可变的，那就是浅拷贝，仅仅retainCount加一">
+
+retain：只是retainCount加一，实际上还是共用一块内存copy：不论拷贝的是不是集合对象，只要被拷贝的对象是不可变的，那就是浅拷贝，仅仅retainCount加一
+
+
+深拷贝会分配出一块内存，然后将引用的内容拷贝进去，也就是说拷贝出来的对象与原对象是独立的。
+
+copy：拷贝可变对象则是深拷贝mu">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS 深拷贝和浅拷贝">
 <meta property="og:url" content="https://slpowercoder.github.io/2017/02/11/iOS 深拷贝和浅拷贝/index.html">
 <meta property="og:site_name" content="枫叶">
 <meta property="og:description" content="浅拷贝只是增加了一个对被引用对象的一个指向，拷贝出的对象与原对象共用一块内存区域。
-retain：只是retainCount加一，实际上还是共用一块内存copy：不论拷贝的是不是集合对象，只要被拷贝的对象是不可变的，那就是浅拷贝，仅仅retainCount加一">
-<meta property="og:updated_time" content="2017-02-11T15:44:10.000Z">
+
+retain：只是retainCount加一，实际上还是共用一块内存copy：不论拷贝的是不是集合对象，只要被拷贝的对象是不可变的，那就是浅拷贝，仅仅retainCount加一
+
+
+深拷贝会分配出一块内存，然后将引用的内容拷贝进去，也就是说拷贝出来的对象与原对象是独立的。
+
+copy：拷贝可变对象则是深拷贝mu">
+<meta property="og:updated_time" content="2017-02-26T14:12:02.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS 深拷贝和浅拷贝">
 <meta name="twitter:description" content="浅拷贝只是增加了一个对被引用对象的一个指向，拷贝出的对象与原对象共用一块内存区域。
-retain：只是retainCount加一，实际上还是共用一块内存copy：不论拷贝的是不是集合对象，只要被拷贝的对象是不可变的，那就是浅拷贝，仅仅retainCount加一">
+
+retain：只是retainCount加一，实际上还是共用一块内存copy：不论拷贝的是不是集合对象，只要被拷贝的对象是不可变的，那就是浅拷贝，仅仅retainCount加一
+
+
+深拷贝会分配出一块内存，然后将引用的内容拷贝进去，也就是说拷贝出来的对象与原对象是独立的。
+
+copy：拷贝可变对象则是深拷贝mu">
 
 
 
@@ -389,9 +407,10 @@ retain：只是retainCount加一，实际上还是共用一块内存copy：不�
 
       
         <ul>
-<li><strong>浅拷贝</strong>只是增加了一个对被引用对象的一个指向，拷贝出的对象与原对象共用一块内存区域。<blockquote>
+<li><p><strong>浅拷贝</strong>只是增加了一个对被引用对象的一个指向，拷贝出的对象与原对象共用一块内存区域。</p>
+<blockquote>
 <p>retain：只是retainCount加一，实际上还是共用一块内存<br>copy：不论拷贝的是不是集合对象，只要被拷贝的对象是不可变的，那就是浅拷贝，仅仅retainCount加一</p>
-<a id="more"></a></blockquote>
+</blockquote>
 </li>
 <li><p><strong>深拷贝</strong>会分配出一块内存，然后将引用的内容拷贝进去，也就是说拷贝出来的对象与原对象是独立的。</p>
 <blockquote>
@@ -448,10 +467,6 @@ retain：只是retainCount加一，实际上还是共用一块内存copy：不�
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/02/26/test/" rel="prev" title="test">
-                test <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -518,7 +533,7 @@ retain：只是retainCount加一，实际上还是共用一块内存copy：不�
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

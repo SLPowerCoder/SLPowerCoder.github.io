@@ -90,7 +90,8 @@
 <meta name="description" content="去掉按钮的高亮黑
 1[funcImgBtn setAdjustsImageWhenHighlighted:NO];
 
-设置视图属性防止背景图片变形关于UIViewContentMode的详解http://blog.csdn.net/iunion/article/details/7494511">
+设置视图属性防止背景图片变形关于UIViewContentMode的详解http://blog.csdn.net/iunion/article/details/7494511
+12345//对于UIButton需要设置button中的imageView的contentMode属性">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS你可能不知道的小技巧">
 <meta property="og:url" content="https://slpowercoder.github.io/2016/09/02/iOS你可能不知道的小技巧/index.html">
@@ -98,14 +99,16 @@
 <meta property="og:description" content="去掉按钮的高亮黑
 1[funcImgBtn setAdjustsImageWhenHighlighted:NO];
 
-设置视图属性防止背景图片变形关于UIViewContentMode的详解http://blog.csdn.net/iunion/article/details/7494511">
-<meta property="og:updated_time" content="2016-09-04T15:06:57.000Z">
+设置视图属性防止背景图片变形关于UIViewContentMode的详解http://blog.csdn.net/iunion/article/details/7494511
+12345//对于UIButton需要设置button中的imageView的contentMode属性">
+<meta property="og:updated_time" content="2017-02-26T14:12:55.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS你可能不知道的小技巧">
 <meta name="twitter:description" content="去掉按钮的高亮黑
 1[funcImgBtn setAdjustsImageWhenHighlighted:NO];
 
-设置视图属性防止背景图片变形关于UIViewContentMode的详解http://blog.csdn.net/iunion/article/details/7494511">
+设置视图属性防止背景图片变形关于UIViewContentMode的详解http://blog.csdn.net/iunion/article/details/7494511
+12345//对于UIButton需要设置button中的imageView的contentMode属性">
 
 
 
@@ -398,7 +401,7 @@
 <li><p>去掉按钮的高亮黑</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[funcImgBtn setAdjustsImageWhenHighlighted:NO];</div></pre></td></tr></table></figure>
 </li>
-<li><p>设置视图属性防止背景图片变形<br>关于UIViewContentMode的详解<br><a href="http://blog.csdn.net/iunion/article/details/7494511" target="_blank" rel="external">http://blog.csdn.net/iunion/article/details/7494511</a><a id="more"></a></p>
+<li><p>设置视图属性防止背景图片变形<br>关于UIViewContentMode的详解<br><a href="http://blog.csdn.net/iunion/article/details/7494511" target="_blank" rel="external">http://blog.csdn.net/iunion/article/details/7494511</a></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">//对于UIButton需要设置button中的imageView的contentMode属性</div><div class="line">button.imageView.contentMode = UIViewContentModeScaleAspectFill;</div><div class="line">//</div><div class="line">视图.contentMode = UIViewContentModeScaleAspectFill;</div><div class="line">视图.clipsToBounds = YES;</div></pre></td></tr></table></figure>
 </li>
 <li><p>当一个页面有多个scrollView（或继承自scrollVIew）的时候，点击状态栏不会回到顶部，可以将非当前显示页的scrollVIew. scrollToTop设置为NO。</p>
@@ -412,6 +415,9 @@
 <li><p>自定义导航栏的返回按钮而造成返回手势的失效的解决办法，对于最顶层的VC我们需要设置enabled = NO，因为最外面一层是不需要该手势的</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">self.navigationController.interactivePopGestureRecognizer.delegate = self;</div><div class="line">self.navigationController.interactivePopGestureRecognizer.enabled = YES;</div></pre></td></tr></table></figure>
 </li>
+</ol>
+<a id="more"></a>
+<ol>
 <li><p>导航条的颜色设置，tabbar也类似</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">//设置状态栏为亮色</div><div class="line">[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];</div><div class="line">//设置title的属性</div><div class="line">[[UINavigationBar appearance] setTitleTextAttributes:@&#123;NSForegroundColorAttributeName: [UIColor whiteColor],NSFontAttributeName:[UIFont systemFontOfSize:16]&#125;];</div><div class="line">//设置导航条的颜色</div><div class="line">[[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@&quot;back&quot;] forBarMetrics:UIBarMetricsDefault];</div><div class="line">//设置导航条所有字体的颜色。包括title，返回箭头的颜色等</div><div class="line">[[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];</div></pre></td></tr></table></figure>
 </li>
@@ -434,7 +440,8 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">self.switch = [[UISwitch alloc]init];</div><div class="line">        [self.switch setOrigin:CGPointMake(Width-60, 15)];</div><div class="line">        self.switch.center = CGPointMake(self.switch.center.x, self.height/2);</div><div class="line">        self.switch.transform = CGAffineTransformMakeScale(0.75, 0.75);</div><div class="line">        self.switch.hidden = YES;</div><div class="line">        self.switch.onTintColor = USERCOLOR(0xffd600);</div><div class="line">        self.switch.tintColor = USERCOLOR(0x222222);</div><div class="line">        self.switch.thumbTintColor = USERCOLOR(0x222222);</div><div class="line">        [self addSubview:self.switch];</div></pre></td></tr></table></figure>
 </li>
 <li><p>load和initialize</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//程序在加载类文件时候会调用load，无论实现该方法的类有没有被引用（只要程序运行的时候就会加载该类文件）</div><div class="line">+(void)load</div><div class="line">//在类被初始化之前会调用一次</div><div class="line">+(void)initialize</div></pre></td></tr></table></figure></li>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//程序在加载类文件时候会调用load，无论实现该方法的类有没有被引用（只要程序运行的时候就会加载该类文件）</div><div class="line">+(void)load</div><div class="line">//在类被初始化之前会调用一次</div><div class="line">+(void)initialize</div></pre></td></tr></table></figure>
+</li>
 </ol>
 
       
@@ -551,7 +558,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
