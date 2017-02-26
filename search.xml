@@ -63,8 +63,8 @@
     </entry>
     
     <entry>
-      <title><![CDATA[react-redux入门]]></title>
-      <url>https://slpowercoder.github.io/2016/12/30/react-redux%E5%85%A5%E9%97%A8/</url>
+      <title><![CDATA[一名iOSer对react-redux的理解]]></title>
+      <url>https://slpowercoder.github.io/2016/12/30/%E4%B8%80%E5%90%8DiOSer%E5%AF%B9react-redux%E7%9A%84%E7%90%86%E8%A7%A3/</url>
       <content type="html"><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><blockquote>
 <p>React认为每个组件都是一个个有限状态机，状态与UI是一一对应的。我们只需管理好APP的state就能控制UI的显示，我们可以在每个component类中来通过<code>this.state</code>和<code>this.setState</code>来管理组件的state，但是如果APP交互比较多比较复杂，或者说该组件的某一状态需要和其他组件共享的话，这种方式就有点复杂了。<br>有没有一种能统一管理APP状态的框架呢，这时候Redux就在我们的期盼中驾着七彩祥云降临人间了，她是一个用于统一管理APP 所有的state的一个的js框架，她不建议我们在component中直接操作state，而是交给redux的store中进行处理。后来又发现redux使用着也是不太方便啊，每次dispatch(action)的时候都需要store对象，最后redux的作者又专门为react native量身订做了一个react-redux。</p>
 </blockquote>

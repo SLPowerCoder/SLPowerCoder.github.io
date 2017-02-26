@@ -90,17 +90,17 @@
 <meta name="description" content="前言
 React认为每个组件都是一个个有限状态机，状态与UI是一一对应的。我们只需管理好APP的state就能控制UI的显示，我们可以在每个component类中来通过this.state和this.setState来管理组件的state，但是如果APP交互比较多比较复杂，或者说该组件的某一状态需要和其他组件共享的话，这种方式就有点复杂了。有没有一种能统一管理APP状态的框架呢，这时候Redux就">
 <meta property="og:type" content="article">
-<meta property="og:title" content="react-redux入门">
-<meta property="og:url" content="https://slpowercoder.github.io/2016/12/30/react-redux入门/index.html">
+<meta property="og:title" content="一名iOSer对react-redux的理解">
+<meta property="og:url" content="https://slpowercoder.github.io/2016/12/30/一名iOSer对react-redux的理解/index.html">
 <meta property="og:site_name" content="枫叶">
 <meta property="og:description" content="前言
 React认为每个组件都是一个个有限状态机，状态与UI是一一对应的。我们只需管理好APP的state就能控制UI的显示，我们可以在每个component类中来通过this.state和this.setState来管理组件的state，但是如果APP交互比较多比较复杂，或者说该组件的某一状态需要和其他组件共享的话，这种方式就有点复杂了。有没有一种能统一管理APP状态的框架呢，这时候Redux就">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1229960-9cae53256b3bba52.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://7xqg0d.com1.z0.glb.clouddn.com/hexoBlog/react-native%E5%A3%B0%E6%98%8E%E5%91%A8%E6%9C%9F.PNG">
 <meta property="og:image" content="http://7xqg0d.com1.z0.glb.clouddn.com/hexoBlog/redux-flow.JPG">
-<meta property="og:updated_time" content="2017-02-26T14:16:01.000Z">
+<meta property="og:updated_time" content="2017-02-26T14:18:52.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="react-redux入门">
+<meta name="twitter:title" content="一名iOSer对react-redux的理解">
 <meta name="twitter:description" content="前言
 React认为每个组件都是一个个有限状态机，状态与UI是一一对应的。我们只需管理好APP的state就能控制UI的显示，我们可以在每个component类中来通过this.state和this.setState来管理组件的state，但是如果APP交互比较多比较复杂，或者说该组件的某一状态需要和其他组件共享的话，这种方式就有点复杂了。有没有一种能统一管理APP状态的框架呢，这时候Redux就">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1229960-9cae53256b3bba52.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
@@ -131,13 +131,13 @@ React认为每个组件都是一个个有限状态机，状态与UI是一一对�
 
 
 
-  <link rel="canonical" href="https://slpowercoder.github.io/2016/12/30/react-redux入门/"/>
+  <link rel="canonical" href="https://slpowercoder.github.io/2016/12/30/一名iOSer对react-redux的理解/"/>
 
 
 
 
 
-  <title> react-redux入门 | 枫叶 </title>
+  <title> 一名iOSer对react-redux的理解 | 枫叶 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -288,7 +288,7 @@ React认为每个组件都是一个个有限状态机，状态与UI是一一对�
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://slpowercoder.github.io/2016/12/30/react-redux入门/">
+    <link itemprop="mainEntityOfPage" href="https://slpowercoder.github.io/2016/12/30/一名iOSer对react-redux的理解/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="枫叶">
@@ -309,7 +309,7 @@ React认为每个组件都是一个个有限状态机，状态与UI是一一对�
             
             
               
-                react-redux入门
+                一名iOSer对react-redux的理解
               
             
           </h1>
@@ -365,8 +365,8 @@ React认为每个组件都是一个个有限状态机，状态与UI是一一对�
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2016/12/30/react-redux入门/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/30/react-redux入门/" itemprop="commentCount"></span>
+                <a href="/2016/12/30/一名iOSer对react-redux的理解/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/30/一名iOSer对react-redux的理解/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -526,8 +526,8 @@ React认为每个组件都是一个个有限状态机，状态与UI是一一对�
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/12/30/react-redux入门/"
-           data-title="react-redux入门" data-url="https://slpowercoder.github.io/2016/12/30/react-redux入门/">
+      <div class="ds-thread" data-thread-key="2016/12/30/一名iOSer对react-redux的理解/"
+           data-title="一名iOSer对react-redux的理解" data-url="https://slpowercoder.github.io/2016/12/30/一名iOSer对react-redux的理解/">
       </div>
     
   </div>
