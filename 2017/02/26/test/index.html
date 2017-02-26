@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="react-native,redux,react-redux," />
+  <meta name="keywords" content="react-native," />
 
 
 
@@ -87,24 +87,18 @@
 
 
 
-<meta name="description" content="title: react-redux入门categories: react-nativetags: [react-native,redux,react-redux]
-
-redux基础actionAction ：一般我们是不允许用户直接操作类的state，而是通过触发消息来执行对应的操作，用户或后台服务器通过store.dispatch()来向store发送一个消息（消息至少一个标识该消息的字段t">
+<meta name="description" content="redux基础actionAction ：一般我们是不允许用户直接操作类的state，而是通过触发消息来执行对应的操作，用户或后台服务器通过store.dispatch()来向store发送一个消息（消息至少一个标识该消息的字段type，还可以添加其他字段用户数据传送），store会在内部根据消息的类型type去reducer中执行相应的处理，这个消息我们就叫他为Action，Action本质上是">
 <meta property="og:type" content="article">
 <meta property="og:title" content="test">
 <meta property="og:url" content="https://slpowercoder.github.io/2017/02/26/test/index.html">
 <meta property="og:site_name" content="枫叶">
-<meta property="og:description" content="title: react-redux入门categories: react-nativetags: [react-native,redux,react-redux]
-
-redux基础actionAction ：一般我们是不允许用户直接操作类的state，而是通过触发消息来执行对应的操作，用户或后台服务器通过store.dispatch()来向store发送一个消息（消息至少一个标识该消息的字段t">
+<meta property="og:description" content="redux基础actionAction ：一般我们是不允许用户直接操作类的state，而是通过触发消息来执行对应的操作，用户或后台服务器通过store.dispatch()来向store发送一个消息（消息至少一个标识该消息的字段type，还可以添加其他字段用户数据传送），store会在内部根据消息的类型type去reducer中执行相应的处理，这个消息我们就叫他为Action，Action本质上是">
 <meta property="og:image" content="http://7xqg0d.com1.z0.glb.clouddn.com/hexoBlog/react-native%E5%A3%B0%E6%98%8E%E5%91%A8%E6%9C%9F.PNG">
 <meta property="og:image" content="http://7xqg0d.com1.z0.glb.clouddn.com/hexoBlog/redux-flow.JPG">
-<meta property="og:updated_time" content="2017-02-26T14:06:05.000Z">
+<meta property="og:updated_time" content="2017-02-26T14:08:15.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="test">
-<meta name="twitter:description" content="title: react-redux入门categories: react-nativetags: [react-native,redux,react-redux]
-
-redux基础actionAction ：一般我们是不允许用户直接操作类的state，而是通过触发消息来执行对应的操作，用户或后台服务器通过store.dispatch()来向store发送一个消息（消息至少一个标识该消息的字段t">
+<meta name="twitter:description" content="redux基础actionAction ：一般我们是不允许用户直接操作类的state，而是通过触发消息来执行对应的操作，用户或后台服务器通过store.dispatch()来向store发送一个消息（消息至少一个标识该消息的字段type，还可以添加其他字段用户数据传送），store会在内部根据消息的类型type去reducer中执行相应的处理，这个消息我们就叫他为Action，Action本质上是">
 <meta name="twitter:image" content="http://7xqg0d.com1.z0.glb.clouddn.com/hexoBlog/react-native%E5%A3%B0%E6%98%8E%E5%91%A8%E6%9C%9F.PNG">
 
 
@@ -349,8 +343,8 @@ redux基础actionAction ：一般我们是不允许用户直接操作类的state
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/react-native/" itemprop="url" rel="index">
-                    <span itemprop="name">react-native</span>
+                  <a href="/categories/react/" itemprop="url" rel="index">
+                    <span itemprop="name">react</span>
                   </a>
                 </span>
 
@@ -394,10 +388,7 @@ redux基础actionAction ：一般我们是不允许用户直接操作类的state
       
 
       
-        <hr>
-<p>title: react-redux入门<br>categories: react-native<br>tags: [react-native,redux,react-redux]</p>
-<hr>
-<h2 id="redux基础"><a href="#redux基础" class="headerlink" title="redux基础"></a>redux基础</h2><h3 id="action"><a href="#action" class="headerlink" title="action"></a>action</h3><p><strong>Action</strong> ：一般我们是不允许用户直接操作类的state，而是通过触发消息来执行对应的操作，用户或后台服务器通过store.dispatch()来向store发送一个消息（消息至少一个标识该消息的字段type，还可以添加其他字段用户数据传送），store会在内部根据消息的类型type去reducer中执行相应的处理，这个消息我们就叫他为Action，Action本质上是一个JavaScript对象。<br><a id="more"></a><br>实际编码中一般会把整个应用的消息类型统一放在一个文件ActionTypes.js中<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="keyword">const</span> ADD_TODO = <span class="string">'ADD_TODO'</span></div></pre></td></tr></table></figure></p>
+        <h2 id="redux基础"><a href="#redux基础" class="headerlink" title="redux基础"></a>redux基础</h2><h3 id="action"><a href="#action" class="headerlink" title="action"></a>action</h3><p><strong>Action</strong> ：一般我们是不允许用户直接操作类的state，而是通过触发消息来执行对应的操作，用户或后台服务器通过store.dispatch()来向store发送一个消息（消息至少一个标识该消息的字段type，还可以添加其他字段用户数据传送），store会在内部根据消息的类型type去reducer中执行相应的处理，这个消息我们就叫他为Action，Action本质上是一个JavaScript对象。<br><a id="more"></a><br>实际编码中一般会把整个应用的消息类型统一放在一个文件ActionTypes.js中<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="keyword">const</span> ADD_TODO = <span class="string">'ADD_TODO'</span></div></pre></td></tr></table></figure></p>
 <p>Action的结构如下，各个字段的key的名字可以随意命名，但是类型的key一般都是type，数据类型最好为字符串<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">type: ADD_TODO,</div><div class="line">text: <span class="string">'Build my first Redux app'</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>随着程序越来越大，你会发现action太多太乱了，所以我们也会把action按业务分类放在各个指定的文件中，但是又有一个问题，若果每个action的字段都有五六个，我们在如下写法岂不是太乱了<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">store.dispatch(</div><div class="line">&#123;</div><div class="line">type: ADD_TODO,</div><div class="line">text: <span class="string">'Build my first Redux app'</span></div><div class="line">&#125;</div><div class="line">)</div></pre></td></tr></table></figure></p>
 <p>于是乎我们就想起来可以将action封装在函数中，这个函数返回一个action对象，这个返回一个action对象的函数我们就称之为ActionCreator，如下所示<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="keyword">let</span> todo = ()=&gt; &#123;</div><div class="line"><span class="keyword">return</span> &#123;</div><div class="line">type: ADD_TODO,</div><div class="line">text: <span class="string">'Build my first Redux app'</span></div><div class="line">&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
@@ -468,10 +459,6 @@ redux基础actionAction ：一般我们是不允许用户直接操作类的state
         <div class="post-tags">
           
             <a href="/tags/react-native/" rel="tag"># react-native</a>
-          
-            <a href="/tags/redux/" rel="tag"># redux</a>
-          
-            <a href="/tags/react-redux/" rel="tag"># react-redux</a>
           
         </div>
       
@@ -577,7 +564,7 @@ redux基础actionAction ：一般我们是不允许用户直接操作类的state
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
