@@ -6,19 +6,9 @@
     <entry>
       <title><![CDATA[iOS 深拷贝和浅拷贝]]></title>
       <url>https://slpowercoder.github.io/2017/02/11/iOS%20%E6%B7%B1%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B5%85%E6%8B%B7%E8%B4%9D/</url>
-      <content type="html"><![CDATA[<ul>
-<li><p><strong>浅拷贝</strong>只是增加了一个对被引用对象的一个指向，拷贝出的对象与原对象共用一块内存区域。</p>
-<blockquote>
-<p>retain：只是retainCount加一，实际上还是共用一块内存<br>copy：不论拷贝的是不是集合对象，只要被拷贝的对象是不可变的，那就是浅拷贝，仅仅retainCount加一</p>
-</blockquote>
-</li>
-<li><p><strong>深拷贝</strong>会分配出一块内存，然后将引用的内容拷贝进去，也就是说拷贝出来的对象与原对象是独立的。</p>
-<blockquote>
-<p>copy：拷贝可变对象则是深拷贝<br>mutableCopy：不论被拷贝的是不是集合对象，是可变的还是不可变的，都是深拷贝</p>
-</blockquote>
-</li>
-</ul>
-<p><strong>注意：</strong>如果mutableCopy的是集合对象，深拷贝的是该集合对象，不是指该集合对象里面的元素，称之为<em>单层深拷贝</em>，对于集合对象内的元素依然是指针拷贝</p>
+      <content type="html"><![CDATA[<p><strong>浅拷贝</strong>只是增加了一个对被引用对象的一个指向，拷贝出的对象与原对象共用一块内存区域。<br>retain：只是retainCount加一，实际上还是共用一块内存<br>copy：不论拷贝的是不是集合对象，只要被拷贝的对象是不可变的，那就是浅拷贝，仅仅retainCount加一</p>
+<p><strong>深拷贝</strong>会分配出一块内存，然后将引用的内容拷贝进去，也就是说拷贝出来的对象与原对象是独立的。<br>copy：拷贝可变对象则是深拷贝<br>mutableCopy：不论被拷贝的是不是集合对象，是可变的还是不可变的，都是深拷贝</p>
+<p><strong>注意：</strong>如果mutableCopy的是集合对象，深拷贝的是该集合对象，不是指该集合对象里面的元素，称之为<strong>单层深拷贝</strong>，对于集合对象内的元素依然是指针拷贝</p>
 <ul>
 <li><strong>总结</strong><br>copy：只要copy的是<strong>不可变</strong>对象，都是浅拷贝，copy<strong>可变集合</strong>象则是单层深拷贝，拷贝<strong>可变非集合</strong>对象则是深拷贝<br>mutableCopy：拷贝<strong>集合</strong>象则是单层深拷贝，拷贝<strong>非集</strong>合对象则是深拷贝</li>
 </ul>
