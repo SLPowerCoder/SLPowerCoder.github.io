@@ -108,7 +108,7 @@
 
 快速转发：NSObject类的子类A可以通过重写NSObject类的forwardingTar">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1229960-edd81dfe76dacf77.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-03-01T03:38:53.000Z">
+<meta property="og:updated_time" content="2017-03-01T04:14:47.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Objective-C 消息转发机制">
 <meta name="twitter:description" content="一图胜千言，习惯性的先来一张图以便对消息转发有个整体的把握
@@ -435,7 +435,7 @@
 <p>目标文件的头文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">//</div><div class="line">//  Target.h</div><div class="line">//  ForwardMsg</div><div class="line">//</div><div class="line">//  Created by 孙磊 on 2017/2/25.</div><div class="line">//  Copyright © 2017年 孙磊. All rights reserved.</div><div class="line">//</div><div class="line"></div><div class="line">#import &lt;Foundation/Foundation.h&gt;</div><div class="line"></div><div class="line">@interface Target : NSObject</div><div class="line"></div><div class="line">-(void)logName;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure></p>
 <p>目标文件的实现文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">//</div><div class="line">//  Target.m</div><div class="line">//  ForwardMsg</div><div class="line">//</div><div class="line">//  Created by 孙磊 on 2017/2/25.</div><div class="line">//  Copyright © 2017年 孙磊. All rights reserved.</div><div class="line">//</div><div class="line"></div><div class="line">#import &quot;Target.h&quot;</div><div class="line"></div><div class="line">@implementation Target</div><div class="line"></div><div class="line">-(void)logName&#123;</div><div class="line">NSLog(@&quot;我是备用方法---%s&quot;,__func__);</div><div class="line">&#125;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure></p>
 <p><a href="https://github.com/nicklockwood/NullSafe" target="_blank" rel="external">推荐一个国外大大利用消息转发避免后台返回NSNull（后台有时候会返回<null>）而引起的奔溃问题，例如你需要一个字符串他却给你返回了一个“<null>”这样一个NSNull对象。用法很简单，直接把NullSafe.m拖到项目中即可，该文件会在运行时自动加载</null></null></a></p>
-<p>扩展：简单说一下NULL，nil，Nil，NSNull的用处<br>NULL：用于普通类型，例如NSInteger<br>nil：用于OC对象（除了类这个对象）<br>Nil：用于Class类型对象的赋值（类是元类的实例，也是对象）<br>NSNull：用于OC对象的站位，一般会作为集合中的占位元素，给NSNull对象发送消息会crash的，后台给我们返回的<null>就是NSNull对象</null></p>
+<p>扩展：简单说一下NULL，nil，Nil，NSNull的用处<br>NULL：用于普通类型，例如NSInteger<br>nil：用于OC对象（除了类这个对象）,给nil对象发送消息不会crash<br>Nil：用于Class类型对象的赋值（类是元类的实例，也是对象）<br>NSNull：用于OC对象的站位，一般会作为集合中的占位元素，给NSNull对象发送消息会crash的，后台给我们返回的<null>就是NSNull对象</null></p>
 
       
     </div>
