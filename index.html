@@ -559,8 +559,7 @@
 <blockquote>
 <p>对于对象无法处理的消息，如果不做转发处理的话，程序最终会调用NSObjective的doesNotRecognizeSelector:消息将程序crash掉。</p>
 </blockquote>
-<p>###Objective-C提供了两种消息转发选项</p>
-<ul>
+<h3 id="Objective-C提供了两种消息转发选项"><a href="#Objective-C提供了两种消息转发选项" class="headerlink" title="Objective-C提供了两种消息转发选项"></a>Objective-C提供了两种消息转发选项</h3><ul>
 <li>快速转发：NSObject类的子类A可以通过重写NSObject类的forwardingTargetForSelector:方法，将A的实例无法识别的消息转发给目标对象B，从而实现快速转发。<em>该技巧就像是将对象的实现代码与转发对象合并到一起。这类似于实现的多继承行为。如果你有一个定了对象 能够消化哪些消息的目标类，这个技巧可以取得很好的效果</em></li>
 <li>标准（完整）转发：NSObject类的子类A可以通过重写NSObject类的forwardInvocation:方法，实现标准转发。标准转发巧可以通过methodSignatureForSelector：方法获取一个methodsignature对象最终被封为NSInvocation对象传递给forwardInvocation:方法（注意如果methodSignatureForSelector：方法返回一个nil，程序会crash）从该对象能获取消息的全部内容（包含目标，方法名，和参数）。</li>
 </ul>
