@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="assign,weak,retain,strong," />
+  <meta name="keywords" content="audio," />
 
 
 
@@ -87,19 +87,16 @@
 
 
 
-<meta name="description" content="以前在没有ARC的时候我们使用assign与retain来修饰属性，后来引入了更安全的weak和strong来修饰属性
-assign与weak两者都是弱引用，assign通常用于普通类型属性（如int,NSInteger），还有代理属性的修饰，基本上来说两者是可以通用的。只是后者比前者多了一个功能，后者会在引用的对象被释放的时候将该属性置为nil，而前者依然会指向原来的位置，这样就会变成野指针。在">
+<meta name="description" content="iOS中的音频包括两种类型，一种是时间比较短无需监听播放时间等属性的音效，一种是时间比较长的音乐">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS中assign与weak，retain与strong的区别">
-<meta property="og:url" content="https://slpowercoder.github.io/2017/02/11/iOS中assign与weak，retain与strong的区别/index.html">
+<meta property="og:title" content="iOS音频的播放以及录制">
+<meta property="og:url" content="https://slpowercoder.github.io/2017/03/10/iOS音频的播放以及录制/index.html">
 <meta property="og:site_name" content="枫叶">
-<meta property="og:description" content="以前在没有ARC的时候我们使用assign与retain来修饰属性，后来引入了更安全的weak和strong来修饰属性
-assign与weak两者都是弱引用，assign通常用于普通类型属性（如int,NSInteger），还有代理属性的修饰，基本上来说两者是可以通用的。只是后者比前者多了一个功能，后者会在引用的对象被释放的时候将该属性置为nil，而前者依然会指向原来的位置，这样就会变成野指针。在">
-<meta property="og:updated_time" content="2017-03-12T06:38:14.000Z">
+<meta property="og:description" content="iOS中的音频包括两种类型，一种是时间比较短无需监听播放时间等属性的音效，一种是时间比较长的音乐">
+<meta property="og:updated_time" content="2017-03-10T09:46:12.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS中assign与weak，retain与strong的区别">
-<meta name="twitter:description" content="以前在没有ARC的时候我们使用assign与retain来修饰属性，后来引入了更安全的weak和strong来修饰属性
-assign与weak两者都是弱引用，assign通常用于普通类型属性（如int,NSInteger），还有代理属性的修饰，基本上来说两者是可以通用的。只是后者比前者多了一个功能，后者会在引用的对象被释放的时候将该属性置为nil，而前者依然会指向原来的位置，这样就会变成野指针。在">
+<meta name="twitter:title" content="iOS音频的播放以及录制">
+<meta name="twitter:description" content="iOS中的音频包括两种类型，一种是时间比较短无需监听播放时间等属性的音效，一种是时间比较长的音乐">
 
 
 
@@ -127,13 +124,13 @@ assign与weak两者都是弱引用，assign通常用于普通类型属性（如i
 
 
 
-  <link rel="canonical" href="https://slpowercoder.github.io/2017/02/11/iOS中assign与weak，retain与strong的区别/"/>
+  <link rel="canonical" href="https://slpowercoder.github.io/2017/03/10/iOS音频的播放以及录制/"/>
 
 
 
 
 
-  <title> iOS中assign与weak，retain与strong的区别 | 枫叶 </title>
+  <title> iOS音频的播放以及录制 | 枫叶 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -304,7 +301,7 @@ assign与weak两者都是弱引用，assign通常用于普通类型属性（如i
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://slpowercoder.github.io/2017/02/11/iOS中assign与weak，retain与strong的区别/">
+    <link itemprop="mainEntityOfPage" href="https://slpowercoder.github.io/2017/03/10/iOS音频的播放以及录制/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="枫叶">
@@ -325,7 +322,7 @@ assign与weak两者都是弱引用，assign通常用于普通类型属性（如i
             
             
               
-                iOS中assign与weak，retain与strong的区别
+                iOS音频的播放以及录制
               
             
           </h1>
@@ -340,8 +337,8 @@ assign与weak两者都是弱引用，assign通常用于普通类型属性（如i
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-11T23:41:29+08:00">
-                2017-02-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-10T17:39:03+08:00">
+                2017-03-10
               </time>
             
 
@@ -381,8 +378,8 @@ assign与weak两者都是弱引用，assign通常用于普通类型属性（如i
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/02/11/iOS中assign与weak，retain与strong的区别/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/11/iOS中assign与weak，retain与strong的区别/" itemprop="commentCount"></span>
+                <a href="/2017/03/10/iOS音频的播放以及录制/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/10/iOS音频的播放以及录制/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -408,10 +405,7 @@ assign与weak两者都是弱引用，assign通常用于普通类型属性（如i
       
 
       
-        <p>以前在没有ARC的时候我们使用assign与retain来修饰属性，后来引入了更安全的weak和strong来修饰属性</p>
-<h3 id="assign与weak"><a href="#assign与weak" class="headerlink" title="assign与weak"></a>assign与weak</h3><p>两者都是弱引用，assign通常用于普通类型属性（如int,NSInteger），还有代理属性的修饰，基本上来说两者是可以通用的。<br>只是后者比前者多了一个功能，后者会在引用的对象被释放的时候将该属性置为nil，而前者依然会指向原来的位置，这样就会变成野指针。在oc中你给你一个nil对象发送消息不会crash，但是给一个对象发送他不能解析的消息是会crash的，所以总的来说weak要比assign安全一些。<br>像delegate属性建议用weak修饰而不是assign。</p>
-<h3 id="retain和strong"><a href="#retain和strong" class="headerlink" title="retain和strong"></a>retain和strong</h3><p>他俩都是强引用，除了某些情况下不一样，其他的时候也是可以通用的。</p>
-<p>在修饰block属性的时候，相信大家都知道要用copy，<strong>对于一个没有引用外部变量（block外面的）的block是存储在堆里面的，但是大多数时候我们都会在block中引入外部变量，这样的话block就被存储在栈里面</strong>，如果不copy的话，他的生命周期会随着函数的结束而结束，copy之后会放在堆里面，延长block的生命周期。<br>strong在修饰block的时候就相当于copy，而retain修饰栈block的时候就相当于assign，这样block会出现提前被释放掉的危险。</p>
+        <p>iOS中的音频包括两种类型，一种是时间比较短无需监听播放时间等属性的音效，一种是时间比较长的音乐</p>
 
       
     </div>
@@ -435,13 +429,7 @@ assign与weak两者都是弱引用，assign通常用于普通类型属性（如i
       
         <div class="post-tags">
           
-            <a href="/tags/assign/" rel="tag"># assign</a>
-          
-            <a href="/tags/weak/" rel="tag"># weak</a>
-          
-            <a href="/tags/retain/" rel="tag"># retain</a>
-          
-            <a href="/tags/strong/" rel="tag"># strong</a>
+            <a href="/tags/audio/" rel="tag"># audio</a>
           
         </div>
       
@@ -454,8 +442,8 @@ assign与weak两者都是弱引用，assign通常用于普通类型属性（如i
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/02/11/iOS中为什么非要用runtime才能在分类中扩展属性呢/" rel="next" title="iOS中为什么非要用runtime才能在分类中扩展属性呢">
-                <i class="fa fa-chevron-left"></i> iOS中为什么非要用runtime才能在分类中扩展属性呢
+              <a href="/2017/02/11/iOS 深拷贝和浅拷贝/" rel="next" title="iOS 深拷贝和浅拷贝">
+                <i class="fa fa-chevron-left"></i> iOS 深拷贝和浅拷贝
               </a>
             
           </div>
@@ -463,10 +451,6 @@ assign与weak两者都是弱引用，assign通常用于普通类型属性（如i
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/02/11/Objective-C 消息转发机制/" rel="prev" title="Objective-C 消息转发机制">
-                Objective-C 消息转发机制 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -492,8 +476,8 @@ assign与weak两者都是弱引用，assign通常用于普通类型属性（如i
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/02/11/iOS中assign与weak，retain与strong的区别/"
-           data-title="iOS中assign与weak，retain与strong的区别" data-url="https://slpowercoder.github.io/2017/02/11/iOS中assign与weak，retain与strong的区别/">
+      <div class="ds-thread" data-thread-key="2017/03/10/iOS音频的播放以及录制/"
+           data-title="iOS音频的播放以及录制" data-url="https://slpowercoder.github.io/2017/03/10/iOS音频的播放以及录制/">
       </div>
     
   </div>
@@ -517,17 +501,8 @@ assign与weak两者都是弱引用，assign通常用于普通类型属性（如i
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/avatar.png"
@@ -623,22 +598,6 @@ assign与weak两者都是弱引用，assign通常用于普通类型属性（如i
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#assign与weak"><span class="nav-number">1.</span> <span class="nav-text">assign与weak</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#retain和strong"><span class="nav-number">2.</span> <span class="nav-text">retain和strong</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       

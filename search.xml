@@ -4,6 +4,13 @@
   
     
     <entry>
+      <title><![CDATA[iOS音频的播放以及录制]]></title>
+      <url>https://slpowercoder.github.io/2017/03/10/iOS%E9%9F%B3%E9%A2%91%E7%9A%84%E6%92%AD%E6%94%BE%E4%BB%A5%E5%8F%8A%E5%BD%95%E5%88%B6/</url>
+      <content type="html"><![CDATA[<p>iOS中的音频包括两种类型，一种是时间比较短无需监听播放时间等属性的音效，一种是时间比较长的音乐</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[iOS 深拷贝和浅拷贝]]></title>
       <url>https://slpowercoder.github.io/2017/02/11/iOS%20%E6%B7%B1%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B5%85%E6%8B%B7%E8%B4%9D/</url>
       <content type="html"><![CDATA[<p><strong>浅拷贝</strong>只是增加了一个对被引用对象的一个指向，拷贝出的对象与原对象共用一块内存区域。<br>retain：只是retainCount加一，实际上还是共用一块内存<br>copy：不论拷贝的是不是集合对象，只要被拷贝的对象是不可变的，那就是浅拷贝，仅仅retainCount加一</p>
@@ -39,15 +46,10 @@
     <entry>
       <title><![CDATA[iOS中assign与weak，retain与strong的区别]]></title>
       <url>https://slpowercoder.github.io/2017/02/11/iOS%E4%B8%ADassign%E4%B8%8Eweak%EF%BC%8Cretain%E4%B8%8Estrong%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
-      <content type="html"><![CDATA[<blockquote>
-<p>以前在没有ARC的时候我们使用assign与retain来修饰属性，后来引入了更安全的weak和strong来修饰属性</p>
-</blockquote>
-<ul>
-<li><p>assign与weak<br>两者都是弱引用，assign通常用于普通类型属性（如int,NSInteger），还有代理属性的修饰，基本上来说两者是可以通用的。<br>只是后者比前者多了一个功能，后者会在引用被释放的时候将该属性置为nil，而前者就会变成野指针。在oc中你给你一个nil对象发送消息不会crash，但是给一个对象发送一个他不能解析的消息是会crash的，所以总的来说weak要比assign安全一些。</p>
-</li>
-<li><p>retain和strong<br>他俩都是强引用，除了某些情况下不一样，其他的时候也是可以通用的。<br>在修饰block属性的时候，相信大家都知道要用copy吧，因为如果不copy的话，block是存放在栈连里面的，他的生命周期会随着函数的出栈而结束的，copy之后会放在堆里面。<br>strong在修饰block的时候就相当于copy，而retain修饰block的时候就相当于assign，这样block会出现提前被释放掉的危险。</p>
-</li>
-</ul>
+      <content type="html"><![CDATA[<p>以前在没有ARC的时候我们使用assign与retain来修饰属性，后来引入了更安全的weak和strong来修饰属性</p>
+<h3 id="assign与weak"><a href="#assign与weak" class="headerlink" title="assign与weak"></a>assign与weak</h3><p>两者都是弱引用，assign通常用于普通类型属性（如int,NSInteger），还有代理属性的修饰，基本上来说两者是可以通用的。<br>只是后者比前者多了一个功能，后者会在引用的对象被释放的时候将该属性置为nil，而前者依然会指向原来的位置，这样就会变成野指针。在oc中你给你一个nil对象发送消息不会crash，但是给一个对象发送他不能解析的消息是会crash的，所以总的来说weak要比assign安全一些。<br>像delegate属性建议用weak修饰而不是assign。</p>
+<h3 id="retain和strong"><a href="#retain和strong" class="headerlink" title="retain和strong"></a>retain和strong</h3><p>他俩都是强引用，除了某些情况下不一样，其他的时候也是可以通用的。</p>
+<p>在修饰block属性的时候，相信大家都知道要用copy，<strong>对于一个没有引用外部变量（block外面的）的block是存储在堆里面的，但是大多数时候我们都会在block中引入外部变量，这样的话block就被存储在栈里面</strong>，如果不copy的话，他的生命周期会随着函数的结束而结束，copy之后会放在堆里面，延长block的生命周期。<br>strong在修饰block的时候就相当于copy，而retain修饰栈block的时候就相当于assign，这样block会出现提前被释放掉的危险。</p>
 ]]></content>
     </entry>
     
