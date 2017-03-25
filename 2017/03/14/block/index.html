@@ -101,7 +101,7 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1229960-5c079f6944335315.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1229960-925bdc8941a771d5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/800">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1229960-e11c0f8b876f7297.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000">
-<meta property="og:updated_time" content="2017-03-18T03:29:58.000Z">
+<meta property="og:updated_time" content="2017-03-25T05:01:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Block深入理解">
 <meta name="twitter:description" content="block 你应该了解的知识为什么不把本部分放到本质部分的下面呢，我以为实用为大，还是先把block的使用及其注意点写在前面吧。
@@ -441,8 +441,8 @@
 <p>7.4 下面这种情况，ARC与MRC下block都存储在全局数据区，这种情况不常出现，一般我们都是在函数中来是实现block的。</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/1229960-e11c0f8b876f7297.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000" alt="ARC与MRC下都存储在全局数据区.png"></p>
 <p>7.5 总结（强调一下如非特殊说明，block都是函数中实现）：</p>
-<p><strong>ARC模式下：</strong>不论你声明的是局部block还是全局block，它们只要不截获外围变量，它们都会存储在全局数据区的，如果截获外围变量，block就会存储在堆中。</p>
-<p><strong>非ARC模式下：</strong>不论你声明的是局部block还是全局block，它们只要不截获外围变量，它们都会存储在全局数据区的，如果截获外围变量，block就会存储在堆中。</p>
+<p><strong>ARC模式下：</strong>不论你声明的是局部block还是全局block，它们只要不截获外围变量，它们都会存储在全局数据区的，如果截获外围变量，block就会存储在堆（heap）中。</p>
+<p><strong>非ARC模式下：</strong>不论你声明的是局部block还是全局block，它们只要不截获外围变量，它们都会存储在全局数据区的，如果截获外围变量，block就会存储在栈(stack)中。</p>
 <p><strong>两种模式下的差别：</strong>只要不截获外围变量block一律都存在全局数据区，只有截获了外围变量ARC和MRC才有所区别，而开发中往往我们的block都是后面这么一个情况，现在很少有人使用非ARC了吧，所以还是关注ARC的情况吧，即你只需要记住结论的第一条就好了。</p>
 <h2 id="block-的本质"><a href="#block-的本质" class="headerlink" title="block 的本质"></a>block 的本质</h2><p>block其本质是一个struct，也可以说是一个含有<a href="http://www.cnblogs.com/candyming/archive/2011/11/25/2262826.html" target="_blank" rel="external">自动变量</a>的匿名函数，通过clang编译器转换成C++代码可以看出，执行<code>clang -rewrite-objc 要转换的OC文件</code>命令，可以在同级目录下获得一个.cpp文件，里面就是转换后的OC代码，下面我会分三种情况给出OC代码及其对应的cpp代码。</p>
 <p>1、只是纯粹的在入口函数中定义了一个block，block中也没有引入外围变量</p>
