@@ -62,7 +62,7 @@
     
     <entry>
       <title><![CDATA[iOS 深拷贝和浅拷贝]]></title>
-      <url>https://slpowercoder.github.io/2017/02/11/iOS%20%E6%B7%B1%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B5%85%E6%8B%B7%E8%B4%9D/</url>
+      <url>https://slpowercoder.github.io/2017/02/11/iOS-%E6%B7%B1%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B5%85%E6%8B%B7%E8%B4%9D/</url>
       <content type="html"><![CDATA[<p><strong>浅拷贝</strong>只是增加了一个对被引用对象的一个指向，拷贝出的对象与原对象共用一块内存区域。<br>retain：只是retainCount加一，实际上还是共用一块内存<br>copy：不论拷贝的是不是集合对象，只要被拷贝的对象是不可变的，那就是浅拷贝，仅仅retainCount加一</p>
 <p><strong>深拷贝</strong>会分配出一块内存，然后将引用的内容拷贝进去，也就是说拷贝出来的对象与原对象是独立的。<br>copy：拷贝可变对象则是深拷贝<br>mutableCopy：不论被拷贝的是不是集合对象，是可变的还是不可变的，都是深拷贝</p>
 <p><strong>注意：</strong>如果mutableCopy的是集合对象，深拷贝的是该集合对象，不是指该集合对象里面的元素，称之为<strong>单层深拷贝</strong>，对于集合对象内的元素依然是指针拷贝</p>
@@ -72,7 +72,7 @@
     
     <entry>
       <title><![CDATA[Objective-C 消息转发机制]]></title>
-      <url>https://slpowercoder.github.io/2017/02/11/Objective-C%20%E6%B6%88%E6%81%AF%E8%BD%AC%E5%8F%91%E6%9C%BA%E5%88%B6/</url>
+      <url>https://slpowercoder.github.io/2017/02/11/Objective-C-%E6%B6%88%E6%81%AF%E8%BD%AC%E5%8F%91%E6%9C%BA%E5%88%B6/</url>
       <content type="html"><![CDATA[<p>一图胜千言，习惯性的先来一张图以便对消息转发有个整体的把握</p>
 <h3 id="运行时系统库方法查询流程图"><a href="#运行时系统库方法查询流程图" class="headerlink" title="运行时系统库方法查询流程图"></a>运行时系统库方法查询流程图</h3><p><img src="http://upload-images.jianshu.io/upload_images/1229960-edd81dfe76dacf77.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="运行时系统库方法查询"></p>
 <blockquote>
@@ -119,7 +119,7 @@
     
     <entry>
       <title><![CDATA[运行react native 官方例子出错的解决办法]]></title>
-      <url>https://slpowercoder.github.io/2017/01/07/%E8%BF%90%E8%A1%8Creact%20native%20%E5%AE%98%E6%96%B9%E4%BE%8B%E5%AD%90%E5%87%BA%E9%94%99/</url>
+      <url>https://slpowercoder.github.io/2017/01/07/%E8%BF%90%E8%A1%8Creact-native-%E5%AE%98%E6%96%B9%E4%BE%8B%E5%AD%90%E5%87%BA%E9%94%99/</url>
       <content type="html"><![CDATA[<p>学习一样新的东西官网文档和官方源码例子无疑是最好的选择，所以今天clone了官方的例子，100多兆，如果网速不好的话会等待很长时间 ~_~!!，然后直接cd到根目录执行了npm install安装了依赖，可是安装的过程中出错了（也有可能安装成功了，但是运行失败了），估计例子上的版本跟我安装的rn版本不兼容吧。<br>我目前的RN版本是0.39，命令行的版本是react-native-cli:2.0.1</p>
 <p>先上官方运行效果图：<br><img src="http://upload-images.jianshu.io/upload_images/1229960-edb9d9b477259960.gif?imageMogr2/auto-orient/strip" alt="官方效果图"></p>
 <h3 id="解决办法："><a href="#解决办法：" class="headerlink" title="解决办法："></a>解决办法：</h3><p>情况一：如果npm install安装失败的话<br><br>1、git checkout 0.xx-stable切换到稳定的分支，我切换的是0.41-stable版本，安装运行成功。<br><br>2、npm install<br><br>3、找到Examples，里面有四个例子，可以用Xcode打开运行<br></p>
