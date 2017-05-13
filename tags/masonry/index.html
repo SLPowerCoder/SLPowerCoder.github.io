@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="深拷贝,浅拷贝," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -87,19 +87,15 @@
 
 
 
-<meta name="description" content="浅拷贝只是增加了一个对被引用对象的一个指向，拷贝出的对象与原对象共用一块内存区域。retain：只是retainCount加一，实际上还是共用一块内存copy：不论拷贝的是不是集合对象，只要被拷贝的对象是不可变的，那就是浅拷贝，仅仅retainCount加一
-深拷贝会分配出一块内存，然后将引用的内容拷贝进去，也就是说拷贝出来的对象与原对象是独立的。copy：拷贝可变对象则是深拷贝mutableCo">
-<meta property="og:type" content="article">
-<meta property="og:title" content="iOS 深拷贝和浅拷贝">
-<meta property="og:url" content="https://slpowercoder.github.io/2017/02/11/iOS-深拷贝和浅拷贝/index.html">
+<meta name="description" content="坐看云起时">
+<meta property="og:type" content="website">
+<meta property="og:title" content="枫叶">
+<meta property="og:url" content="https://slpowercoder.github.io/tags/masonry/index.html">
 <meta property="og:site_name" content="枫叶">
-<meta property="og:description" content="浅拷贝只是增加了一个对被引用对象的一个指向，拷贝出的对象与原对象共用一块内存区域。retain：只是retainCount加一，实际上还是共用一块内存copy：不论拷贝的是不是集合对象，只要被拷贝的对象是不可变的，那就是浅拷贝，仅仅retainCount加一
-深拷贝会分配出一块内存，然后将引用的内容拷贝进去，也就是说拷贝出来的对象与原对象是独立的。copy：拷贝可变对象则是深拷贝mutableCo">
-<meta property="og:updated_time" content="2017-02-28T09:56:45.000Z">
+<meta property="og:description" content="坐看云起时">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS 深拷贝和浅拷贝">
-<meta name="twitter:description" content="浅拷贝只是增加了一个对被引用对象的一个指向，拷贝出的对象与原对象共用一块内存区域。retain：只是retainCount加一，实际上还是共用一块内存copy：不论拷贝的是不是集合对象，只要被拷贝的对象是不可变的，那就是浅拷贝，仅仅retainCount加一
-深拷贝会分配出一块内存，然后将引用的内容拷贝进去，也就是说拷贝出来的对象与原对象是独立的。copy：拷贝可变对象则是深拷贝mutableCo">
+<meta name="twitter:title" content="枫叶">
+<meta name="twitter:description" content="坐看云起时">
 
 
 
@@ -127,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="https://slpowercoder.github.io/2017/02/11/iOS-深拷贝和浅拷贝/"/>
+  <link rel="canonical" href="https://slpowercoder.github.io/tags/masonry/"/>
 
 
 
 
 
-  <title> iOS 深拷贝和浅拷贝 | 枫叶 </title>
+  <title> 标签: masonry | 枫叶 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -158,7 +154,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
+  <div class="container one-collumn sidebar-position-left  ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -294,191 +290,46 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://slpowercoder.github.io/2017/02/11/iOS-深拷贝和浅拷贝/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="枫叶">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="枫叶">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                iOS 深拷贝和浅拷贝
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-11T23:44:10+08:00">
-                2017-02-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/02/11/iOS-深拷贝和浅拷贝/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/11/iOS-深拷贝和浅拷贝/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <p><strong>浅拷贝</strong>只是增加了一个对被引用对象的一个指向，拷贝出的对象与原对象共用一块内存区域。<br>retain：只是retainCount加一，实际上还是共用一块内存<br>copy：不论拷贝的是不是集合对象，只要被拷贝的对象是不可变的，那就是浅拷贝，仅仅retainCount加一</p>
-<p><strong>深拷贝</strong>会分配出一块内存，然后将引用的内容拷贝进去，也就是说拷贝出来的对象与原对象是独立的。<br>copy：拷贝可变对象则是深拷贝<br>mutableCopy：不论被拷贝的是不是集合对象，是可变的还是不可变的，都是深拷贝</p>
-<p><strong>注意：</strong>如果mutableCopy的是集合对象，深拷贝的是该集合对象，不是指该集合对象里面的元素，称之为<strong>单层深拷贝</strong>，对于集合对象内的元素依然是指针拷贝</p>
-<p><strong>总结</strong><br>copy：只要copy的是<strong>不可变</strong>对象，都是浅拷贝，copy<strong>可变集合</strong>象则是单层深拷贝，拷贝<strong>可变非集合</strong>对象则是深拷贝<br>mutableCopy：拷贝<strong>集合</strong>象则是单层深拷贝，拷贝<strong>非集</strong>合对象则是深拷贝</p>
-
-      
+  <div id="posts" class="posts-collapse">
+    <div class="collection-title">
+      <h2 >
+        masonry
+        <small>标签</small>
+      </h2>
     </div>
 
-    <div>
+    
       
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h1 class="post-title">
         
-
-      
-    </div>
-
-    <div>
-      
+            <a class="post-title-link" href="/2017/05/13/一次masonry布局错误后的自检/" itemprop="url">
+              
+                <span itemprop="name">写这篇blog内心是崩溃的</span>
+              
+            </a>
         
+      </h1>
 
-      
-    </div>
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2017-05-13T21:09:34+08:00"
+              content="2017-05-13" >
+          05-13
+        </time>
+      </div>
 
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/深拷贝/" rel="tag"># 深拷贝</a>
-          
-            <a href="/tags/浅拷贝/" rel="tag"># 浅拷贝</a>
-          
-        </div>
-      
-
-      
-        
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2017/02/11/Objective-C-消息转发机制/" rel="next" title="Objective-C 消息转发机制">
-                <i class="fa fa-chevron-left"></i> Objective-C 消息转发机制
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/03/10/iOS音频的播放以及录制/" rel="prev" title="iOS音频的播放以及录制">
-                iOS音频的播放以及录制 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
+    </header>
   </article>
 
 
-
-    <div class="post-spread">
-      
-    </div>
+    
   </div>
+
+  
 
           
           </div>
@@ -486,14 +337,6 @@
 
 
           
-  <div class="comments" id="comments">
-    
-      <div class="ds-thread" data-thread-key="2017/02/11/iOS-深拷贝和浅拷贝/"
-           data-title="iOS 深拷贝和浅拷贝" data-url="https://slpowercoder.github.io/2017/02/11/iOS-深拷贝和浅拷贝/">
-      </div>
-    
-  </div>
-
 
         </div>
         
@@ -715,10 +558,6 @@
   
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
-
-
 
   
 
