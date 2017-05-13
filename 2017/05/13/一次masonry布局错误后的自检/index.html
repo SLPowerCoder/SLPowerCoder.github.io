@@ -98,7 +98,7 @@ iOS布局有这么几种方式：frame：你要看吗？我并不">
 约束报错，很是无奈，于是我又到GitHub上查看了一遍masonry的使用方式，现总一下。
 iOS布局有这么几种方式：frame：你要看吗？我并不">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1229960-fd829b12d38e19b5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480">
-<meta property="og:updated_time" content="2017-05-13T16:58:44.000Z">
+<meta property="og:updated_time" content="2017-05-13T17:00:51.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="写这篇blog内心是崩溃的">
 <meta name="twitter:description" content="在某一个月黑风高的夜里，他正在伏案敲代码，敲完之后一脸自信的cmd + run，结果不愉快的事情就此发生了，心塞。。😂事情是这样的，我们美丽的UI设计了一套图，本来想自定义个flowLayout走个捷径的，事实却发现走了个大弯路，图是下面这样子的👇
@@ -415,7 +415,7 @@ iOS布局有这么几种方式：frame：你要看吗？我并不">
       
         <p>在某一个月黑风高的夜里，他正在伏案敲代码，敲完之后一脸自信的cmd + run，结果不愉快的事情就此发生了，心塞。。😂<br>事情是这样的，我们美丽的UI设计了一套图，本来想自定义个flowLayout走个捷径的，事实却发现走了个大弯路，图是下面这样子的👇</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/1229960-fd829b12d38e19b5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480" alt="图.png"><br>约束报错，很是无奈，于是我又到GitHub上查看了一遍masonry的使用方式，现总一下。</p>
-<p>iOS布局有这么几种方式：<br><br><strong>frame：</strong>你要看吗？我并不打算写<br><br><strong>autoResize：</strong>autoresizingMask是view的一个布局属性，默认值是UIViewAutoresizingNone，这个枚举值有很多值，具体自己查看<br><br><strong>autoLayout：</strong>自动布局出来以后，很受欢迎，为此苹果还设计了<a href="http://www.tuicool.com/articles/QrUfemz" target="_blank" rel="external">VFL</a>可视化语言，但是程序员是很懒的（不是说不会偷懒的程序员不是好程序员吗，所以我说程序员懒并不是贬义词），然后<a href="https://github.com/SnapKit/Masonry" target="_blank" rel="external">masonry</a>就诞生了，masonry是一个对NSLayoutConstraint的封装具备链式语法的三方布局库，很受大家欢迎，我不敢说没人用frame布局，但是我敢说没几个人还在用NSLayoutConstraint来布局了吧</p>
+<p>iOS布局有这么几种方式：<br><strong>frame：</strong>你要看吗？我并不打算写<br><strong>autoResize：</strong>autoresizingMask是view的一个布局属性，默认值是UIViewAutoresizingNone，这个枚举值有很多值，具体自己查看<br><strong>autoLayout：</strong>自动布局出来以后，很受欢迎，为此苹果还设计了<a href="http://www.tuicool.com/articles/QrUfemz" target="_blank" rel="external">VFL</a>可视化语言，但是程序员是很懒的（不是说不会偷懒的程序员不是好程序员吗，所以我说程序员懒并不是贬义词），然后<a href="https://github.com/SnapKit/Masonry" target="_blank" rel="external">masonry</a>就诞生了，masonry是一个对NSLayoutConstraint的封装具备链式语法的三方布局库，很受大家欢迎，我不敢说没人用frame布局，但是我敢说没几个人还在用NSLayoutConstraint来布局了吧</p>
 <p>masonry的具体用法就不说了，GitHub上有详细的用法，下面就提一下masonry一些你值得注意的地方。</p>
 <ol>
 <li>masrony 提供的一个利于debug约束问题的方法，代码摘自masonry的demo上的，我加了注释</li>

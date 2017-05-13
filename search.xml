@@ -8,7 +8,7 @@
       <url>https://slpowercoder.github.io/2017/05/13/%E4%B8%80%E6%AC%A1masonry%E5%B8%83%E5%B1%80%E9%94%99%E8%AF%AF%E5%90%8E%E7%9A%84%E8%87%AA%E6%A3%80/</url>
       <content type="html"><![CDATA[<p>在某一个月黑风高的夜里，他正在伏案敲代码，敲完之后一脸自信的cmd + run，结果不愉快的事情就此发生了，心塞。。😂<br>事情是这样的，我们美丽的UI设计了一套图，本来想自定义个flowLayout走个捷径的，事实却发现走了个大弯路，图是下面这样子的👇</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/1229960-fd829b12d38e19b5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480" alt="图.png"><br>约束报错，很是无奈，于是我又到GitHub上查看了一遍masonry的使用方式，现总一下。</p>
-<p>iOS布局有这么几种方式：<br><br><strong>frame：</strong>你要看吗？我并不打算写<br><br><strong>autoResize：</strong>autoresizingMask是view的一个布局属性，默认值是UIViewAutoresizingNone，这个枚举值有很多值，具体自己查看<br><br><strong>autoLayout：</strong>自动布局出来以后，很受欢迎，为此苹果还设计了<a href="http://www.tuicool.com/articles/QrUfemz" target="_blank" rel="external">VFL</a>可视化语言，但是程序员是很懒的（不是说不会偷懒的程序员不是好程序员吗，所以我说程序员懒并不是贬义词），然后<a href="https://github.com/SnapKit/Masonry" target="_blank" rel="external">masonry</a>就诞生了，masonry是一个对NSLayoutConstraint的封装具备链式语法的三方布局库，很受大家欢迎，我不敢说没人用frame布局，但是我敢说没几个人还在用NSLayoutConstraint来布局了吧</p>
+<p>iOS布局有这么几种方式：<br><strong>frame：</strong>你要看吗？我并不打算写<br><strong>autoResize：</strong>autoresizingMask是view的一个布局属性，默认值是UIViewAutoresizingNone，这个枚举值有很多值，具体自己查看<br><strong>autoLayout：</strong>自动布局出来以后，很受欢迎，为此苹果还设计了<a href="http://www.tuicool.com/articles/QrUfemz" target="_blank" rel="external">VFL</a>可视化语言，但是程序员是很懒的（不是说不会偷懒的程序员不是好程序员吗，所以我说程序员懒并不是贬义词），然后<a href="https://github.com/SnapKit/Masonry" target="_blank" rel="external">masonry</a>就诞生了，masonry是一个对NSLayoutConstraint的封装具备链式语法的三方布局库，很受大家欢迎，我不敢说没人用frame布局，但是我敢说没几个人还在用NSLayoutConstraint来布局了吧</p>
 <p>masonry的具体用法就不说了，GitHub上有详细的用法，下面就提一下masonry一些你值得注意的地方。</p>
 <ol>
 <li>masrony 提供的一个利于debug约束问题的方法，代码摘自masonry的demo上的，我加了注释</li>
@@ -125,6 +125,16 @@
     </entry>
     
     <entry>
+      <title><![CDATA[iOS中assign与weak，retain与strong的区别]]></title>
+      <url>https://slpowercoder.github.io/2017/02/11/iOS%E4%B8%ADassign%E4%B8%8Eweak%EF%BC%8Cretain%E4%B8%8Estrong%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
+      <content type="html"><![CDATA[<p>以前在没有ARC的时候我们使用assign与retain来修饰属性，后来引入了更安全的weak和strong来修饰属性</p>
+<h3 id="assign与weak"><a href="#assign与weak" class="headerlink" title="assign与weak"></a>assign与weak</h3><p>两者都是弱引用，assign通常用于普通类型属性（如int,NSInteger），还有代理属性的修饰，基本上来说两者是可以通用的。<br>只是后者比前者多了一个功能，后者会在引用的对象被释放的时候将该属性置为nil，而前者依然会指向原来的位置，这样就会变成野指针。在oc中你给你一个nil对象发送消息不会crash，但是给一个对象（野指针）发送他不能解析的消息是会crash的，所以总的来说weak要比assign安全一些。<br>像delegate属性建议用weak修饰而不是assign。</p>
+<h3 id="retain和strong"><a href="#retain和strong" class="headerlink" title="retain和strong"></a>retain和strong</h3><p>他俩都是强引用，除了某些情况下不一样，其他的时候也是可以通用的。</p>
+<p>在修饰block属性的时候，相信大家都知道要用copy，如果不copy的话，他的生命周期会随着函数的结束而结束，copy之后会放在堆里面，延长block的生命周期。<br>strong在修饰block的时候就相当于copy，而retain修饰栈block的时候就相当于assign，这样block会出现提前被释放掉的危险。</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[Objective-C 消息转发机制]]></title>
       <url>https://slpowercoder.github.io/2017/02/11/Objective-C-%E6%B6%88%E6%81%AF%E8%BD%AC%E5%8F%91%E6%9C%BA%E5%88%B6/</url>
       <content type="html"><![CDATA[<p>一图胜千言，习惯性的先来一张图以便对消息转发有个整体的把握</p>
@@ -144,16 +154,6 @@
 <p>目标文件的实现文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">//</div><div class="line">//  Target.m</div><div class="line">//  ForwardMsg</div><div class="line">//</div><div class="line">//  Created by 孙磊 on 2017/2/25.</div><div class="line">//  Copyright © 2017年 孙磊. All rights reserved.</div><div class="line">//</div><div class="line"></div><div class="line">#import &quot;Target.h&quot;</div><div class="line"></div><div class="line">@implementation Target</div><div class="line"></div><div class="line">-(void)logName&#123;</div><div class="line">NSLog(@&quot;我是备用方法---%s&quot;,__func__);</div><div class="line">&#125;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure></p>
 <p><a href="https://github.com/nicklockwood/NullSafe" target="_blank" rel="external">推荐一个国外大大利用消息转发避免后台返回NSNull（后台有时候会返回<null>）而引起的奔溃问题，例如你需要一个字符串他却给你返回了一个“<null>”这样一个NSNull对象。用法很简单，直接把NullSafe.m拖到项目中即可，该文件会在运行时自动加载</null></null></a></p>
 <p>扩展：简单说一下NULL，nil，Nil，NSNull的用处<br>NULL：用于普通类型，例如NSInteger<br>nil：用于OC对象（除了类这个对象）,给nil对象发送消息不会crash<br>Nil：用于Class类型对象的赋值（类是元类的实例，也是对象）<br>NSNull：用于OC对象的站位，一般会作为集合中的占位元素，给NSNull对象发送消息会crash的，后台给我们返回的<null>就是NSNull对象</null></p>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[iOS中assign与weak，retain与strong的区别]]></title>
-      <url>https://slpowercoder.github.io/2017/02/11/iOS%E4%B8%ADassign%E4%B8%8Eweak%EF%BC%8Cretain%E4%B8%8Estrong%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
-      <content type="html"><![CDATA[<p>以前在没有ARC的时候我们使用assign与retain来修饰属性，后来引入了更安全的weak和strong来修饰属性</p>
-<h3 id="assign与weak"><a href="#assign与weak" class="headerlink" title="assign与weak"></a>assign与weak</h3><p>两者都是弱引用，assign通常用于普通类型属性（如int,NSInteger），还有代理属性的修饰，基本上来说两者是可以通用的。<br>只是后者比前者多了一个功能，后者会在引用的对象被释放的时候将该属性置为nil，而前者依然会指向原来的位置，这样就会变成野指针。在oc中你给你一个nil对象发送消息不会crash，但是给一个对象（野指针）发送他不能解析的消息是会crash的，所以总的来说weak要比assign安全一些。<br>像delegate属性建议用weak修饰而不是assign。</p>
-<h3 id="retain和strong"><a href="#retain和strong" class="headerlink" title="retain和strong"></a>retain和strong</h3><p>他俩都是强引用，除了某些情况下不一样，其他的时候也是可以通用的。</p>
-<p>在修饰block属性的时候，相信大家都知道要用copy，如果不copy的话，他的生命周期会随着函数的结束而结束，copy之后会放在堆里面，延长block的生命周期。<br>strong在修饰block的时候就相当于copy，而retain修饰栈block的时候就相当于assign，这样block会出现提前被释放掉的危险。</p>
 ]]></content>
     </entry>
     
