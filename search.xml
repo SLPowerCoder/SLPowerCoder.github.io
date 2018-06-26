@@ -5,7 +5,7 @@
     
     <entry>
       <title><![CDATA[滴滴面试总结.md]]></title>
-      <url>https://slpowercoder.github.io/2018/06/26/%E6%BB%B4%E6%BB%B4%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%93/</url>
+      <url>https://slpowercoder.github.io/2018/06/15/%E6%BB%B4%E6%BB%B4%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%93/</url>
       <content type="html"><![CDATA[<p><strong>下面是面试滴滴的经历，总共出了四道技术面试题，说不出的辛酸。。。<br>日后有时间在总结答案，先记录下来</strong></p>
 <hr>
 <p><strong>1、实现一个游戏人物GameRole，包含年龄、性别、装备（可以动态增减），不是Xcode，是一个没有提示的编辑器，徒手写，类名忘写了。。。</strong></p>
