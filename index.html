@@ -411,9 +411,20 @@
       
         
           
-            <h2 id="React-Native的性能优化"><a href="#React-Native的性能优化" class="headerlink" title="React Native的性能优化"></a>React Native的性能优化</h2><p><strong>众所周知RN由于应用了virtual DOM 、diff算法等一些列调优机制，使RN应用几乎达到了与原生一样的体验。但是RN毕竟和原生还隔着一道桥梁batch bridge，并且最终RN的代码还是要通过jscore引擎转换成原生代码来执行，RN模块可以说只是原生APP的一个线程而已，尽管官方替我们做了一些优化，但是有些优化还是交给了用户来决定，比如<code>sholdComponentUpdate</code>是返回true还是false，所以还是有许多需要人工来优化</strong> </p>
-<p>– 既然是性能优化那就肯定得找出RN的性能瓶颈在哪<br>– 1、从简单处着手就是尽量减少页面的渲染</p>
-
+            <h2 id="React-Native的性能优化"><a href="#React-Native的性能优化" class="headerlink" title="React Native的性能优化"></a>React Native的性能优化</h2><p>众所周知RN由于应用了virtual DOM 、diff算法等一些列调优机制，使RN应用几乎达到了与原生一样的体验，但是毕竟RN只是原生APP的一个线程而已，RN和原生还隔着一道桥梁batch bridge，最终RN的代码还是要通过jscore引擎转换成原生代码来执行，这就决定了RN不可能超越原生，除非RN能越过这道坎，尽管官方替我们做了一些优化，但是有些优化只能交给了用户来决定，比如<code>sholdComponentUpdate</code>是返回true还是false，这是需要我们来决定的，所以还是有许多需要人工来优化。</p>
+<p>既然是性能优化那就肯定得找出RN的性能瓶颈在哪</p>
+<h3 id="一、从简单处着手就是尽量减少页面的渲染"><a href="#一、从简单处着手就是尽量减少页面的渲染" class="headerlink" title="一、从简单处着手就是尽量减少页面的渲染"></a>一、从简单处着手就是尽量减少页面的渲染</h3><ol>
+<li>比较吃性能的、耗时的操作可以放到componentDidMount中，然后再用Interaction manager在包裹一下，比如网络请求。</li>
+<li>尽量少用状态组件，尽可能用无状态组件，无状态组件不会被实例化，可以提升性能</li>
+<li>自定义的有状态组件尽量继承自pure component，这样系统会自动在shouldComponentUpdate中做一层浅比较，可以减少一些不必要的渲染，同时自己也可以在该方法中做深层次的比较。</li>
+<li>利用immutable不可变数据，提升性能，同时也可以避免本来应该渲染而实际却没有发生渲染的问题，因为框架默认在shouldComponentUpdate做的是一层浅比较，如果在state改变的过程中做的是浅拷贝，则state改变之前和改变之后有可能是相等的，指向的是同一个对象，这样浅比较会认为state没有改变而不做渲染。</li>
+<li><p>一个数组中的多个兄弟组件要指定唯一的key值。例如通常我们在一个容器组件中创建多个子组件的时候，我们会把这些子组件放在一个数组里，然后把数组直接放到容器页面中，形如下面的伪代码：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">banner = ()=&gt;&#123;</div><div class="line">	let childArr = [];</div><div class="line">	while(let i &lt; 10) &#123;</div><div class="line">		childArr.push(&lt;Child key=&#123;XXXXXX&#125;&gt;&lt;/Child&gt;)</div><div class="line">	&#125;</div><div class="line">	return &lt;View&gt; &#123;childArr&#125; &lt;/View&gt;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p> Child组件的key一定要有，这涉及到diff算法的原理，diff算法是按层级进行比较的，当前的virtual DOM 和之前的virtual DOM进行同层级比较的时候，对于属于同一个父组件的同一层级的子组件，<strong>如果没有key值的话，RN需要遍历该父组件的所有子组件来行进对比，才能知道哪一个子组件发生了改变，这样如果子组件的数量很大的时候会很耗性能，RN有可能会因为遍历的耗时而选择放弃对比来重新渲染所有的子组件，但是如果有key值的话可以利用key直接进行两两比较</strong>，效率就高出很多。</p>
+</li>
+<li>列表优化，几乎所有的APP都有列表，所以列表的优化尤为重要，之前RN采用的是listView，数据稍微大的时候会出现明显卡顿，有性能瓶颈，最后RN在xxx版推出了新的列表神器FlatList和SectionList，</li>
+</ol>
+<h3 id="二、包优化"><a href="#二、包优化" class="headerlink" title="二、包优化"></a>二、包优化</h3>
           
         
       
