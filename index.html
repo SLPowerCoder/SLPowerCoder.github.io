@@ -411,7 +411,7 @@
       
         
           
-            <h2 id="React-Native的性能优化"><a href="#React-Native的性能优化" class="headerlink" title="React Native的性能优化"></a>React Native的性能优化</h2><p>众所周知RN由于应用了virtual DOM 、diff算法等一些列调优机制，使RN应用几乎达到了与原生一样的体验，但是毕竟RN只是原生APP的一个线程而已，RN和原生还隔着一道桥梁batch bridge，最终RN的代码还是要通过jscore引擎转换成原生代码来执行，这就决定了RN不可能超越原生，除非RN能越过这道坎，尽管官方替我们做了一些优化，但是有些优化只能交给了用户来决定，比如<code>sholdComponentUpdate</code>是返回true还是false，这是需要我们来决定的，再比如APP的页面如果非常多的话，打包之后bundle非常大，而加载和初始化bundle又很耗时间，这又需要拆分bundle，所以还是有许多需要人工来优化。</p>
+            <p>众所周知RN由于应用了virtual DOM 、diff算法等一些列调优机制，使RN应用几乎达到了与原生一样的体验，但是毕竟RN只是原生APP的一个线程而已，RN和原生还隔着一道桥梁batch bridge，最终RN的代码还是要通过jscore引擎转换成原生代码来执行，这就决定了RN不可能超越原生，除非RN能越过这道坎，尽管官方替我们做了一些优化，但是有些优化只能交给了用户来决定，比如<code>sholdComponentUpdate</code>是返回true还是false，这是需要我们来决定的，再比如APP的页面如果非常多的话，打包之后bundle非常大，而加载和初始化bundle又很耗时间，这又需要拆分bundle，所以还是有许多需要人工来优化。</p>
 <p>既然是性能优化那就肯定得找出RN的性能瓶颈在哪</p>
 <h3 id="一、基础优化（尽量减少页面的渲染）"><a href="#一、基础优化（尽量减少页面的渲染）" class="headerlink" title="一、基础优化（尽量减少页面的渲染）"></a>一、基础优化（尽量减少页面的渲染）</h3><ol>
 <li>比较吃性能的、耗时的操作可以放到<code>componentDidMount</code>中，然后再用<code>Interaction manager</code>在包裹一下，比如网络请求。</li>
