@@ -413,7 +413,7 @@
           
             <h3 id="React-Native的性能优化"><a href="#React-Native的性能优化" class="headerlink" title="React Native的性能优化"></a>React Native的性能优化</h3><p>众所周知RN由于应用了virtual DOM 、diff算法等一些列调优机制，使RN应用几乎达到了与原生一样的体验，但是毕竟RN只是原生APP的一个线程而已，RN和原生还隔着一道桥梁batch bridge，最终RN的代码还是要通过jscore引擎转换成原生代码来执行，这就决定了RN不可能超越原生，除非RN能越过这道坎，尽管官方替我们做了一些优化，但是有些优化只能交给了用户来决定，比如<code>sholdComponentUpdate</code>是返回true还是false，这是需要我们来决定的，再比如APP的页面如果非常多的话，打包之后bundle非常大，而加载和初始化bundle又很耗时间，这又需要拆分bundle，所以还是有许多需要人工来优化。</p>
 <p>既然是性能优化那就肯定得找出RN的性能瓶颈在哪</p>
-<h3 id="一、基础优化（尽量减少页面的渲染）"><a href="#一、基础优化（尽量减少页面的渲染）" class="headerlink" title="一、基础优化（尽量减少页面的渲染）"></a>一、基础优化（尽量减少页面的渲染）</h3><ol>
+<h3 id="一、基础优化（目的是尽量减少页面的渲染）"><a href="#一、基础优化（目的是尽量减少页面的渲染）" class="headerlink" title="一、基础优化（目的是尽量减少页面的渲染）"></a>一、基础优化（目的是尽量减少页面的渲染）</h3><ol>
 <li>比较吃性能的、耗时的操作可以放到<code>componentDidMount</code>中，然后再用<code>Interaction manager</code>在包裹一下，比如网络请求。</li>
 <li>尽量少用状态组件，尽可能用无状态组件，<strong>无状态组件不会被实例化</strong>，可以提升性能</li>
 <li>自定义的有状态组件尽量继承自<code>pure component</code>，这样系统会自动在<code>shouldComponentUpdate</code>中<strong>默认做一层浅比较（直接拿两个对象做比较，对象中的子元素不做比较）</strong>，可以减少一些不必要的渲染，当然你也也可以在该方法中做<strong>深</strong>层次的比较，如果组件不是继承自<code>PureComponent</code>则该方法默认返回true，这样会导致很多无用的渲染，比如父组件的改变会导致子组件的重新render。</li>
@@ -425,13 +425,15 @@
 <li>列表优化，几乎所有的APP都有列表，所以列表的优化尤为重要，之前RN采用的是listView，数据稍微大的时候会出现明显卡顿，有性能瓶颈，最后RN在xxx版推出了新的列表神器<code>FlatList</code>和<code>SectionList</code>，他俩都是继承自<code>VirtualizedList</code>，比listView的性能更高，并且使用起来也更简单了，无需再想listView一样要先创建一个DataSource对象了。具体优化可以参考官网。。。</li>
 <li>用<code>FlatList</code>替换<code>scrollView</code>，因为在用<code>scrollView</code>的时候它会一下子把他上面的所有子组件都渲染出来，而<code>FlatList</code>可以设置首屏渲染的行数，这样就不会导致在刚进入这一页的时候出现卡顿现象。</li>
 </ol>
-<h3 id="二、本地分包优化"><a href="#二、本地分包优化" class="headerlink" title="二、本地分包优化"></a>二、本地分包优化</h3><p>从官方给出的RN耗时图可以看出，最耗性能的地方是bundle包的<strong>加载</strong>和<strong>JS环境的初始化</strong>，所以这一块的优化也至关重要，bundle体积过大会导致加载慢，所以我们需要尽可能的优化bundle的体积，做拆分处理，把bundle拆分成<code>基础bundle</code>和<code>业务bundle</code>，<code>基础bundle</code>是APP不许依赖的公共基础部分。其实拆分之后还是很耗时间，所以我们又做了另一种处理，那就是<code>预加载</code>，对<code>基础bundle</code>进行预加载，这样可以减少一些加载以及初始化的耗时。总结如下：</p>
+<h3 id="二、本地分包优化"><a href="#二、本地分包优化" class="headerlink" title="二、本地分包优化"></a>二、本地分包优化</h3><p>从官方给出的RN耗时图可以看出，最耗性能的地方是bundle包的<strong>加载</strong>和<strong>JS环境的初始化</strong>，所以这一块的优化也至关重要，bundle体积过大会导致加载慢，所以第一我们需要尽可能的优化bundle的体积，第二做拆分处理，把bundle拆分成<code>基础bundle</code>和<code>业务bundle</code>，<code>基础bundle</code>是APP不许依赖的公共基础部分。其实拆分之后还是很耗时间，所以我们又做了另一种处理，那就是<code>预加载</code>，对<code>基础bundle</code>进行预加载，这样可以减少一些加载以及初始化的耗时。总结如下：</p>
 <ol>
 <li><strong>本地分包</strong>： 把过大的bundle拆分成<code>公共基础bundle</code>和<code>业务bundle</code></li>
 <li><strong>预加载</strong>： 预加载公共基础bundle</li>
 </ol>
 <h3 id="三、按需延迟加载"><a href="#三、按需延迟加载" class="headerlink" title="三、按需延迟加载"></a>三、按需延迟加载</h3><p>可以通过<code>require</code>来实现动态延迟加载,伪代码如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">import xxx from &apos;./xxxx&apos;</div><div class="line"></div><div class="line">let test2;</div><div class="line"></div><div class="line">export default class Test extent Componnet &#123;</div><div class="line"></div><div class="line">	getTest2 = ()=&gt;&#123;</div><div class="line">		// 对test2模块进行懒加载（延迟加载），以提高性能</div><div class="line">		if(test2 === undefined) &#123;</div><div class="line">			test2 = require(&apos;./xxxx/test2&apos;);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我们不需要再这个test模块一开始就加载test2模块，这样可以延迟加载一些不是立马需要的其他模块，提升整体加载速度，降低内存。</p>
+
           
         
       
@@ -1467,6 +1469,159 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://slpowercoder.github.io/2017/02/11/iOS中assign与weak，retain与strong的区别/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="枫叶">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="枫叶">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/02/11/iOS中assign与weak，retain与strong的区别/" itemprop="url">
+                  iOS中assign与weak，retain与strong的区别
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-11T23:41:29+08:00">
+                2017-02-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/02/11/iOS中assign与weak，retain与strong的区别/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/11/iOS中assign与weak，retain与strong的区别/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>以前在没有ARC的时候我们使用assign与retain来修饰属性，后来引入了更安全的weak和strong来修饰属性</p>
+<h3 id="assign与weak"><a href="#assign与weak" class="headerlink" title="assign与weak"></a>assign与weak</h3><p>两者都是弱引用，assign通常用于普通类型属性（如int,NSInteger），还有代理属性的修饰，基本上来说两者是可以通用的。<br>只是后者比前者多了一个功能，后者会在引用的对象被释放的时候将该属性置为nil，而前者依然会指向原来的位置，这样就会变成野指针。在oc中你给你一个nil对象发送消息不会crash，但是给一个对象（野指针）发送他不能解析的消息是会crash的，所以总的来说weak要比assign安全一些。<br>像delegate属性建议用weak修饰而不是assign。</p>
+<h3 id="retain和strong"><a href="#retain和strong" class="headerlink" title="retain和strong"></a>retain和strong</h3><p>他俩都是强引用，除了某些情况下不一样，其他的时候也是可以通用的。</p>
+<p>在修饰block属性的时候，相信大家都知道要用copy，如果不copy的话，他的生命周期会随着函数的结束而结束，copy之后会放在堆里面，延长block的生命周期。<br>strong在修饰block的时候就相当于copy，而retain修饰栈block的时候就相当于assign，这样block会出现提前被释放掉的危险。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://slpowercoder.github.io/2017/02/11/Objective-C-消息转发机制/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1593,159 +1748,6 @@
 <p>目标文件的实现文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">//</div><div class="line">//  Target.m</div><div class="line">//  ForwardMsg</div><div class="line">//</div><div class="line">//  Created by 孙磊 on 2017/2/25.</div><div class="line">//  Copyright © 2017年 孙磊. All rights reserved.</div><div class="line">//</div><div class="line"></div><div class="line">#import &quot;Target.h&quot;</div><div class="line"></div><div class="line">@implementation Target</div><div class="line"></div><div class="line">-(void)logName&#123;</div><div class="line">NSLog(@&quot;我是备用方法---%s&quot;,__func__);</div><div class="line">&#125;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure></p>
 <p><a href="https://github.com/nicklockwood/NullSafe" target="_blank" rel="external">推荐一个国外大大利用消息转发避免后台返回NSNull（后台有时候会返回<null>）而引起的奔溃问题，例如你需要一个字符串他却给你返回了一个“<null>”这样一个NSNull对象。用法很简单，直接把NullSafe.m拖到项目中即可，该文件会在运行时自动加载</null></null></a></p>
 <p>扩展：简单说一下NULL，nil，Nil，NSNull的用处<br>NULL：用于普通类型，例如NSInteger<br>nil：用于OC对象（除了类这个对象）,给nil对象发送消息不会crash<br>Nil：用于Class类型对象的赋值（类是元类的实例，也是对象）<br>NSNull：用于OC对象的站位，一般会作为集合中的占位元素，给NSNull对象发送消息会crash的，后台给我们返回的<null>就是NSNull对象</null></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://slpowercoder.github.io/2017/02/11/iOS中assign与weak，retain与strong的区别/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="枫叶">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="枫叶">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/02/11/iOS中assign与weak，retain与strong的区别/" itemprop="url">
-                  iOS中assign与weak，retain与strong的区别
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-11T23:41:29+08:00">
-                2017-02-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/02/11/iOS中assign与weak，retain与strong的区别/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/11/iOS中assign与weak，retain与strong的区别/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>以前在没有ARC的时候我们使用assign与retain来修饰属性，后来引入了更安全的weak和strong来修饰属性</p>
-<h3 id="assign与weak"><a href="#assign与weak" class="headerlink" title="assign与weak"></a>assign与weak</h3><p>两者都是弱引用，assign通常用于普通类型属性（如int,NSInteger），还有代理属性的修饰，基本上来说两者是可以通用的。<br>只是后者比前者多了一个功能，后者会在引用的对象被释放的时候将该属性置为nil，而前者依然会指向原来的位置，这样就会变成野指针。在oc中你给你一个nil对象发送消息不会crash，但是给一个对象（野指针）发送他不能解析的消息是会crash的，所以总的来说weak要比assign安全一些。<br>像delegate属性建议用weak修饰而不是assign。</p>
-<h3 id="retain和strong"><a href="#retain和strong" class="headerlink" title="retain和strong"></a>retain和strong</h3><p>他俩都是强引用，除了某些情况下不一样，其他的时候也是可以通用的。</p>
-<p>在修饰block属性的时候，相信大家都知道要用copy，如果不copy的话，他的生命周期会随着函数的结束而结束，copy之后会放在堆里面，延长block的生命周期。<br>strong在修饰block的时候就相当于copy，而retain修饰栈block的时候就相当于assign，这样block会出现提前被释放掉的危险。</p>
 
           
         

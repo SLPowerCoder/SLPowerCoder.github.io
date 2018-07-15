@@ -93,7 +93,7 @@
 <meta property="og:url" content="https://slpowercoder.github.io/2018/06/27/React-Native的性能优化/index.html">
 <meta property="og:site_name" content="枫叶">
 <meta property="og:description" content="React Native的性能优化众所周知RN由于应用了virtual DOM 、diff算法等一些列调优机制，使RN应用几乎达到了与原生一样的体验，但是毕竟RN只是原生APP的一个线程而已，RN和原生还隔着一道桥梁batch bridge，最终RN的代码还是要通过jscore引擎转换成原生代码来执行，这就决定了RN不可能超越原生，除非RN能越过这道坎，尽管官方替我们做了一些优化，但是有些优化只能">
-<meta property="og:updated_time" content="2018-07-15T03:12:18.322Z">
+<meta property="og:updated_time" content="2018-07-15T03:22:13.942Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React Native的性能优化">
 <meta name="twitter:description" content="React Native的性能优化众所周知RN由于应用了virtual DOM 、diff算法等一些列调优机制，使RN应用几乎达到了与原生一样的体验，但是毕竟RN只是原生APP的一个线程而已，RN和原生还隔着一道桥梁batch bridge，最终RN的代码还是要通过jscore引擎转换成原生代码来执行，这就决定了RN不可能超越原生，除非RN能越过这道坎，尽管官方替我们做了一些优化，但是有些优化只能">
@@ -407,7 +407,7 @@
       
         <h3 id="React-Native的性能优化"><a href="#React-Native的性能优化" class="headerlink" title="React Native的性能优化"></a>React Native的性能优化</h3><p>众所周知RN由于应用了virtual DOM 、diff算法等一些列调优机制，使RN应用几乎达到了与原生一样的体验，但是毕竟RN只是原生APP的一个线程而已，RN和原生还隔着一道桥梁batch bridge，最终RN的代码还是要通过jscore引擎转换成原生代码来执行，这就决定了RN不可能超越原生，除非RN能越过这道坎，尽管官方替我们做了一些优化，但是有些优化只能交给了用户来决定，比如<code>sholdComponentUpdate</code>是返回true还是false，这是需要我们来决定的，再比如APP的页面如果非常多的话，打包之后bundle非常大，而加载和初始化bundle又很耗时间，这又需要拆分bundle，所以还是有许多需要人工来优化。</p>
 <p>既然是性能优化那就肯定得找出RN的性能瓶颈在哪</p>
-<h3 id="一、基础优化（尽量减少页面的渲染）"><a href="#一、基础优化（尽量减少页面的渲染）" class="headerlink" title="一、基础优化（尽量减少页面的渲染）"></a>一、基础优化（尽量减少页面的渲染）</h3><ol>
+<h3 id="一、基础优化（目的是尽量减少页面的渲染）"><a href="#一、基础优化（目的是尽量减少页面的渲染）" class="headerlink" title="一、基础优化（目的是尽量减少页面的渲染）"></a>一、基础优化（目的是尽量减少页面的渲染）</h3><ol>
 <li>比较吃性能的、耗时的操作可以放到<code>componentDidMount</code>中，然后再用<code>Interaction manager</code>在包裹一下，比如网络请求。</li>
 <li>尽量少用状态组件，尽可能用无状态组件，<strong>无状态组件不会被实例化</strong>，可以提升性能</li>
 <li>自定义的有状态组件尽量继承自<code>pure component</code>，这样系统会自动在<code>shouldComponentUpdate</code>中<strong>默认做一层浅比较（直接拿两个对象做比较，对象中的子元素不做比较）</strong>，可以减少一些不必要的渲染，当然你也也可以在该方法中做<strong>深</strong>层次的比较，如果组件不是继承自<code>PureComponent</code>则该方法默认返回true，这样会导致很多无用的渲染，比如父组件的改变会导致子组件的重新render。</li>
@@ -419,13 +419,15 @@
 <li>列表优化，几乎所有的APP都有列表，所以列表的优化尤为重要，之前RN采用的是listView，数据稍微大的时候会出现明显卡顿，有性能瓶颈，最后RN在xxx版推出了新的列表神器<code>FlatList</code>和<code>SectionList</code>，他俩都是继承自<code>VirtualizedList</code>，比listView的性能更高，并且使用起来也更简单了，无需再想listView一样要先创建一个DataSource对象了。具体优化可以参考官网。。。</li>
 <li>用<code>FlatList</code>替换<code>scrollView</code>，因为在用<code>scrollView</code>的时候它会一下子把他上面的所有子组件都渲染出来，而<code>FlatList</code>可以设置首屏渲染的行数，这样就不会导致在刚进入这一页的时候出现卡顿现象。</li>
 </ol>
-<h3 id="二、本地分包优化"><a href="#二、本地分包优化" class="headerlink" title="二、本地分包优化"></a>二、本地分包优化</h3><p>从官方给出的RN耗时图可以看出，最耗性能的地方是bundle包的<strong>加载</strong>和<strong>JS环境的初始化</strong>，所以这一块的优化也至关重要，bundle体积过大会导致加载慢，所以我们需要尽可能的优化bundle的体积，做拆分处理，把bundle拆分成<code>基础bundle</code>和<code>业务bundle</code>，<code>基础bundle</code>是APP不许依赖的公共基础部分。其实拆分之后还是很耗时间，所以我们又做了另一种处理，那就是<code>预加载</code>，对<code>基础bundle</code>进行预加载，这样可以减少一些加载以及初始化的耗时。总结如下：</p>
+<h3 id="二、本地分包优化"><a href="#二、本地分包优化" class="headerlink" title="二、本地分包优化"></a>二、本地分包优化</h3><p>从官方给出的RN耗时图可以看出，最耗性能的地方是bundle包的<strong>加载</strong>和<strong>JS环境的初始化</strong>，所以这一块的优化也至关重要，bundle体积过大会导致加载慢，所以第一我们需要尽可能的优化bundle的体积，第二做拆分处理，把bundle拆分成<code>基础bundle</code>和<code>业务bundle</code>，<code>基础bundle</code>是APP不许依赖的公共基础部分。其实拆分之后还是很耗时间，所以我们又做了另一种处理，那就是<code>预加载</code>，对<code>基础bundle</code>进行预加载，这样可以减少一些加载以及初始化的耗时。总结如下：</p>
 <ol>
 <li><strong>本地分包</strong>： 把过大的bundle拆分成<code>公共基础bundle</code>和<code>业务bundle</code></li>
 <li><strong>预加载</strong>： 预加载公共基础bundle</li>
 </ol>
 <h3 id="三、按需延迟加载"><a href="#三、按需延迟加载" class="headerlink" title="三、按需延迟加载"></a>三、按需延迟加载</h3><p>可以通过<code>require</code>来实现动态延迟加载,伪代码如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">import xxx from &apos;./xxxx&apos;</div><div class="line"></div><div class="line">let test2;</div><div class="line"></div><div class="line">export default class Test extent Componnet &#123;</div><div class="line"></div><div class="line">	getTest2 = ()=&gt;&#123;</div><div class="line">		// 对test2模块进行懒加载（延迟加载），以提高性能</div><div class="line">		if(test2 === undefined) &#123;</div><div class="line">			test2 = require(&apos;./xxxx/test2&apos;);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我们不需要再这个test模块一开始就加载test2模块，这样可以延迟加载一些不是立马需要的其他模块，提升整体加载速度，降低内存。</p>
+
       
     </div>
 
@@ -636,7 +638,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#React-Native的性能优化"><span class="nav-number">1.</span> <span class="nav-text">React Native的性能优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一、基础优化（尽量减少页面的渲染）"><span class="nav-number">2.</span> <span class="nav-text">一、基础优化（尽量减少页面的渲染）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、本地分包优化"><span class="nav-number">3.</span> <span class="nav-text">二、本地分包优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、按需延迟加载"><span class="nav-number">4.</span> <span class="nav-text">三、按需延迟加载</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#React-Native的性能优化"><span class="nav-number">1.</span> <span class="nav-text">React Native的性能优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一、基础优化（目的是尽量减少页面的渲染）"><span class="nav-number">2.</span> <span class="nav-text">一、基础优化（目的是尽量减少页面的渲染）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、本地分包优化"><span class="nav-number">3.</span> <span class="nav-text">二、本地分包优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、按需延迟加载"><span class="nav-number">4.</span> <span class="nav-text">三、按需延迟加载</span></a></li></ol></div>
             
 
           </div>
