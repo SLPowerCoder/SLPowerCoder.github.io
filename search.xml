@@ -18,13 +18,15 @@
 <p> Child组件的key一定要有，这涉及到diff算法的原理，diff算法是按层级进行比较的，当前的virtual DOM 和之前的virtual DOM进行同层级比较的时候，对于属于同一个父组件的同一层级的子组件，<strong>如果没有key值的话，RN需要遍历该父组件的所有子组件来行进对比，才能知道哪一个子组件发生了改变，这样如果子组件的数量很大的时候会很耗性能，RN有可能会因为遍历的耗时而选择放弃对比来重新渲染所有的子组件，但是如果有key值的话可以利用key直接进行两两比较</strong>，效率就高出很多。</p>
 </li>
 <li>列表优化，几乎所有的APP都有列表，所以列表的优化尤为重要，之前RN采用的是listView，数据稍微大的时候会出现明显卡顿，有性能瓶颈，最后RN在xxx版推出了新的列表神器<code>FlatList</code>和<code>SectionList</code>，他俩都是继承自<code>VirtualizedList</code>，比listView的性能更高，并且使用起来也更简单了，无需再想listView一样要先创建一个DataSource对象了。具体优化可以参考官网。。。</li>
+<li>用<code>FlatList</code>替换<code>scrollView</code>，因为在用<code>scrollView</code>的时候它会一下子把他上面的所有子组件都渲染出来，而<code>FlatList</code>可以设置首屏渲染的行数，这样就不会导致在刚进入这一页的时候出现卡顿现象。</li>
 </ol>
-<h3 id="二、本地分包优化"><a href="#二、本地分包优化" class="headerlink" title="二、本地分包优化"></a>二、本地分包优化</h3><p>从官方给出的RN耗时图可以看出，最耗性能的地方是bundle包的<strong>加载</strong>和<strong>初始化</strong>，所以这一块的优化也至关重要，bundle体积过大会导致加载慢，所以我们需要尽可能的优化bundle的体积，做拆分处理，把bundle拆分成<code>基础bundle</code>和<code>业务bundle</code>，<code>基础bundle</code>是APP不许依赖的公共基础部分。其实拆分之后还是很耗时间，所以我们又做了另一种处理，那就是<code>预加载</code>，对<code>基础bundle</code>进行预加载，这样可以减少一些加载以及初始化的耗时。总结如下：</p>
+<h3 id="二、本地分包优化"><a href="#二、本地分包优化" class="headerlink" title="二、本地分包优化"></a>二、本地分包优化</h3><p>从官方给出的RN耗时图可以看出，最耗性能的地方是bundle包的<strong>加载</strong>和<strong>JS环境的初始化</strong>，所以这一块的优化也至关重要，bundle体积过大会导致加载慢，所以我们需要尽可能的优化bundle的体积，做拆分处理，把bundle拆分成<code>基础bundle</code>和<code>业务bundle</code>，<code>基础bundle</code>是APP不许依赖的公共基础部分。其实拆分之后还是很耗时间，所以我们又做了另一种处理，那就是<code>预加载</code>，对<code>基础bundle</code>进行预加载，这样可以减少一些加载以及初始化的耗时。总结如下：</p>
 <ol>
 <li><strong>本地分包</strong>： 把过大的bundle拆分成<code>公共基础bundle</code>和<code>业务bundle</code></li>
 <li><strong>预加载</strong>： 预加载公共基础bundle</li>
 </ol>
-]]></content>
+<h3 id="三、按需延迟加载"><a href="#三、按需延迟加载" class="headerlink" title="三、按需延迟加载"></a>三、按需延迟加载</h3><p>可以通过<code>require</code>来实现动态延迟加载,伪代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">import xxx from &apos;./xxxx&apos;</div><div class="line"></div><div class="line">let test2;</div><div class="line"></div><div class="line">export default class Test extent Componnet &#123;</div><div class="line"></div><div class="line">	getTest2 = ()=&gt;&#123;</div><div class="line">		// 对test2模块进行懒加载（延迟加载），以提高性能</div><div class="line">		if(test2 === undefined) &#123;</div><div class="line">			test2 = require(&apos;./xxxx/test2&apos;);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
     </entry>
     
     <entry>
