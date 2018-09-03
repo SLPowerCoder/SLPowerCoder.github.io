@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="react-native," />
+  <meta name="keywords" content="深拷贝,浅拷贝," />
 
 
 
@@ -87,21 +87,19 @@
 
 
 
-<meta name="description" content="学习一样新的东西官网文档和官方源码例子无疑是最好的选择，所以今天clone了官方的例子，100多兆，如果网速不好的话会等待很长时间 ~_~!!，然后直接cd到根目录执行了npm install安装了依赖，可是安装的过程中出错了（也有可能安装成功了，但是运行失败了），估计例子上的版本跟我安装的rn版本不兼容吧。我目前的RN版本是0.39，命令行的版本是react-native-cli:2.0.1
-先">
+<meta name="description" content="浅拷贝只是增加了一个对被引用对象的一个指向，拷贝出的对象与原对象共用一块内存区域。retain：只是retainCount加一，实际上还是共用一块内存copy：不论拷贝的是不是集合对象，只要被拷贝的对象是不可变的，那就是浅拷贝，仅仅retainCount加一
+深拷贝会分配出一块内存，然后将引用的内容拷贝进去，也就是说拷贝出来的对象与原对象是独立的。copy：拷贝可变对象则是深拷贝mutableCo">
 <meta property="og:type" content="article">
-<meta property="og:title" content="运行react native 官方例子出错的解决办法">
-<meta property="og:url" content="https://slpowercoder.github.io/2017/01/07/运行react-native-官方例子出错/index.html">
+<meta property="og:title" content="iOS 深拷贝和浅拷贝">
+<meta property="og:url" content="https://slpowercoder.github.io/2017/02/11/iOS 深拷贝和浅拷贝/index.html">
 <meta property="og:site_name" content="枫叶">
-<meta property="og:description" content="学习一样新的东西官网文档和官方源码例子无疑是最好的选择，所以今天clone了官方的例子，100多兆，如果网速不好的话会等待很长时间 ~_~!!，然后直接cd到根目录执行了npm install安装了依赖，可是安装的过程中出错了（也有可能安装成功了，但是运行失败了），估计例子上的版本跟我安装的rn版本不兼容吧。我目前的RN版本是0.39，命令行的版本是react-native-cli:2.0.1
-先">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1229960-edb9d9b477259960.gif?imageMogr2/auto-orient/strip">
-<meta property="og:updated_time" content="2017-03-13T05:02:05.000Z">
+<meta property="og:description" content="浅拷贝只是增加了一个对被引用对象的一个指向，拷贝出的对象与原对象共用一块内存区域。retain：只是retainCount加一，实际上还是共用一块内存copy：不论拷贝的是不是集合对象，只要被拷贝的对象是不可变的，那就是浅拷贝，仅仅retainCount加一
+深拷贝会分配出一块内存，然后将引用的内容拷贝进去，也就是说拷贝出来的对象与原对象是独立的。copy：拷贝可变对象则是深拷贝mutableCo">
+<meta property="og:updated_time" content="2017-02-28T09:56:45.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="运行react native 官方例子出错的解决办法">
-<meta name="twitter:description" content="学习一样新的东西官网文档和官方源码例子无疑是最好的选择，所以今天clone了官方的例子，100多兆，如果网速不好的话会等待很长时间 ~_~!!，然后直接cd到根目录执行了npm install安装了依赖，可是安装的过程中出错了（也有可能安装成功了，但是运行失败了），估计例子上的版本跟我安装的rn版本不兼容吧。我目前的RN版本是0.39，命令行的版本是react-native-cli:2.0.1
-先">
-<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1229960-edb9d9b477259960.gif?imageMogr2/auto-orient/strip">
+<meta name="twitter:title" content="iOS 深拷贝和浅拷贝">
+<meta name="twitter:description" content="浅拷贝只是增加了一个对被引用对象的一个指向，拷贝出的对象与原对象共用一块内存区域。retain：只是retainCount加一，实际上还是共用一块内存copy：不论拷贝的是不是集合对象，只要被拷贝的对象是不可变的，那就是浅拷贝，仅仅retainCount加一
+深拷贝会分配出一块内存，然后将引用的内容拷贝进去，也就是说拷贝出来的对象与原对象是独立的。copy：拷贝可变对象则是深拷贝mutableCo">
 
 
 
@@ -129,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="https://slpowercoder.github.io/2017/01/07/运行react-native-官方例子出错/"/>
+  <link rel="canonical" href="https://slpowercoder.github.io/2017/02/11/iOS 深拷贝和浅拷贝/"/>
 
 
 
 
 
-  <title> 运行react native 官方例子出错的解决办法 | 枫叶 </title>
+  <title> iOS 深拷贝和浅拷贝 | 枫叶 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -306,7 +304,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://slpowercoder.github.io/2017/01/07/运行react-native-官方例子出错/">
+    <link itemprop="mainEntityOfPage" href="https://slpowercoder.github.io/2017/02/11/iOS 深拷贝和浅拷贝/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="枫叶">
@@ -327,7 +325,7 @@
             
             
               
-                运行react native 官方例子出错的解决办法
+                iOS 深拷贝和浅拷贝
               
             
           </h1>
@@ -342,8 +340,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-07T20:07:16+08:00">
-                2017-01-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-11T23:44:10+08:00">
+                2017-02-11
               </time>
             
 
@@ -365,8 +363,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/react-native/" itemprop="url" rel="index">
-                    <span itemprop="name">react-native</span>
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
                   </a>
                 </span>
 
@@ -383,8 +381,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/01/07/运行react-native-官方例子出错/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/07/运行react-native-官方例子出错/" itemprop="commentCount"></span>
+                <a href="/2017/02/11/iOS 深拷贝和浅拷贝/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/11/iOS 深拷贝和浅拷贝/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -410,10 +408,10 @@
       
 
       
-        <p>学习一样新的东西官网文档和官方源码例子无疑是最好的选择，所以今天clone了官方的例子，100多兆，如果网速不好的话会等待很长时间 ~_~!!，然后直接cd到根目录执行了npm install安装了依赖，可是安装的过程中出错了（也有可能安装成功了，但是运行失败了），估计例子上的版本跟我安装的rn版本不兼容吧。<br>我目前的RN版本是0.39，命令行的版本是react-native-cli:2.0.1</p>
-<p>先上官方运行效果图：<br><img src="http://upload-images.jianshu.io/upload_images/1229960-edb9d9b477259960.gif?imageMogr2/auto-orient/strip" alt="官方效果图"></p>
-<h3 id="解决办法："><a href="#解决办法：" class="headerlink" title="解决办法："></a>解决办法：</h3><p>情况一：如果npm install安装失败的话<br><br>1、git checkout 0.xx-stable切换到稳定的分支，我切换的是0.41-stable版本，安装运行成功。<br><br>2、npm install<br><br>3、找到Examples，里面有四个例子，可以用Xcode打开运行<br></p>
-<p>情况二：npm install 安装成功，但运行失败<br><br>1、git checkout 0.xx-stable切换到稳定的分支<br><br>2、fm -rf node_modules &amp;&amp; npm install<br><br>3、找到Examples，里面有四个例子，可以用Xcode打开运行<br></p>
+        <p><strong>浅拷贝</strong>只是增加了一个对被引用对象的一个指向，拷贝出的对象与原对象共用一块内存区域。<br>retain：只是retainCount加一，实际上还是共用一块内存<br>copy：不论拷贝的是不是集合对象，只要被拷贝的对象是不可变的，那就是浅拷贝，仅仅retainCount加一</p>
+<p><strong>深拷贝</strong>会分配出一块内存，然后将引用的内容拷贝进去，也就是说拷贝出来的对象与原对象是独立的。<br>copy：拷贝可变对象则是深拷贝<br>mutableCopy：不论被拷贝的是不是集合对象，是可变的还是不可变的，都是深拷贝</p>
+<p><strong>注意：</strong>如果mutableCopy的是集合对象，深拷贝的是该集合对象，不是指该集合对象里面的元素，称之为<strong>单层深拷贝</strong>，对于集合对象内的元素依然是指针拷贝</p>
+<p><strong>总结</strong><br>copy：只要copy的是<strong>不可变</strong>对象，都是浅拷贝，copy<strong>可变集合</strong>象则是单层深拷贝，拷贝<strong>可变非集合</strong>对象则是深拷贝<br>mutableCopy：拷贝<strong>集合</strong>象则是单层深拷贝，拷贝<strong>非集</strong>合对象则是深拷贝</p>
 
       
     </div>
@@ -437,7 +435,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/react-native/" rel="tag"># react-native</a>
+            <a href="/tags/深拷贝/" rel="tag"># 深拷贝</a>
+          
+            <a href="/tags/浅拷贝/" rel="tag"># 浅拷贝</a>
           
         </div>
       
@@ -450,8 +450,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/12/30/看了我这篇RN你就入门了/" rel="next" title="看了我这篇RN你就入门了">
-                <i class="fa fa-chevron-left"></i> 看了我这篇RN你就入门了
+              <a href="/2017/02/11/Objective-C 消息转发机制/" rel="next" title="Objective-C 消息转发机制">
+                <i class="fa fa-chevron-left"></i> Objective-C 消息转发机制
               </a>
             
           </div>
@@ -460,8 +460,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/02/11/iOS中为什么非要用runtime才能在分类中扩展属性呢/" rel="prev" title="iOS中为什么非要用runtime才能在分类中扩展属性呢">
-                iOS中为什么非要用runtime才能在分类中扩展属性呢 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/03/10/iOS音频的播放以及录制/" rel="prev" title="iOS音频的播放以及录制">
+                iOS音频的播放以及录制 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -488,8 +488,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/01/07/运行react-native-官方例子出错/"
-           data-title="运行react native 官方例子出错的解决办法" data-url="https://slpowercoder.github.io/2017/01/07/运行react-native-官方例子出错/">
+      <div class="ds-thread" data-thread-key="2017/02/11/iOS 深拷贝和浅拷贝/"
+           data-title="iOS 深拷贝和浅拷贝" data-url="https://slpowercoder.github.io/2017/02/11/iOS 深拷贝和浅拷贝/">
       </div>
     
   </div>
@@ -513,17 +513,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/avatar.png"
@@ -619,22 +610,6 @@
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#解决办法："><span class="nav-number">1.</span> <span class="nav-text">解决办法：</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       

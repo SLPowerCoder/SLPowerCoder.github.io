@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="消息转发," />
+  <meta name="keywords" content="react-native," />
 
 
 
@@ -87,36 +87,16 @@
 
 
 
-<meta name="description" content="一图胜千言，习惯性的先来一张图以便对消息转发有个整体的把握
-运行时系统库方法查询流程图
-
-对于对象无法处理的消息，如果不做转发处理的话，程序最终会调用NSObjective的doesNotRecognizeSelector:消息将程序crash掉。
-
-Objective-C提供了两种消息转发选项
-快速转发：NSObject类的子类A可以通过重写NSObject类的forwardingTargetF">
+<meta name="description" content="React Native的性能优化众所周知RN由于应用了virtual DOM 、diff算法等一些列调优机制，使RN应用几乎达到了与原生一样的体验，但是毕竟RN只是原生APP的一个线程而已，RN和原生还隔着一道桥梁batch bridge，最终RN的代码还是要通过jscore引擎转换成原生代码来执行，这就决定了RN不可能超越原生，除非RN能越过这道坎，尽管官方替我们做了一些优化，但是有些优化只能">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Objective-C 消息转发机制">
-<meta property="og:url" content="https://slpowercoder.github.io/2017/02/11/Objective-C-消息转发机制/index.html">
+<meta property="og:title" content="React Native的性能优化">
+<meta property="og:url" content="https://slpowercoder.github.io/2018/06/27/React Native的性能优化/index.html">
 <meta property="og:site_name" content="枫叶">
-<meta property="og:description" content="一图胜千言，习惯性的先来一张图以便对消息转发有个整体的把握
-运行时系统库方法查询流程图
-
-对于对象无法处理的消息，如果不做转发处理的话，程序最终会调用NSObjective的doesNotRecognizeSelector:消息将程序crash掉。
-
-Objective-C提供了两种消息转发选项
-快速转发：NSObject类的子类A可以通过重写NSObject类的forwardingTargetF">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1229960-edd81dfe76dacf77.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-03-01T07:06:47.000Z">
+<meta property="og:description" content="React Native的性能优化众所周知RN由于应用了virtual DOM 、diff算法等一些列调优机制，使RN应用几乎达到了与原生一样的体验，但是毕竟RN只是原生APP的一个线程而已，RN和原生还隔着一道桥梁batch bridge，最终RN的代码还是要通过jscore引擎转换成原生代码来执行，这就决定了RN不可能超越原生，除非RN能越过这道坎，尽管官方替我们做了一些优化，但是有些优化只能">
+<meta property="og:updated_time" content="2018-07-15T03:58:12.950Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Objective-C 消息转发机制">
-<meta name="twitter:description" content="一图胜千言，习惯性的先来一张图以便对消息转发有个整体的把握
-运行时系统库方法查询流程图
-
-对于对象无法处理的消息，如果不做转发处理的话，程序最终会调用NSObjective的doesNotRecognizeSelector:消息将程序crash掉。
-
-Objective-C提供了两种消息转发选项
-快速转发：NSObject类的子类A可以通过重写NSObject类的forwardingTargetF">
-<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1229960-edd81dfe76dacf77.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:title" content="React Native的性能优化">
+<meta name="twitter:description" content="React Native的性能优化众所周知RN由于应用了virtual DOM 、diff算法等一些列调优机制，使RN应用几乎达到了与原生一样的体验，但是毕竟RN只是原生APP的一个线程而已，RN和原生还隔着一道桥梁batch bridge，最终RN的代码还是要通过jscore引擎转换成原生代码来执行，这就决定了RN不可能超越原生，除非RN能越过这道坎，尽管官方替我们做了一些优化，但是有些优化只能">
 
 
 
@@ -144,13 +124,13 @@ Objective-C提供了两种消息转发选项
 
 
 
-  <link rel="canonical" href="https://slpowercoder.github.io/2017/02/11/Objective-C-消息转发机制/"/>
+  <link rel="canonical" href="https://slpowercoder.github.io/2018/06/27/React Native的性能优化/"/>
 
 
 
 
 
-  <title> Objective-C 消息转发机制 | 枫叶 </title>
+  <title> React Native的性能优化 | 枫叶 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -321,7 +301,7 @@ Objective-C提供了两种消息转发选项
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://slpowercoder.github.io/2017/02/11/Objective-C-消息转发机制/">
+    <link itemprop="mainEntityOfPage" href="https://slpowercoder.github.io/2018/06/27/React Native的性能优化/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="枫叶">
@@ -342,7 +322,7 @@ Objective-C提供了两种消息转发选项
             
             
               
-                Objective-C 消息转发机制
+                React Native的性能优化
               
             
           </h1>
@@ -357,8 +337,8 @@ Objective-C提供了两种消息转发选项
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-11T23:41:29+08:00">
-                2017-02-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-27T22:58:51+08:00">
+                2018-06-27
               </time>
             
 
@@ -380,8 +360,8 @@ Objective-C提供了两种消息转发选项
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
+                  <a href="/categories/react-native/" itemprop="url" rel="index">
+                    <span itemprop="name">react-native</span>
                   </a>
                 </span>
 
@@ -398,8 +378,8 @@ Objective-C提供了两种消息转发选项
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/02/11/Objective-C-消息转发机制/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/11/Objective-C-消息转发机制/" itemprop="commentCount"></span>
+                <a href="/2018/06/27/React Native的性能优化/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/06/27/React Native的性能优化/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -425,23 +405,29 @@ Objective-C提供了两种消息转发选项
       
 
       
-        <p>一图胜千言，习惯性的先来一张图以便对消息转发有个整体的把握</p>
-<h3 id="运行时系统库方法查询流程图"><a href="#运行时系统库方法查询流程图" class="headerlink" title="运行时系统库方法查询流程图"></a>运行时系统库方法查询流程图</h3><p><img src="http://upload-images.jianshu.io/upload_images/1229960-edd81dfe76dacf77.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="运行时系统库方法查询"></p>
-<blockquote>
-<p>对于对象无法处理的消息，如果不做转发处理的话，程序最终会调用NSObjective的doesNotRecognizeSelector:消息将程序crash掉。</p>
-</blockquote>
-<h3 id="Objective-C提供了两种消息转发选项"><a href="#Objective-C提供了两种消息转发选项" class="headerlink" title="Objective-C提供了两种消息转发选项"></a>Objective-C提供了两种消息转发选项</h3><ul>
-<li>快速转发：NSObject类的子类A可以通过重写NSObject类的forwardingTargetForSelector:方法，将A的实例无法识别的消息转发给目标对象B，从而实现快速转发。<em>该技巧就像是将对象的实现代码与转发对象合并到一起。这类似于实现的多继承行为。如果你有一个定了对象 能够消化哪些消息的目标类，这个技巧可以取得很好的效果</em></li>
-<li>标准（完整）转发：NSObject类的子类A可以通过重写NSObject类的forwardInvocation:方法，实现标准转发。标准转发巧可以通过methodSignatureForSelector：方法获取一个methodsignature对象最终被封为NSInvocation对象传递给forwardInvocation:方法（注意如果methodSignatureForSelector：方法返回一个nil，程序会crash）从该对象能获取消息的全部内容（包含目标，方法名，和参数）。</li>
-</ul>
-<p>如果你拥有了一个定义了对象能够消化哪些消息的目标类，快速转发可以取得很好的效果。如果你没有这样目标类或想要执行其他处理过程（如记录日志并‘吞下’消息），就应该使用完整转发。</p>
-<h3 id="写了一大推字感觉很抽象，下面来点干货"><a href="#写了一大推字感觉很抽象，下面来点干货" class="headerlink" title="写了一大推字感觉很抽象，下面来点干货"></a>写了一大推字感觉很抽象，下面来点干货</h3><p>下面我要把Test实例的logName消息转发给Target实例，代码如下<br>Test头文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">//</div><div class="line">//  Test.h</div><div class="line">//  ForwardMsg</div><div class="line">//</div><div class="line">//  Created by 孙磊 on 2017/2/25.</div><div class="line">//  Copyright © 2017年 孙磊. All rights reserved.</div><div class="line">//</div><div class="line"></div><div class="line">#import &lt;Foundation/Foundation.h&gt;</div><div class="line"></div><div class="line">@interface Test : NSObject</div><div class="line"></div><div class="line">-(void)logName;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure></p>
-<p>Test实现文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div></pre></td><td class="code"><pre><div class="line">//</div><div class="line">//  Test.m</div><div class="line">//  ForwardMsg</div><div class="line">//</div><div class="line">//  Created by 孙磊 on 2017/2/25.</div><div class="line">//  Copyright © 2017年 孙磊. All rights reserved.</div><div class="line">//</div><div class="line"></div><div class="line">#import &quot;Test.h&quot;</div><div class="line">#import &quot;Target.h&quot;</div><div class="line">#import &lt;objc/runtime.h&gt;</div><div class="line"></div><div class="line">@implementation Test&#123;</div><div class="line">    Target *mTarget;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (instancetype)init</div><div class="line">&#123;</div><div class="line">    self = [super init];</div><div class="line">    if (self) &#123;</div><div class="line">        </div><div class="line">        //创建目标对象</div><div class="line">        mTarget = [Target new];</div><div class="line">    &#125;</div><div class="line">    return self;</div><div class="line">&#125;</div><div class="line"></div><div class="line">#if 0</div><div class="line">//当一个对象无法识别消息后，会执行resolveInstanceMethod或者resolveClassMethod方法</div><div class="line">//如果不想进行消息转发，可以在此方法中动态添加消息来做处理</div><div class="line">//如果不重写此方法或者此方法返回NO，系统会执行forwardingTargetForSelector进行快速转发</div><div class="line"></div><div class="line">+ (BOOL)resolveInstanceMethod:(SEL)sel</div><div class="line">&#123;</div><div class="line">    </div><div class="line">    if(sel == @selector(logName))&#123;</div><div class="line">        //第四个参数详解地址  https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/ObjCRuntimeGuide/Articles/ocrtTypeEncodings.html</div><div class="line">        //v代表返回类型为void</div><div class="line">        //@代表一个对象</div><div class="line">        //:代表一个selector</div><div class="line">        //因为OC中的每个方法都有默认的两个参数sel 和 selector，所以一般都是v@:</div><div class="line">        class_addMethod([self class],sel,(IMP)dynamicMethodIMP,&quot;v@:&quot;);</div><div class="line">        return YES;</div><div class="line">    &#125;</div><div class="line">    return [super resolveInstanceMethod:sel];</div><div class="line">&#125;</div><div class="line"></div><div class="line">//万年备胎</div><div class="line">void dynamicMethodIMP(id self, SEL _cmd)</div><div class="line">&#123;</div><div class="line">    //对无法识别的消息做处理</div><div class="line">    NSLog(@&quot;该对象无法识别 %@ 方法------%s&quot;, NSStringFromSelector(_cmd),__func__);</div><div class="line">&#125;</div><div class="line"></div><div class="line">#else </div><div class="line"></div><div class="line">/***************==========1、快速消息转发，快速转发只可以获取到方法签名==========*******************/</div><div class="line"></div><div class="line">-(id)forwardingTargetForSelector:(SEL)aSelector&#123;</div><div class="line">    NSLog(@&quot;%s&quot;,__func__);</div><div class="line">    if ([mTarget respondsToSelector:aSelector]) &#123;</div><div class="line">        //目标对象有对应的处理方法，则就会快速消息转发，不会再执行完整消息转发了</div><div class="line">        return mTarget;</div><div class="line">    &#125;</div><div class="line">    //目标对象也没有对应的方法，此时系统会执行forwardInvocation进行完整消息转发</div><div class="line">    return nil;</div><div class="line">&#125;</div><div class="line"></div><div class="line">/***********=============2、标准（完整）消息转发，完整消息转发，可以获取方法签名，参数等详细信息==========*********/</div><div class="line"></div><div class="line">//返回一个完整的方法签名，提供给forwardInvocation以便完整转发消息</div><div class="line">-(NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector&#123;</div><div class="line">    </div><div class="line">    NSMethodSignature* signature = [super methodSignatureForSelector:aSelector];</div><div class="line">    </div><div class="line">     if (!signature)</div><div class="line">        signature = [mTarget methodSignatureForSelector:aSelector];</div><div class="line"></div><div class="line">     return signature;</div><div class="line">&#125;</div><div class="line"></div><div class="line">-(void)forwardInvocation:(NSInvocation *)anInvocation&#123;</div><div class="line">    NSLog(@&quot;%s-----完整消息转发------&quot;,__func__);</div><div class="line">    SEL invSEL = anInvocation.selector;</div><div class="line">    if ([mTarget respondsToSelector:invSEL])&#123;</div><div class="line">        </div><div class="line">        //利用forwardInvocation方法来重新指定消息处理对象</div><div class="line">        [anInvocation invokeWithTarget:mTarget];</div><div class="line">    &#125;</div><div class="line">    else &#123;</div><div class="line">        [self doesNotRecognizeSelector:invSEL];</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">#endif</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
-<p>目标文件的头文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">//</div><div class="line">//  Target.h</div><div class="line">//  ForwardMsg</div><div class="line">//</div><div class="line">//  Created by 孙磊 on 2017/2/25.</div><div class="line">//  Copyright © 2017年 孙磊. All rights reserved.</div><div class="line">//</div><div class="line"></div><div class="line">#import &lt;Foundation/Foundation.h&gt;</div><div class="line"></div><div class="line">@interface Target : NSObject</div><div class="line"></div><div class="line">-(void)logName;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure></p>
-<p>目标文件的实现文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">//</div><div class="line">//  Target.m</div><div class="line">//  ForwardMsg</div><div class="line">//</div><div class="line">//  Created by 孙磊 on 2017/2/25.</div><div class="line">//  Copyright © 2017年 孙磊. All rights reserved.</div><div class="line">//</div><div class="line"></div><div class="line">#import &quot;Target.h&quot;</div><div class="line"></div><div class="line">@implementation Target</div><div class="line"></div><div class="line">-(void)logName&#123;</div><div class="line">NSLog(@&quot;我是备用方法---%s&quot;,__func__);</div><div class="line">&#125;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure></p>
-<p><a href="https://github.com/nicklockwood/NullSafe" target="_blank" rel="external">推荐一个国外大大利用消息转发避免后台返回NSNull（后台有时候会返回<null>）而引起的奔溃问题，例如你需要一个字符串他却给你返回了一个“<null>”这样一个NSNull对象。用法很简单，直接把NullSafe.m拖到项目中即可，该文件会在运行时自动加载</null></null></a></p>
-<p>扩展：简单说一下NULL，nil，Nil，NSNull的用处<br>NULL：用于普通类型，例如NSInteger<br>nil：用于OC对象（除了类这个对象）,给nil对象发送消息不会crash<br>Nil：用于Class类型对象的赋值（类是元类的实例，也是对象）<br>NSNull：用于OC对象的站位，一般会作为集合中的占位元素，给NSNull对象发送消息会crash的，后台给我们返回的<null>就是NSNull对象</null></p>
+        <h3 id="React-Native的性能优化"><a href="#React-Native的性能优化" class="headerlink" title="React Native的性能优化"></a>React Native的性能优化</h3><p>众所周知RN由于应用了virtual DOM 、diff算法等一些列调优机制，使RN应用几乎达到了与原生一样的体验，但是毕竟RN只是原生APP的一个线程而已，RN和原生还隔着一道桥梁batch bridge，最终RN的代码还是要通过jscore引擎转换成原生代码来执行，这就决定了RN不可能超越原生，除非RN能越过这道坎，尽管官方替我们做了一些优化，但是有些优化只能交给了用户来决定，比如<code>sholdComponentUpdate</code>是返回true还是false，这是需要我们来决定的，再比如APP的页面如果非常多的话，打包之后bundle非常大，而加载和初始化bundle又很耗时间，这又需要拆分bundle，所以还是有许多需要人工来优化。</p>
+<p>既然是性能优化那就肯定得找出RN的性能瓶颈在哪</p>
+<h3 id="一、基础优化（目的是尽量减少页面的渲染）"><a href="#一、基础优化（目的是尽量减少页面的渲染）" class="headerlink" title="一、基础优化（目的是尽量减少页面的渲染）"></a>一、基础优化（目的是尽量减少页面的渲染）</h3><ol>
+<li>比较吃性能的、耗时的操作可以放到<code>componentDidMount</code>中，然后再用<code>Interaction manager</code>在包裹一下，比如网络请求。</li>
+<li>尽量少用状态组件，尽可能用无状态组件，<strong>无状态组件不会被实例化</strong>，可以提升性能</li>
+<li>自定义的有状态组件尽量继承自<code>pure component</code>，这样系统会自动在<code>shouldComponentUpdate</code>中<strong>默认做一层浅比较（直接拿两个对象做比较，对象中的子元素不做比较）</strong>，可以减少一些不必要的渲染，当然你也也可以在该方法中做<strong>深</strong>层次的比较，如果组件不是继承自<code>PureComponent</code>则该方法默认返回true，这样会导致很多无用的渲染，比如父组件的改变会导致子组件的重新render。</li>
+<li>利用<code>immutable</code>不可变数据，提升性能，它可以避免本来应该渲染而实际却没有发生渲染的问题，因为框架默认在<code>shouldComponentUpdate</code>做的是一层浅比较，如果在state改变的过程中做的是浅拷贝，则state改变之前和改变之后是相等的，指向的是同一个对象，这样浅比较会认为state没有改变而不做渲染。</li>
+<li><p>对于同层级的相同类型的组件，要给每个组件指定唯一的key值。例如通常我们在一个容器组件中创建多个子组件的时候，我们会把这些子组件放在一个数组里，然后把数组直接放到容器页面中，形如下面的伪代码：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">banner = ()=&gt;&#123;</div><div class="line">	let childArr = [];</div><div class="line">	while(let i &lt; 10) &#123;</div><div class="line">		childArr.push(&lt;Child key=&#123;XXXXXX&#125;&gt;&lt;/Child&gt;)</div><div class="line">	&#125;</div><div class="line">	return &lt;View&gt; &#123;childArr&#125; &lt;/View&gt;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p> Child组件的key一定要有，这涉及到diff算法的原理，diff算法是按层级进行比较的，当前的virtual DOM 和之前的virtual DOM进行同层级比较的时候，对于属于同一个父组件的同一层级的子组件，<strong>如果没有key值的话，RN需要遍历该父组件的所有子组件来行进对比，才能知道哪一个子组件发生了改变，这样如果子组件的数量很大的时候会很耗性能，RN有可能会因为遍历的耗时而选择放弃对比来重新渲染所有的子组件，但是如果有key值的话可以利用key直接进行两两比较</strong>，效率就高出很多。</p>
+</li>
+<li>列表优化，几乎所有的APP都有列表，所以列表的优化尤为重要，之前RN采用的是listView，数据稍微大的时候会出现明显卡顿，有性能瓶颈，最后RN在xxx版推出了新的列表神器<code>FlatList</code>和<code>SectionList</code>，他俩都是继承自<code>VirtualizedList</code>，比listView的性能更高，并且使用起来也更简单了，无需再想listView一样要先创建一个DataSource对象了。具体优化可以参考官网。。。</li>
+<li>用<code>FlatList</code>替换<code>scrollView</code>，因为在用<code>scrollView</code>的时候它会一下子把他上面的所有子组件都渲染出来，而<code>FlatList</code>可以设置首屏渲染的行数，这样就不会导致在刚进入这一页的时候出现卡顿现象。</li>
+</ol>
+<h3 id="二、本地分包优化"><a href="#二、本地分包优化" class="headerlink" title="二、本地分包优化"></a>二、本地分包优化</h3><p>从官方给出的RN耗时图可以看出，最耗性能的地方是bundle包的<strong>JS环境的初始化</strong>和<strong>加载</strong>，所以这一块的优化也至关重要，bundle体积过大会导致加载慢，其中bundle包括<strong>react等基础库以及引入的三方库</strong> 和 <strong>你自己的业务代码</strong>，可以先从两方面着手。第一：需要尽可能的优化bundle的体积，去掉一些不必要的资源。第二：做拆分处理，把bundle拆分成<code>基础bundle</code>和<code>业务bundle</code>。 <code>基础bundle</code>是APP必须依赖的公共基础部分。其实拆分之后还是很耗时间，所以我们又做了另一种处理，那就是<code>预加载</code>，对<code>基础bundle</code>进行预加载，这样可以减少一些加载以及初始化的耗时。</p>
+<p>总结如下：</p>
+<ol>
+<li><strong>本地分包</strong>： 把bundle拆分成<code>公共基础bundle</code>和<code>业务bundle</code></li>
+<li><strong>预加载</strong>： 预加载<code>公共基础bundle</code></li>
+</ol>
+<h3 id="三、按需延迟加载"><a href="#三、按需延迟加载" class="headerlink" title="三、按需延迟加载"></a>三、按需延迟加载</h3><p>可以通过<code>require</code>来实现动态延迟加载,伪代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">import xxx from &apos;./xxxx&apos;</div><div class="line"></div><div class="line">let test2;</div><div class="line"></div><div class="line">export default class Test extent Componnet &#123;</div><div class="line"></div><div class="line">	getTest2 = ()=&gt;&#123;</div><div class="line">		// 对test2模块进行懒加载（延迟加载），以提高性能</div><div class="line">		if(test2 === undefined) &#123;</div><div class="line">			test2 = require(&apos;./xxxx/test2&apos;);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我们不需要再这个test模块一开始就加载test2模块，这样可以延迟加载一些不是立马需要的其他模块，提升整体加载速度，降低内存。</p>
 
       
     </div>
@@ -465,7 +451,7 @@ Objective-C提供了两种消息转发选项
       
         <div class="post-tags">
           
-            <a href="/tags/消息转发/" rel="tag"># 消息转发</a>
+            <a href="/tags/react-native/" rel="tag"># react-native</a>
           
         </div>
       
@@ -478,8 +464,8 @@ Objective-C提供了两种消息转发选项
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/02/11/iOS中assign与weak，retain与strong的区别/" rel="next" title="iOS中assign与weak，retain与strong的区别">
-                <i class="fa fa-chevron-left"></i> iOS中assign与weak，retain与strong的区别
+              <a href="/2018/06/15/滴滴面试总结/" rel="next" title="滴滴面试总结">
+                <i class="fa fa-chevron-left"></i> 滴滴面试总结
               </a>
             
           </div>
@@ -488,8 +474,8 @@ Objective-C提供了两种消息转发选项
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/02/11/iOS-深拷贝和浅拷贝/" rel="prev" title="iOS 深拷贝和浅拷贝">
-                iOS 深拷贝和浅拷贝 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/07/29/RN原生之间的通信方式/" rel="prev" title="RN与原生之间的通信方式">
+                RN与原生之间的通信方式 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -516,8 +502,8 @@ Objective-C提供了两种消息转发选项
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/02/11/Objective-C-消息转发机制/"
-           data-title="Objective-C 消息转发机制" data-url="https://slpowercoder.github.io/2017/02/11/Objective-C-消息转发机制/">
+      <div class="ds-thread" data-thread-key="2018/06/27/React Native的性能优化/"
+           data-title="React Native的性能优化" data-url="https://slpowercoder.github.io/2018/06/27/React Native的性能优化/">
       </div>
     
   </div>
@@ -657,7 +643,7 @@ Objective-C提供了两种消息转发选项
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#运行时系统库方法查询流程图"><span class="nav-number">1.</span> <span class="nav-text">运行时系统库方法查询流程图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Objective-C提供了两种消息转发选项"><span class="nav-number">2.</span> <span class="nav-text">Objective-C提供了两种消息转发选项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#写了一大推字感觉很抽象，下面来点干货"><span class="nav-number">3.</span> <span class="nav-text">写了一大推字感觉很抽象，下面来点干货</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#React-Native的性能优化"><span class="nav-number">1.</span> <span class="nav-text">React Native的性能优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一、基础优化（目的是尽量减少页面的渲染）"><span class="nav-number">2.</span> <span class="nav-text">一、基础优化（目的是尽量减少页面的渲染）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、本地分包优化"><span class="nav-number">3.</span> <span class="nav-text">二、本地分包优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、按需延迟加载"><span class="nav-number">4.</span> <span class="nav-text">三、按需延迟加载</span></a></li></ol></div>
             
 
           </div>
