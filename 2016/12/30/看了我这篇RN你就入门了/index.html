@@ -94,10 +94,10 @@
 <meta property="og:site_name" content="枫叶">
 <meta property="og:description" content="前言React认为每个组件都是一个有限状态机，状态与UI是一一对应的。我们只需管理好APP的state就能控制UI的显示，我们可以在每个component类中来通过this.state和this.setState来管理组件的state，但是如果APP交互比较多比较复杂，或者说该组件的某一状态需要和其他组件共享的话，这种方式就有点复杂了。有没有一种能统一管理APP状态的框架呢，这时候Redux就应用">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1229960-9cae53256b3bba52.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://github.com/SLPowerCoder/SLPowerCoder.github.io/blob/master/uploads/react-native%E5%A3%B0%E6%98%8E%E5%91%A8%E6%9C%9F.PNG">
+<meta property="og:image" content="https://github.com/SLPowerCoder/SLPowerCoder.github.io/blob/master/uploads/react-native%E5%A3%B0%E6%98%8E%E5%91%A8%E6%9C%9F.PNG?raw=true">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1229960-e38436556eda2e19.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1229960-24ed9d2bcfd08bde.JPG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-10-10T09:49:48.832Z">
+<meta property="og:updated_time" content="2018-10-10T09:53:17.189Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="看了我这篇RN你就入门了">
 <meta name="twitter:description" content="前言React认为每个组件都是一个有限状态机，状态与UI是一一对应的。我们只需管理好APP的state就能控制UI的显示，我们可以在每个component类中来通过this.state和this.setState来管理组件的state，但是如果APP交互比较多比较复杂，或者说该组件的某一状态需要和其他组件共享的话，这种方式就有点复杂了。有没有一种能统一管理APP状态的框架呢，这时候Redux就应用">
@@ -477,7 +477,7 @@
 <p>{<br><br>  reducer1: …<br><br>  reducer2: …<br><br>}</p>
 <p>所以可以通过解构的方式，获取对应模块的state，如下面的const { BrandReducer } = state;</p>
 <p>下面这一块代码的作用就是将store中state传递给关联的容器组件中，当store中的state发生变化的时候，connect的第一参数mapStateToProps回调函数就会被调用，并且将该回调函数的返回值映射成其关联组件的一个属性，这样容器组件的属性就会发生变化，而UI组件又通过{…this.props}将容器组件的属性传递给了UI组件，所以UI组件的属性也会发生变化，我们知道属性的变化会导致UI组件重新render。好了，我们就能知道为什么我们在UI组件中dispatch一个action后UI组件能更新了，因为UI组件的属性发生变化导致RN重绘了UI。</p>
-<h2 id="react-native-组件的生命周期"><a href="#react-native-组件的生命周期" class="headerlink" title="react native 组件的生命周期"></a>react native 组件的生命周期</h2><h3 id="弄明白了这个图我认为你就能基本掌握RN了"><a href="#弄明白了这个图我认为你就能基本掌握RN了" class="headerlink" title="弄明白了这个图我认为你就能基本掌握RN了"></a>弄明白了这个图我认为你就能基本掌握RN了</h3><p><img src="https://github.com/SLPowerCoder/SLPowerCoder.github.io/blob/master/uploads/react-native%E5%A3%B0%E6%98%8E%E5%91%A8%E6%9C%9F.PNG" alt="react-native lifecircle"><br>注意：上图的最右边componentWillMount改成componentWillUnmount</p>
+<h2 id="react-native-组件的生命周期"><a href="#react-native-组件的生命周期" class="headerlink" title="react native 组件的生命周期"></a>react native 组件的生命周期</h2><h3 id="弄明白了这个图我认为你就能基本掌握RN了"><a href="#弄明白了这个图我认为你就能基本掌握RN了" class="headerlink" title="弄明白了这个图我认为你就能基本掌握RN了"></a>弄明白了这个图我认为你就能基本掌握RN了</h3><p><img src="https://github.com/SLPowerCoder/SLPowerCoder.github.io/blob/master/uploads/react-native%E5%A3%B0%E6%98%8E%E5%91%A8%E6%9C%9F.PNG?raw=true" alt="react-native lifecircle"><br>注意：上图的最右边componentWillMount改成componentWillUnmount</p>
 <h3 id="项目的推荐目录"><a href="#项目的推荐目录" class="headerlink" title="项目的推荐目录"></a>项目的推荐目录</h3><p>这种结构适合业务逻辑不太复杂的中小型项目，其优点是逻辑模块清晰，缺点是文件目录跨度较大，对于大型项目建议按项目的功能模块来划分。<br><img src="http://upload-images.jianshu.io/upload_images/1229960-e38436556eda2e19.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="项目的推荐目录"></p>
 <h2 id="热更新"><a href="#热更新" class="headerlink" title="热更新"></a>热更新</h2><p>暂时不说了，苹果粑粑这两天不高兴了，凡是热更新的APP不能上架，已上线的APP也应该收到了一份批评邮件了。<br><img src="http://upload-images.jianshu.io/upload_images/1229960-24ed9d2bcfd08bde.JPG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="你尽管hot patch吧"></p>
 <h2 id="相关文章"><a href="#相关文章" class="headerlink" title="相关文章"></a>相关文章</h2><p><a href="http://www.tuicool.com/articles/MrmYN36" target="_blank" rel="external">React 实践心得：react-redux 之 connect 方法详解</a><br><a href="http://www.ruanyifeng.com/blog/2016/09/redux_tutorial_part_one_basic_usages.html" target="_blank" rel="external">Redux 入门教程（一）：基本用法</a><br><a href="http://www.redux.org.cn/" target="_blank" rel="external">redux中文文档</a></p>
