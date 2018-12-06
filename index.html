@@ -469,7 +469,7 @@
     
         <div class="post-media">
             <a href="/2017/05/02/react native集成到原有的项目中(iOS)/">
-                <img class="img-ajax" src="/img/loading.gif"  data-src="http://upload-images.jianshu.io/upload_images/1229960-a6e617a8586a6cfa.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"   alt="react native集成到原有的项目中(iOS)">
+                <img class="img-ajax" src="/img/loading.gif"  data-src="http://upload-images.jianshu.io/upload_images/1229960-9acc384414a84b12.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"   alt="react native集成到原有的项目中(iOS)">
             </a>
         </div>
     
@@ -537,7 +537,7 @@
     
         <div class="post-media">
             <a href="/2017/03/14/block/">
-                <img class="img-ajax" src="/img/loading.gif"  data-src="http://upload-images.jianshu.io/upload_images/1229960-5c079f6944335315.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000"   alt="Block深入理解">
+                <img class="img-ajax" src="/img/loading.gif"  data-src="http://upload-images.jianshu.io/upload_images/1229960-e11c0f8b876f7297.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000"   alt="Block深入理解">
             </a>
         </div>
     
@@ -730,16 +730,10 @@
 
 <article class="post">
     
-        <div class="post-media">
-            <a href="/2017/02/11/Objective-C 消息转发机制/">
-                <img class="img-ajax" src="/img/loading.gif"  data-src="http://upload-images.jianshu.io/upload_images/1229960-edd81dfe76dacf77.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"   alt="Objective-C 消息转发机制">
-            </a>
-        </div>
-    
     <div class="post-content">
         <div class="post-head home-post-head">
             <h1 class="post-title">
-                <a href="/2017/02/11/Objective-C 消息转发机制/">Objective-C 消息转发机制</a>
+                <a href="/2017/02/11/iOS中assign与weak，retain与strong的区别/">iOS中assign与weak，retain与strong的区别</a>
             </h1>
             <div class="post-meta">  &bull;
                 <time class="post-date" datetime="" title="">
@@ -749,10 +743,8 @@
         </div>
         <p class="brief">
             
-                一图胜千言，习惯性的先来一张图以便对消息转发有个整体的把握
-运行时系统库方法查询流程图
-
-对于对象无法处理的消息，如果不做转发处理的话，程序最终会调用NSObjective的doesNotRecognizeSelector:消息将程序...
+                以前在没有ARC的时候我们使用assign与retain来修饰属性，后来引入了更安全的weak和strong来修饰属性
+assign与weak两者都是弱引用，assign通常用于普通类型属性（如int,NSInteger），还有代理属...
             
         </p>
     </div>
@@ -776,8 +768,16 @@
         <span class="tags-meta">
             
                 
-                    <a href="/tags/消息转发" title='消息转发'>
-                        消息转发
+                    <a href="/tags/assign" title='assign'>
+                        assign
+                    </a>
+                
+                    <a href="/tags/weak" title='weak'>
+                        weak
+                    </a>
+                
+                    <a href="/tags/retain" title='retain'>
+                        retain
                     </a>
                 
             
@@ -791,7 +791,7 @@
             </div>
 
             <div class="post-permalink">
-                <a href="/2017/02/11/Objective-C 消息转发机制/" class="btn btn-default">Read</a>
+                <a href="/2017/02/11/iOS中assign与weak，retain与strong的区别/" class="btn btn-default">Read</a>
             </div>
         </footer>
     
@@ -812,35 +812,6 @@
                 
                     
     <aside class="col-md-4 sidebar">
-        
-        
-    <div class="widget">
-        <h3 class="title">Search</h3>
-        <div id="search-form">
-            <div id="result-mask" class="hide"></div>
-            <div class="search-area">
-                
-                    <input id="search-key" type="search" autocomplete="off" placeholder="Search What？">
-                    <button type="button" class="search-form-submit" id="search-local">localSearch</button>
-                
-                
-            </div>
-            <div id="result-wrap" class="hide">
-                <div id="search-result"></div>
-            </div>
-            <div class="hide">
-                <template id="search-tpl">
-                    <div class="item">
-                        <a href="/{path}" title="{title}">
-                            <div class="title">{title}</div>
-                            <div class="content">{content}</div>
-                        </a>
-                    </div>
-                </template>
-            </div>
-        </div>
-    </div>
-
         
         
     <div class="widget">
