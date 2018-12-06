@@ -35,7 +35,7 @@
     <link rel="alternate" href="/atom.xml" title="枫叶" type="application/atom+xml">
 
 
-    <link rel="icon" href="/favicon.ico">
+    <link rel="icon" href="./favicon.ico">
 
     
 
@@ -75,7 +75,7 @@
 <![endif]-->
 
 <body>
-    <header class="main-header"  style="background-image:url(https://slpowercoder.github.io/img/header-bg.png)"  >
+    <header class="main-header"  style="background-image:url(./img/header-bg.png)"  >
     <div class="main-header-box">
         <a class="header-avatar" href="/" title='枫叶'>
             <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
@@ -132,16 +132,28 @@
             <div class="row">
                 <main class="col-md-8 main-content ">
                     
+    <div class="carousel">
+        <a href="javascript:" target="_blank">
+            <img src="/./img/head-img.jpg" alt="">
+        </a>
+    </div>
+
 
 
 
 
 <article class="post">
     
+        <div class="post-media">
+            <a href="/2017/02/11/Objective-C 消息转发机制/">
+                <img class="img-ajax" src="/img/loading.gif"  data-src="http://upload-images.jianshu.io/upload_images/1229960-edd81dfe76dacf77.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"   alt="Objective-C 消息转发机制">
+            </a>
+        </div>
+    
     <div class="post-content">
         <div class="post-head home-post-head">
             <h1 class="post-title">
-                <a href="/2017/02/11/iOS中assign与weak，retain与strong的区别/">iOS中assign与weak，retain与strong的区别</a>
+                <a href="/2017/02/11/Objective-C 消息转发机制/">Objective-C 消息转发机制</a>
             </h1>
             <div class="post-meta">  &bull;
                 <time class="post-date" datetime="" title="">
@@ -151,8 +163,10 @@
         </div>
         <p class="brief">
             
-                以前在没有ARC的时候我们使用assign与retain来修饰属性，后来引入了更安全的weak和strong来修饰属性
-assign与weak两者都是弱引用，assign通常用于普通类型属性（如int,NSInteger），还有代理属...
+                一图胜千言，习惯性的先来一张图以便对消息转发有个整体的把握
+运行时系统库方法查询流程图
+
+对于对象无法处理的消息，如果不做转发处理的话，程序最终会调用NSObjective的doesNotRecognizeSelector:消息将程序...
             
         </p>
     </div>
@@ -176,16 +190,8 @@ assign与weak两者都是弱引用，assign通常用于普通类型属性（如i
         <span class="tags-meta">
             
                 
-                    <a href="/tags/assign" title='assign'>
-                        assign
-                    </a>
-                
-                    <a href="/tags/weak" title='weak'>
-                        weak
-                    </a>
-                
-                    <a href="/tags/retain" title='retain'>
-                        retain
+                    <a href="/tags/消息转发" title='消息转发'>
+                        消息转发
                     </a>
                 
             
@@ -199,7 +205,7 @@ assign与weak两者都是弱引用，assign通常用于普通类型属性（如i
             </div>
 
             <div class="post-permalink">
-                <a href="/2017/02/11/iOS中assign与weak，retain与strong的区别/" class="btn btn-default">Read</a>
+                <a href="/2017/02/11/Objective-C 消息转发机制/" class="btn btn-default">Read</a>
             </div>
         </footer>
     
@@ -344,7 +350,7 @@ assign与weak两者都是弱引用，assign通常用于普通类型属性（如i
     
         <div class="post-media">
             <a href="/2016/12/30/看了我这篇RN你就入门了/">
-                <img class="img-ajax" src="/img/loading.gif"  data-src="http://upload-images.jianshu.io/upload_images/1229960-e38436556eda2e19.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"   alt="看了我这篇RN你就入门了">
+                <img class="img-ajax" src="/img/loading.gif"  data-src="https://github.com/SLPowerCoder/SLPowerCoder.github.io/blob/master/uploads/react-native%E5%A3%B0%E6%98%8E%E5%91%A8%E6%9C%9F.PNG?raw=true"   alt="看了我这篇RN你就入门了">
             </a>
         </div>
     
