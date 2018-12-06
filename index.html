@@ -1,376 +1,51 @@
+extends base
+- var current_title = page.title || tag.name || category.name || site.title
 
- <!DOCTYPE HTML>
-<html lang="zh-Hans">
-<head>
-  <meta charset="UTF-8">
-  
-    <title>枫叶</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
-    
-    <meta name="author" content="枫叶">
-    
-    <meta name="description" content="坐看云起时">
-    
-    
-    
-    
-    
-    <link rel="icon" href="/img/favicon.ico">
-    
-    
-    <link rel="apple-touch-icon" href="/img/pacman.jpg">
-    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
-    
-    <link rel="stylesheet" href="/css/style.css">
-</head>
+block title
+  if config.subtitle
+    title= config.title + ' | ' + config.subtitle
+  else
+    title= config.title
+block content
 
-  <body>
-    <header>
-      <div>
-		
-			<div id="imglogo">
-				<a href="/"><img src="/img/logo.svg" alt="枫叶" title="枫叶"/></a>
-			</div>
-			
-			<div id="textlogo">
-				<h1 class="site-name"><a href="/" title="枫叶">枫叶</a></h1>
-				<h2 class="blog-motto">枫叶</h2>
-			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
-			</a></div>
-			<nav class="animated">
-				<ul>
-					
-						<li><a href="/">Home</a></li>
-					
-						<li><a href="/archives">Archives</a></li>
-					
-					<li>
-					
-					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
-						<label>Search</label>
-						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
-						<input type="hidden" name="q" value="site:slpowercoder.github.io">
-					</form>
-					
-					</li>
-				</ul>
-			</nav>			
-</div>
+  for post in page.posts.toArray()
+    .post
+      h2.post-title
+        include _partial/helpers
+        a(href=url_for(post.path))
+          +title(post)
+      .post-meta
+        if theme.comment.changyan.appid && theme.comment.changyan.appkey
+          a.comment-count(href=url_for(post.path) + '#comments')
+            span.cy_cmt_count(id = 'url::' + config.url +'/'+ post.path)
+            = ''+ __('guestbook') + ','
+            span.cy_cmt_participate(id = 'url::' + config.url +'/'+ post.path)
+            = ''+ __('participate')
+        p
+          span.date= post.date.format(config.date_format)
+          if post.categories.length > 0
+            span
+              for category in post.categories.toArray()
+                a.category(href=url_for(category.path))= category.name
+      if post.description
+        .post-content
+          != post.description
+      else if post.excerpt
+        .post-content
+          != post.excerpt
+      else if post.content
+        - var br = post.content.indexOf('\n')
+        if br < 0
+          .post-content
+            != post.content
+        else
+          .post-content
+            != post.content.substring(0, br)
+      p(class='readmore')
+        a(href=url_for(post.path))= __('Readmore')
 
-    </header>
-    <div id="container">
-      <div id="main">
-
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2018/09/03/react-native组件间的通信/" title="react-native组件间的通信" itemprop="url">
-  
-    <h1 itemprop="name">react-native组件间的通信</h1>
-    
-     
-           <p itemprop="description" ></p>
-        
-    
-    <time datetime="2018-09-03T14:52:22.000Z" itemprop="datePublished">2018-09-03</time>
-  </a>
-</section>
-
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2018/07/29/RN原生之间的通信方式/" title="RN与原生之间的通信方式" itemprop="url">
-  
-    <h1 itemprop="name">RN与原生之间的通信方式</h1>
-    
-     
-           <p itemprop="description" >从原生到RN的通信可以通过bridge发送通知的方式来向RN通信
-从RN到原生的通信通过实现RN的一些协议来用原生代码封装RN接口</p>
-        
-    
-    <time datetime="2018-07-29T12:06:09.142Z" itemprop="datePublished">2018-07-29</time>
-  </a>
-</section>
-
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2018/06/27/React Native的性能优化/" title="React Native的性能优化" itemprop="url">
-  
-    <h1 itemprop="name">React Native的性能优化</h1>
-    
-     
-           <p itemprop="description" >React Native的性能优化众所周知RN由于应用了virtual DOM 、diff算法等一些列调优机制，使RN应用几乎达到了与原生一样的体验，但是毕竟RN只是原生APP的一个线程而已，RN和原生还隔着一道桥梁batch bridge，最终RN的代码还是要通过jscore引</p>
-        
-    
-    <time datetime="2018-06-27T14:58:51.000Z" itemprop="datePublished">2018-06-27</time>
-  </a>
-</section>
-
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2018/06/15/滴滴面试总结/" title="滴滴面试总结" itemprop="url">
-  
-    <h1 itemprop="name">滴滴面试总结</h1>
-    
-     
-           <p itemprop="description" >下面是面试滴滴的经历，总共出了四道技术面试题，说不出的辛酸。。。日后有时间在总结答案，先记录下来
-
-1、实现一个游戏人物GameRole，包含年龄、性别、装备（可以动态增减），不是Xcode，是一个没有提示的编辑器，徒手写，类名忘写了。。。
-2、GameRole *role = </p>
-        
-    
-    <time datetime="2018-06-15T14:32:51.000Z" itemprop="datePublished">2018-06-15</time>
-  </a>
-</section>
-
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2017/05/13/一次masonry布局错误后的自检/" title="写这篇blog内心是崩溃的" itemprop="url">
-  
-    <h1 itemprop="name">写这篇blog内心是崩溃的</h1>
-    
-     
-           <p itemprop="description" >在某一个月黑风高的夜里，他正在伏案敲代码，敲完之后一脸自信的cmd + run，结果不愉快的事情就此发生了，心塞。。😂事情是这样的，我们美丽的UI设计了一套图，本来想自定义个flowLayout走个捷径的，事实却发现走了个大弯路，图是下面这样子的👇
-约束报错，很是无奈，于是我</p>
-        
-    
-    <time datetime="2017-05-13T13:09:34.000Z" itemprop="datePublished">2017-05-13</time>
-  </a>
-</section>
-
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2017/05/02/react native集成到原有的项目中(iOS)/" title="react native集成到原有的项目中(iOS)" itemprop="url">
-  
-    <h1 itemprop="name">react native集成到原有的项目中(iOS)</h1>
-    
-     
-           <p itemprop="description" >接触RN也有一段时间了，基本上来说算是入门了，到目前RN的应用还没有达到期望的广泛度，大部分还是以原生+RN的方式进行混合开发，今天抽空写一下关于RN嵌入到iOS原生项目中的知识点。
-前期准备现在大部分嵌入方式都是采用cocoapods的方式引入RN依赖库到原生项目中，当然你也可</p>
-        
-    
-    <time datetime="2017-05-01T16:44:35.000Z" itemprop="datePublished">2017-05-02</time>
-  </a>
-</section>
-
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2017/03/14/block/" title="Block深入理解" itemprop="url">
-  
-    <h1 itemprop="name">Block深入理解</h1>
-    
-     
-           <p itemprop="description" >block 你应该了解的知识为什么不把本部分放到本质部分的下面呢，我以为实用为大，还是先把block的使用及其注意点写在前面吧。
-1、为了方便声明block类型的变量，我们一般用typedef typedef void (^Block)(void)给block类型起个别名，这样我</p>
-        
-    
-    <time datetime="2017-03-14T08:36:04.000Z" itemprop="datePublished">2017-03-14</time>
-  </a>
-</section>
-
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2017/03/10/iOS音频的播放以及录制/" title="iOS音频的播放以及录制" itemprop="url">
-  
-    <h1 itemprop="name">iOS音频的播放以及录制</h1>
-    
-     
-           <p itemprop="description" >iOS中的音频包括两种类型，一种是时间比较短无需监听播放时间等属性的音效，一种是时间比较长的音乐</p>
-        
-    
-    <time datetime="2017-03-10T09:39:03.000Z" itemprop="datePublished">2017-03-10</time>
-  </a>
-</section>
-
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2017/02/11/iOS 深拷贝和浅拷贝/" title="iOS 深拷贝和浅拷贝" itemprop="url">
-  
-    <h1 itemprop="name">iOS 深拷贝和浅拷贝</h1>
-    
-     
-           <p itemprop="description" >浅拷贝只是增加了一个对被引用对象的一个指向，拷贝出的对象与原对象共用一块内存区域。retain：只是retainCount加一，实际上还是共用一块内存copy：不论拷贝的是不是集合对象，只要被拷贝的对象是不可变的，那就是浅拷贝，仅仅retainCount加一
-深拷贝会分配出一块内</p>
-        
-    
-    <time datetime="2017-02-11T15:44:10.000Z" itemprop="datePublished">2017-02-11</time>
-  </a>
-</section>
-
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2017/02/11/Objective-C 消息转发机制/" title="Objective-C 消息转发机制" itemprop="url">
-  
-    <h1 itemprop="name">Objective-C 消息转发机制</h1>
-    
-     
-           <p itemprop="description" >一图胜千言，习惯性的先来一张图以便对消息转发有个整体的把握
-运行时系统库方法查询流程图
-
-对于对象无法处理的消息，如果不做转发处理的话，程序最终会调用NSObjective的doesNotRecognizeSelector:消息将程序crash掉。
-
-Objective-C提供了</p>
-        
-    
-    <time datetime="2017-02-11T15:41:29.000Z" itemprop="datePublished">2017-02-11</time>
-  </a>
-</section>
-
-
-  <nav id="page-nav" class="clearfix">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
-  </nav>
-
-</div>
-      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
-
-<div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
-<aside class="clearfix">
-
-  
-<div class="categorieslist">
-	<p class="asidetitle">Categories</p>
-		<ul>
-		
-			<li><a href="/categories/hexo/" title="hexo">hexo<sup>1</sup></a></li>
-		
-			<li><a href="/categories/iOS/" title="iOS">iOS<sup>9</sup></a></li>
-		
-			<li><a href="/categories/react-native/" title="react-native">react-native<sup>6</sup></a></li>
-		
-		</ul>
-</div>
-
-
-  
-<div class="tagslist">
-	<p class="asidetitle">Tags</p>
-		<ul class="clearfix">
-		
-			<li><a href="/tags/assign/" title="assign">assign<sup>1</sup></a></li>
-		
-			<li><a href="/tags/audio/" title="audio">audio<sup>1</sup></a></li>
-		
-			<li><a href="/tags/block/" title="block">block<sup>1</sup></a></li>
-		
-			<li><a href="/tags/category/" title="category">category<sup>1</sup></a></li>
-		
-			<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
-		
-			<li><a href="/tags/iOS/" title="iOS">iOS<sup>2</sup></a></li>
-		
-			<li><a href="/tags/masonry/" title="masonry">masonry<sup>1</sup></a></li>
-		
-			<li><a href="/tags/react-native/" title="react-native">react-native<sup>6</sup></a></li>
-		
-			<li><a href="/tags/react-redux/" title="react-redux">react-redux<sup>1</sup></a></li>
-		
-			<li><a href="/tags/redux/" title="redux">redux<sup>1</sup></a></li>
-		
-			<li><a href="/tags/retain/" title="retain">retain<sup>1</sup></a></li>
-		
-			<li><a href="/tags/runtime/" title="runtime">runtime<sup>1</sup></a></li>
-		
-			<li><a href="/tags/strong/" title="strong">strong<sup>1</sup></a></li>
-		
-			<li><a href="/tags/weak/" title="weak">weak<sup>1</sup></a></li>
-		
-			<li><a href="/tags/博客/" title="博客">博客<sup>1</sup></a></li>
-		
-			<li><a href="/tags/浅拷贝/" title="浅拷贝">浅拷贝<sup>1</sup></a></li>
-		
-			<li><a href="/tags/消息转发/" title="消息转发">消息转发<sup>1</sup></a></li>
-		
-			<li><a href="/tags/深拷贝/" title="深拷贝">深拷贝<sup>1</sup></a></li>
-		
-			<li><a href="/tags/通信/" title="通信">通信<sup>1</sup></a></li>
-		
-			<li><a href="/tags/面试/" title="面试">面试<sup>1</sup></a></li>
-		
-		</ul>
-</div>
-
-
-  <div class="rsspart">
-	<a href="null" target="_blank" title="rss">RSS</a>
-</div>
-
-</aside>
-</div>
-    </div>
-    <footer><div id="footer" >
-	
-	<div class="line">
-		<span></span>
-		<div class="author"></div>
-	</div>
-	
-	
-	<div class="social-font clearfix">
-		
-		
-		
-		
-		
-	</div>
-		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2018 
-		
-		<a href="https://slpowercoder.github.io" target="_blank" title="枫叶">枫叶</a>
-		
-		</p>
-</div>
-</footer>
-    <script src="/js/jquery-2.1.0.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){ 
-  $('.navbar').click(function(){
-    $('header nav').toggleClass('shownav');
-  });
-  var myWidth = 0;
-  function getSize(){
-    if( typeof( window.innerWidth ) == 'number' ) {
-      myWidth = window.innerWidth;
-    } else if( document.documentElement && document.documentElement.clientWidth) {
-      myWidth = document.documentElement.clientWidth;
-    };
-  };
-  var m = $('#main'),
-      a = $('#asidepart'),
-      c = $('.closeaside'),
-      o = $('.openaside');
-  $(window).resize(function(){
-    getSize(); 
-    if (myWidth >= 1024) {
-      $('header nav').removeClass('shownav');
-    }else
-    {
-      m.removeClass('moveMain');
-      a.css('display', 'block').removeClass('fadeOut');
-      o.css('display', 'none');
-        
-    }
-  });
-  c.click(function(){
-    a.addClass('fadeOut').css('display', 'none');
-    o.css('display', 'block').addClass('fadeIn');
-    m.addClass('moveMain');
-  });
-  o.click(function(){
-    o.css('display', 'none').removeClass('beforeFadeIn');
-    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
-    m.removeClass('moveMain');
-  });
-  $(window).scroll(function(){
-    o.css("top",Math.max(80,260-$(this).scrollTop()));
-  });
-});
-</script>
-
-
-
-
-
-
-
-  </body>
- </html>
+  include _partial/paginator
+block pageOnly
+  script(type='text/javascript', src=url_for(theme.js) + '/totop.js' + '?v=' + theme.version, async)
+  if theme.comment.changyan.appid && theme.comment.changyan.appkey
+    script(id="cy_cmt_num", src='http://changyan.sohu.com/upload/plugins/plugins.list.count.js' + '?clientId=' + theme.comment.changyan.appid)

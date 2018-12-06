@@ -1,379 +1,45 @@
+extends base
 
- <!DOCTYPE HTML>
-<html lang="zh-Hans">
-<head>
-  <meta charset="UTF-8">
-  
-    <title>React Native的性能优化 | 枫叶</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
-    
-    <meta name="author" content="枫叶">
-    
-    <meta name="description" content="React Native的性能优化众所周知RN由于应用了virtual DOM 、diff算法等一些列调优机制，使RN应用几乎达到了与原生一样的体验，但是毕竟RN只是原生APP的一个线程而已，RN和原生还隔着一道桥梁batch bridge，最终RN的代码还是要通过jscore引擎转换成原生代码来执">
-    
-    
-    
-    
-    
-    <link rel="icon" href="/img/favicon.ico">
-    
-    
-    <link rel="apple-touch-icon" href="/img/pacman.jpg">
-    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
-    
-    <link rel="stylesheet" href="/css/style.css">
-</head>
+block title
+  title= page.title + ' | ' + config.title
 
-  <body>
-    <header>
-      <div>
-		
-			<div id="imglogo">
-				<a href="/"><img src="/img/logo.svg" alt="枫叶" title="枫叶"/></a>
-			</div>
-			
-			<div id="textlogo">
-				<h1 class="site-name"><a href="/" title="枫叶">枫叶</a></h1>
-				<h2 class="blog-motto">枫叶</h2>
-			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
-			</a></div>
-			<nav class="animated">
-				<ul>
-					
-						<li><a href="/">Home</a></li>
-					
-						<li><a href="/archives">Archives</a></li>
-					
-					<li>
-					
-					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
-						<label>Search</label>
-						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
-						<input type="hidden" name="q" value="site:slpowercoder.github.io">
-					</form>
-					
-					</li>
-				</ul>
-			</nav>			
-</div>
+block content
+  .post
+    h1.post-title= page.title
+    .post-meta
+      if theme.comment
+        include _partial/comment_count
+        +comment-count(page.path)
+      p
+        span.date= page.date.format(theme.date_formats.post)
+        if page.categories.length > 0
+          span
+            for category in page.categories.toArray()
+              a.category(href=url_for(category.path))= category.name 
+        if theme.busuanzi == true
+          span
+            i#busuanzi_container_page_pv
+              i#busuanzi_value_page_pv
+              i= '' + __('hits')
+    .post-content
+      != page.content
+    include _partial/tag
+    .post-share
+      include _partial/share
+    include _partial/post_nav
+    #comments
+      include _partial/comments
 
-    </header>
-    <div id="container">
-      <div id="main" class="post" itemscope itemprop="blogPost">
-	<article itemprop="articleBody"> 
-		<header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2018/06/27/React Native的性能优化/" title="React Native的性能优化" itemprop="url">React Native的性能优化</a>
-  </h1>
-  <p class="article-author">By
-    
-      <a href="https://slpowercoder.github.io" title="枫叶">枫叶</a>
-    </p>
-  <p class="article-time">
-    <time datetime="2018-06-27T14:58:51.000Z" itemprop="datePublished">2018-06-27</time>
-    Updated:<time datetime="2018-07-15T03:58:12.950Z" itemprop="dateModified">2018-07-15</time>
-    
-  </p>
-</header>
-	<div class="article-content">
-		
-		
-		<div id="toc" class="toc-article">
-			<strong class="toc-title">Contents</strong>
-		<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#React-Native的性能优化"><span class="toc-number">1.</span> <span class="toc-text">React Native的性能优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一、基础优化（目的是尽量减少页面的渲染）"><span class="toc-number">2.</span> <span class="toc-text">一、基础优化（目的是尽量减少页面的渲染）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、本地分包优化"><span class="toc-number">3.</span> <span class="toc-text">二、本地分包优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、按需延迟加载"><span class="toc-number">4.</span> <span class="toc-text">三、按需延迟加载</span></a></li></ol>
-		</div>
-		
-		<h3 id="React-Native的性能优化"><a href="#React-Native的性能优化" class="headerlink" title="React Native的性能优化"></a>React Native的性能优化</h3><p>众所周知RN由于应用了virtual DOM 、diff算法等一些列调优机制，使RN应用几乎达到了与原生一样的体验，但是毕竟RN只是原生APP的一个线程而已，RN和原生还隔着一道桥梁batch bridge，最终RN的代码还是要通过jscore引擎转换成原生代码来执行，这就决定了RN不可能超越原生，除非RN能越过这道坎，尽管官方替我们做了一些优化，但是有些优化只能交给了用户来决定，比如<code>sholdComponentUpdate</code>是返回true还是false，这是需要我们来决定的，再比如APP的页面如果非常多的话，打包之后bundle非常大，而加载和初始化bundle又很耗时间，这又需要拆分bundle，所以还是有许多需要人工来优化。</p>
-<p>既然是性能优化那就肯定得找出RN的性能瓶颈在哪</p>
-<h3 id="一、基础优化（目的是尽量减少页面的渲染）"><a href="#一、基础优化（目的是尽量减少页面的渲染）" class="headerlink" title="一、基础优化（目的是尽量减少页面的渲染）"></a>一、基础优化（目的是尽量减少页面的渲染）</h3><ol>
-<li>比较吃性能的、耗时的操作可以放到<code>componentDidMount</code>中，然后再用<code>Interaction manager</code>在包裹一下，比如网络请求。</li>
-<li>尽量少用状态组件，尽可能用无状态组件，<strong>无状态组件不会被实例化</strong>，可以提升性能</li>
-<li>自定义的有状态组件尽量继承自<code>pure component</code>，这样系统会自动在<code>shouldComponentUpdate</code>中<strong>默认做一层浅比较（直接拿两个对象做比较，对象中的子元素不做比较）</strong>，可以减少一些不必要的渲染，当然你也也可以在该方法中做<strong>深</strong>层次的比较，如果组件不是继承自<code>PureComponent</code>则该方法默认返回true，这样会导致很多无用的渲染，比如父组件的改变会导致子组件的重新render。</li>
-<li>利用<code>immutable</code>不可变数据，提升性能，它可以避免本来应该渲染而实际却没有发生渲染的问题，因为框架默认在<code>shouldComponentUpdate</code>做的是一层浅比较，如果在state改变的过程中做的是浅拷贝，则state改变之前和改变之后是相等的，指向的是同一个对象，这样浅比较会认为state没有改变而不做渲染。</li>
-<li><p>对于同层级的相同类型的组件，要给每个组件指定唯一的key值。例如通常我们在一个容器组件中创建多个子组件的时候，我们会把这些子组件放在一个数组里，然后把数组直接放到容器页面中，形如下面的伪代码：</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">banner = ()=&gt;&#123;</div><div class="line">	let childArr = [];</div><div class="line">	while(let i &lt; 10) &#123;</div><div class="line">		childArr.push(&lt;Child key=&#123;XXXXXX&#125;&gt;&lt;/Child&gt;)</div><div class="line">	&#125;</div><div class="line">	return &lt;View&gt; &#123;childArr&#125; &lt;/View&gt;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p> Child组件的key一定要有，这涉及到diff算法的原理，diff算法是按层级进行比较的，当前的virtual DOM 和之前的virtual DOM进行同层级比较的时候，对于属于同一个父组件的同一层级的子组件，<strong>如果没有key值的话，RN需要遍历该父组件的所有子组件来行进对比，才能知道哪一个子组件发生了改变，这样如果子组件的数量很大的时候会很耗性能，RN有可能会因为遍历的耗时而选择放弃对比来重新渲染所有的子组件，但是如果有key值的话可以利用key直接进行两两比较</strong>，效率就高出很多。</p>
-</li>
-<li>列表优化，几乎所有的APP都有列表，所以列表的优化尤为重要，之前RN采用的是listView，数据稍微大的时候会出现明显卡顿，有性能瓶颈，最后RN在xxx版推出了新的列表神器<code>FlatList</code>和<code>SectionList</code>，他俩都是继承自<code>VirtualizedList</code>，比listView的性能更高，并且使用起来也更简单了，无需再想listView一样要先创建一个DataSource对象了。具体优化可以参考官网。。。</li>
-<li>用<code>FlatList</code>替换<code>scrollView</code>，因为在用<code>scrollView</code>的时候它会一下子把他上面的所有子组件都渲染出来，而<code>FlatList</code>可以设置首屏渲染的行数，这样就不会导致在刚进入这一页的时候出现卡顿现象。</li>
-</ol>
-<h3 id="二、本地分包优化"><a href="#二、本地分包优化" class="headerlink" title="二、本地分包优化"></a>二、本地分包优化</h3><p>从官方给出的RN耗时图可以看出，最耗性能的地方是bundle包的<strong>JS环境的初始化</strong>和<strong>加载</strong>，所以这一块的优化也至关重要，bundle体积过大会导致加载慢，其中bundle包括<strong>react等基础库以及引入的三方库</strong> 和 <strong>你自己的业务代码</strong>，可以先从两方面着手。第一：需要尽可能的优化bundle的体积，去掉一些不必要的资源。第二：做拆分处理，把bundle拆分成<code>基础bundle</code>和<code>业务bundle</code>。 <code>基础bundle</code>是APP必须依赖的公共基础部分。其实拆分之后还是很耗时间，所以我们又做了另一种处理，那就是<code>预加载</code>，对<code>基础bundle</code>进行预加载，这样可以减少一些加载以及初始化的耗时。</p>
-<p>总结如下：</p>
-<ol>
-<li><strong>本地分包</strong>： 把bundle拆分成<code>公共基础bundle</code>和<code>业务bundle</code></li>
-<li><strong>预加载</strong>： 预加载<code>公共基础bundle</code></li>
-</ol>
-<h3 id="三、按需延迟加载"><a href="#三、按需延迟加载" class="headerlink" title="三、按需延迟加载"></a>三、按需延迟加载</h3><p>可以通过<code>require</code>来实现动态延迟加载,伪代码如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">import xxx from &apos;./xxxx&apos;</div><div class="line"></div><div class="line">let test2;</div><div class="line"></div><div class="line">export default class Test extent Componnet &#123;</div><div class="line"></div><div class="line">	getTest2 = ()=&gt;&#123;</div><div class="line">		// 对test2模块进行懒加载（延迟加载），以提高性能</div><div class="line">		if(test2 === undefined) &#123;</div><div class="line">			test2 = require(&apos;./xxxx/test2&apos;);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>我们不需要再这个test模块一开始就加载test2模块，这样可以延迟加载一些不是立马需要的其他模块，提升整体加载速度，降低内存。</p>
-  
-	</div>
-		<footer class="article-footer clearfix">
+block tocmodel
+  if theme.toc.enable == true 
+    .widget(id='toc')
+      .widget-title
+        i(class='fa fa-fei')= __('contents')
+      != toc(page.content, {list_number: theme.toc.number})
 
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/react-native/">react-native</a>
-  </div>
-
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/react-native/">react-native</a>
-</div>
-
-
-
-<div class="article-share" id="share">
-
-  <div data-url="https://slpowercoder.github.io/2018/06/27/React Native的性能优化/" data-title="React Native的性能优化 | 枫叶" data-tsina="null" class="share clearfix">
-  </div>
-
-</div>
-</footer>   	       
-	</article>
-	
-<nav class="article-nav clearfix">
- 
- <div class="prev" >
- <a href="/2018/07/29/RN原生之间的通信方式/" title="RN与原生之间的通信方式">
-  <strong>PREVIOUS:</strong><br/>
-  <span>
-  RN与原生之间的通信方式</span>
-</a>
-</div>
-
-
-<div class="next">
-<a href="/2018/06/15/滴滴面试总结/"  title="滴滴面试总结">
- <strong>NEXT:</strong><br/> 
- <span>滴滴面试总结
-</span>
-</a>
-</div>
-
-</nav>
-
-	
-</div>  
-      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
-
-  <div id="toc" class="toc-aside">
-  <strong class="toc-title">Contents</strong>
-  <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#React-Native的性能优化"><span class="toc-number">1.</span> <span class="toc-text">React Native的性能优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一、基础优化（目的是尽量减少页面的渲染）"><span class="toc-number">2.</span> <span class="toc-text">一、基础优化（目的是尽量减少页面的渲染）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、本地分包优化"><span class="toc-number">3.</span> <span class="toc-text">二、本地分包优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、按需延迟加载"><span class="toc-number">4.</span> <span class="toc-text">三、按需延迟加载</span></a></li></ol>
-  </div>
-
-<div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
-<aside class="clearfix">
-
-  
-<div class="categorieslist">
-	<p class="asidetitle">Categories</p>
-		<ul>
-		
-			<li><a href="/categories/hexo/" title="hexo">hexo<sup>1</sup></a></li>
-		
-			<li><a href="/categories/iOS/" title="iOS">iOS<sup>9</sup></a></li>
-		
-			<li><a href="/categories/react-native/" title="react-native">react-native<sup>6</sup></a></li>
-		
-		</ul>
-</div>
-
-
-  
-<div class="tagslist">
-	<p class="asidetitle">Tags</p>
-		<ul class="clearfix">
-		
-			<li><a href="/tags/assign/" title="assign">assign<sup>1</sup></a></li>
-		
-			<li><a href="/tags/audio/" title="audio">audio<sup>1</sup></a></li>
-		
-			<li><a href="/tags/block/" title="block">block<sup>1</sup></a></li>
-		
-			<li><a href="/tags/category/" title="category">category<sup>1</sup></a></li>
-		
-			<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
-		
-			<li><a href="/tags/iOS/" title="iOS">iOS<sup>2</sup></a></li>
-		
-			<li><a href="/tags/masonry/" title="masonry">masonry<sup>1</sup></a></li>
-		
-			<li><a href="/tags/react-native/" title="react-native">react-native<sup>6</sup></a></li>
-		
-			<li><a href="/tags/react-redux/" title="react-redux">react-redux<sup>1</sup></a></li>
-		
-			<li><a href="/tags/redux/" title="redux">redux<sup>1</sup></a></li>
-		
-			<li><a href="/tags/retain/" title="retain">retain<sup>1</sup></a></li>
-		
-			<li><a href="/tags/runtime/" title="runtime">runtime<sup>1</sup></a></li>
-		
-			<li><a href="/tags/strong/" title="strong">strong<sup>1</sup></a></li>
-		
-			<li><a href="/tags/weak/" title="weak">weak<sup>1</sup></a></li>
-		
-			<li><a href="/tags/博客/" title="博客">博客<sup>1</sup></a></li>
-		
-			<li><a href="/tags/浅拷贝/" title="浅拷贝">浅拷贝<sup>1</sup></a></li>
-		
-			<li><a href="/tags/消息转发/" title="消息转发">消息转发<sup>1</sup></a></li>
-		
-			<li><a href="/tags/深拷贝/" title="深拷贝">深拷贝<sup>1</sup></a></li>
-		
-			<li><a href="/tags/通信/" title="通信">通信<sup>1</sup></a></li>
-		
-			<li><a href="/tags/面试/" title="面试">面试<sup>1</sup></a></li>
-		
-		</ul>
-</div>
-
-
-  <div class="rsspart">
-	<a href="null" target="_blank" title="rss">RSS</a>
-</div>
-
-</aside>
-</div>
-    </div>
-    <footer><div id="footer" >
-	
-	<div class="line">
-		<span></span>
-		<div class="author"></div>
-	</div>
-	
-	
-	<div class="social-font clearfix">
-		
-		
-		
-		
-		
-	</div>
-		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2018 
-		
-		<a href="https://slpowercoder.github.io" target="_blank" title="枫叶">枫叶</a>
-		
-		</p>
-</div>
-</footer>
-    <script src="/js/jquery-2.1.0.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){ 
-  $('.navbar').click(function(){
-    $('header nav').toggleClass('shownav');
-  });
-  var myWidth = 0;
-  function getSize(){
-    if( typeof( window.innerWidth ) == 'number' ) {
-      myWidth = window.innerWidth;
-    } else if( document.documentElement && document.documentElement.clientWidth) {
-      myWidth = document.documentElement.clientWidth;
-    };
-  };
-  var m = $('#main'),
-      a = $('#asidepart'),
-      c = $('.closeaside'),
-      o = $('.openaside');
-  $(window).resize(function(){
-    getSize(); 
-    if (myWidth >= 1024) {
-      $('header nav').removeClass('shownav');
-    }else
-    {
-      m.removeClass('moveMain');
-      a.css('display', 'block').removeClass('fadeOut');
-      o.css('display', 'none');
-      
-      $('#toc.toc-aside').css('display', 'none');
-        
-    }
-  });
-  c.click(function(){
-    a.addClass('fadeOut').css('display', 'none');
-    o.css('display', 'block').addClass('fadeIn');
-    m.addClass('moveMain');
-  });
-  o.click(function(){
-    o.css('display', 'none').removeClass('beforeFadeIn');
-    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
-    m.removeClass('moveMain');
-  });
-  $(window).scroll(function(){
-    o.css("top",Math.max(80,260-$(this).scrollTop()));
-  });
-});
-</script>
-
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var ai = $('.article-content>iframe'),
-      ae = $('.article-content>embed'),
-      t  = $('#toc'),
-      h  = $('article h2')
-      ah = $('article h2'),
-      ta = $('#toc.toc-aside'),
-      o  = $('.openaside'),
-      c  = $('.closeaside');
-  if(ai.length>0){
-    ai.wrap('<div class="video-container" />');
-  };
-  if(ae.length>0){
-   ae.wrap('<div class="video-container" />');
-  };
-  if(ah.length==0){
-    t.css('display','none');
-  }else{
-    c.click(function(){
-      ta.css('display', 'block').addClass('fadeIn');
-    });
-    o.click(function(){
-      ta.css('display', 'none');
-    });
-    $(window).scroll(function(){
-      ta.css("top",Math.max(140,320-$(this).scrollTop()));
-    });
-  };
-});
-</script>
-
-
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var $this = $('.share'),
-      url = $this.attr('data-url'),
-      encodedUrl = encodeURIComponent(url),
-      title = $this.attr('data-title'),
-      tsina = $this.attr('data-tsina');
-  var html = [
-  '<a href="#" class="overlay" id="qrcode"></a>',
-  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
-  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
-  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
-  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
-  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
-  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
-  '<span title="Share to"></span>'
-  ].join('');
-  $this.append(html);
-  $('.article-share-qrcode').click(function(){
-    var imgSrc = $('#qrcode-pic').attr('data-src');
-    $('#qrcode-pic').attr('src', imgSrc);
-    $('#qrcode-pic').load(function(){
-        $('.qrcode strong').text(' ');
-    });
-  });
-});     
-</script>
-
-
-
-
-
-
-  </body>
-</html>
+block pageOnly
+  if theme.toc.enable == true 
+    script(type='text/javascript', src=url_for(theme.js) + '/toctotop.js' + '?v=' + theme.version, async)
+  else 
+    script(type='text/javascript', src=url_for(theme.js) + '/totop.js' + '?v=' + theme.version, async)
+  include _partial/comments_js

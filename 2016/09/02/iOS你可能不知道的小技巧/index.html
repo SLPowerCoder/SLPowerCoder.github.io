@@ -1,400 +1,45 @@
+extends base
 
- <!DOCTYPE HTML>
-<html lang="zh-Hans">
-<head>
-  <meta charset="UTF-8">
-  
-    <title>iOS小知识 | 枫叶</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
-    
-    <meta name="author" content="枫叶">
-    
-    <meta name="description" content="原文https://slpowercoder.github.io/
+block title
+  title= page.title + ' | ' + config.title
 
-去掉按钮的高亮黑
-1[funcImgBtn setAdjustsImageWhenHighlighted:NO];
+block content
+  .post
+    h1.post-title= page.title
+    .post-meta
+      if theme.comment
+        include _partial/comment_count
+        +comment-count(page.path)
+      p
+        span.date= page.date.format(theme.date_formats.post)
+        if page.categories.length > 0
+          span
+            for category in page.categories.toArray()
+              a.category(href=url_for(category.path))= category.name 
+        if theme.busuanzi == true
+          span
+            i#busuanzi_container_page_pv
+              i#busuanzi_value_page_pv
+              i= '' + __('hits')
+    .post-content
+      != page.content
+    include _partial/tag
+    .post-share
+      include _partial/share
+    include _partial/post_nav
+    #comments
+      include _partial/comments
 
-设置视图属性防止背景图片变形关于UIViewContentMode的详解http://blog.csdn.net">
-    
-    
-    
-    
-    
-    <link rel="icon" href="/img/favicon.ico">
-    
-    
-    <link rel="apple-touch-icon" href="/img/pacman.jpg">
-    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
-    
-    <link rel="stylesheet" href="/css/style.css">
-</head>
+block tocmodel
+  if theme.toc.enable == true 
+    .widget(id='toc')
+      .widget-title
+        i(class='fa fa-fei')= __('contents')
+      != toc(page.content, {list_number: theme.toc.number})
 
-  <body>
-    <header>
-      <div>
-		
-			<div id="imglogo">
-				<a href="/"><img src="/img/logo.svg" alt="枫叶" title="枫叶"/></a>
-			</div>
-			
-			<div id="textlogo">
-				<h1 class="site-name"><a href="/" title="枫叶">枫叶</a></h1>
-				<h2 class="blog-motto">枫叶</h2>
-			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
-			</a></div>
-			<nav class="animated">
-				<ul>
-					
-						<li><a href="/">Home</a></li>
-					
-						<li><a href="/archives">Archives</a></li>
-					
-					<li>
-					
-					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
-						<label>Search</label>
-						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
-						<input type="hidden" name="q" value="site:slpowercoder.github.io">
-					</form>
-					
-					</li>
-				</ul>
-			</nav>			
-</div>
-
-    </header>
-    <div id="container">
-      <div id="main" class="post" itemscope itemprop="blogPost">
-	<article itemprop="articleBody"> 
-		<header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2016/09/02/iOS你可能不知道的小技巧/" title="iOS小知识" itemprop="url">iOS小知识</a>
-  </h1>
-  <p class="article-author">By
-    
-      <a href="https://slpowercoder.github.io" title="枫叶">枫叶</a>
-    </p>
-  <p class="article-time">
-    <time datetime="2016-09-02T09:48:56.000Z" itemprop="datePublished">2016-09-02</time>
-    Updated:<time datetime="2017-03-13T05:03:12.000Z" itemprop="dateModified">2017-03-13</time>
-    
-  </p>
-</header>
-	<div class="article-content">
-		
-		
-		<div id="toc" class="toc-article">
-			<strong class="toc-title">Contents</strong>
-		
-		</div>
-		
-		<p>原文<a href="https://slpowercoder.github.io/">https://slpowercoder.github.io/</a></p>
-<ol>
-<li><p>去掉按钮的高亮黑</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[funcImgBtn setAdjustsImageWhenHighlighted:NO];</div></pre></td></tr></table></figure>
-</li>
-<li><p>设置视图属性防止背景图片变形<br>关于UIViewContentMode的详解<br><a href="http://blog.csdn.net/iunion/article/details/7494511" target="_blank" rel="external">http://blog.csdn.net/iunion/article/details/7494511</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">//对于UIButton需要设置button中的imageView的contentMode属性</div><div class="line">button.imageView.contentMode = UIViewContentModeScaleAspectFill;</div><div class="line">//</div><div class="line">视图.contentMode = UIViewContentModeScaleAspectFill;</div><div class="line">视图.clipsToBounds = YES;</div></pre></td></tr></table></figure>
-</li>
-<li><p>当一个页面有多个scrollView（或继承自scrollVIew）的时候，点击状态栏不会回到顶部，可以将非当前显示页的scrollVIew. scrollToTop设置为NO。</p>
-</li>
-<li><p>去掉在UITableViewStylePlain 样式的时候多余的默认cell</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">_tableView.tableFooterView = [[UIView alloc]init];</div></pre></td></tr></table></figure>
-</li>
-<li><p>去掉在UITableViewStyleGrouped 样式的时候默认的组脚高度</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section&#123;</div><div class="line">return 0.001; //越小越好，不能设置为0</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>自定义导航栏的返回按钮而造成返回手势的失效的解决办法，对于最顶层的VC我们需要设置enabled = NO，因为最外面一层是不需要该手势的</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">self.navigationController.interactivePopGestureRecognizer.delegate = self;</div><div class="line">self.navigationController.interactivePopGestureRecognizer.enabled = YES;</div></pre></td></tr></table></figure>
-</li>
-<li><p>根据十六进制色值返回一个UIColor对象的宏</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">#define USERCOLOR(string) [UIColor colorWithRed:((float)((string &amp; 0xFF0000) &gt;&gt; 16))/255.0 green:((float)((string &amp; 0xFF00) &gt;&gt; 8))/255.0 blue:((float)(string &amp; 0xFF))/255.0 alpha:1.0]</div></pre></td></tr></table></figure>
-</li>
-<li><p>控制屏幕是否锁屏</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//值为yes的时候可以防止屏幕黑屏，注意在程序结束点时候要设置为no</div><div class="line">[[UIApplication sharedApplication] setIdleTimerDisabled:YES];</div></pre></td></tr></table></figure>
-</li>
-<li><p>防止自定义导航栏返回按钮时，返回手势失效</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">self.navigationController.interactivePopGestureRecognizer.enabled = YES;</div></pre></td></tr></table></figure>
-</li>
-<li><p>打印函数，可以打印所在的函数，行数，以及你要打印的值</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">#define DLog(fmt, ...) NSLog((@&quot;%s [Line %d] &quot; fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);</div></pre></td></tr></table></figure>
-</li>
-<li><p>UISwitch的大小直接设置frame是没有用的，可以通过CGAffineTransformMakeScale缩放来设置</p>
-</li>
-<li><p>load和initialize</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//程序在加载类文件时候会调用load，无论实现该方法的类有没有被引用（只要程序运行的时候就会加载该类文件）</div><div class="line">+(void)load</div><div class="line">//在类被初始化之前会调用一次</div><div class="line">+(void)initialize</div></pre></td></tr></table></figure>
-</li>
-<li><p>iPad使用UIAlertController会crash<br><a href="http://stackoverflow.com/questions/31577140/uialertcontroller-is-crashed-ipad" target="_blank" rel="external">http://stackoverflow.com/questions/31577140/uialertcontroller-is-crashed-ipad</a></p>
-</li>
-</ol>
-  
-	</div>
-		<footer class="article-footer clearfix">
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/iOS/">iOS</a>
-  </div>
-
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/iOS/">iOS</a>
-</div>
-
-
-
-<div class="article-share" id="share">
-
-  <div data-url="https://slpowercoder.github.io/2016/09/02/iOS你可能不知道的小技巧/" data-title="iOS小知识 | 枫叶" data-tsina="null" class="share clearfix">
-  </div>
-
-</div>
-</footer>   	       
-	</article>
-	
-<nav class="article-nav clearfix">
- 
- <div class="prev" >
- <a href="/2016/12/30/看了我这篇RN你就入门了/" title="看了我这篇RN你就入门了">
-  <strong>PREVIOUS:</strong><br/>
-  <span>
-  看了我这篇RN你就入门了</span>
-</a>
-</div>
-
-
-<div class="next">
-<a href="/2016/09/02/hexo的安装和配置/"  title="Mac上 Hexo安装与配置">
- <strong>NEXT:</strong><br/> 
- <span>Mac上 Hexo安装与配置
-</span>
-</a>
-</div>
-
-</nav>
-
-	
-</div>  
-      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
-
-  <div id="toc" class="toc-aside">
-  <strong class="toc-title">Contents</strong>
-  
-  </div>
-
-<div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
-<aside class="clearfix">
-
-  
-<div class="categorieslist">
-	<p class="asidetitle">Categories</p>
-		<ul>
-		
-			<li><a href="/categories/hexo/" title="hexo">hexo<sup>1</sup></a></li>
-		
-			<li><a href="/categories/iOS/" title="iOS">iOS<sup>9</sup></a></li>
-		
-			<li><a href="/categories/react-native/" title="react-native">react-native<sup>6</sup></a></li>
-		
-		</ul>
-</div>
-
-
-  
-<div class="tagslist">
-	<p class="asidetitle">Tags</p>
-		<ul class="clearfix">
-		
-			<li><a href="/tags/assign/" title="assign">assign<sup>1</sup></a></li>
-		
-			<li><a href="/tags/audio/" title="audio">audio<sup>1</sup></a></li>
-		
-			<li><a href="/tags/block/" title="block">block<sup>1</sup></a></li>
-		
-			<li><a href="/tags/category/" title="category">category<sup>1</sup></a></li>
-		
-			<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
-		
-			<li><a href="/tags/iOS/" title="iOS">iOS<sup>2</sup></a></li>
-		
-			<li><a href="/tags/masonry/" title="masonry">masonry<sup>1</sup></a></li>
-		
-			<li><a href="/tags/react-native/" title="react-native">react-native<sup>6</sup></a></li>
-		
-			<li><a href="/tags/react-redux/" title="react-redux">react-redux<sup>1</sup></a></li>
-		
-			<li><a href="/tags/redux/" title="redux">redux<sup>1</sup></a></li>
-		
-			<li><a href="/tags/retain/" title="retain">retain<sup>1</sup></a></li>
-		
-			<li><a href="/tags/runtime/" title="runtime">runtime<sup>1</sup></a></li>
-		
-			<li><a href="/tags/strong/" title="strong">strong<sup>1</sup></a></li>
-		
-			<li><a href="/tags/weak/" title="weak">weak<sup>1</sup></a></li>
-		
-			<li><a href="/tags/博客/" title="博客">博客<sup>1</sup></a></li>
-		
-			<li><a href="/tags/浅拷贝/" title="浅拷贝">浅拷贝<sup>1</sup></a></li>
-		
-			<li><a href="/tags/消息转发/" title="消息转发">消息转发<sup>1</sup></a></li>
-		
-			<li><a href="/tags/深拷贝/" title="深拷贝">深拷贝<sup>1</sup></a></li>
-		
-			<li><a href="/tags/通信/" title="通信">通信<sup>1</sup></a></li>
-		
-			<li><a href="/tags/面试/" title="面试">面试<sup>1</sup></a></li>
-		
-		</ul>
-</div>
-
-
-  <div class="rsspart">
-	<a href="null" target="_blank" title="rss">RSS</a>
-</div>
-
-</aside>
-</div>
-    </div>
-    <footer><div id="footer" >
-	
-	<div class="line">
-		<span></span>
-		<div class="author"></div>
-	</div>
-	
-	
-	<div class="social-font clearfix">
-		
-		
-		
-		
-		
-	</div>
-		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2018 
-		
-		<a href="https://slpowercoder.github.io" target="_blank" title="枫叶">枫叶</a>
-		
-		</p>
-</div>
-</footer>
-    <script src="/js/jquery-2.1.0.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){ 
-  $('.navbar').click(function(){
-    $('header nav').toggleClass('shownav');
-  });
-  var myWidth = 0;
-  function getSize(){
-    if( typeof( window.innerWidth ) == 'number' ) {
-      myWidth = window.innerWidth;
-    } else if( document.documentElement && document.documentElement.clientWidth) {
-      myWidth = document.documentElement.clientWidth;
-    };
-  };
-  var m = $('#main'),
-      a = $('#asidepart'),
-      c = $('.closeaside'),
-      o = $('.openaside');
-  $(window).resize(function(){
-    getSize(); 
-    if (myWidth >= 1024) {
-      $('header nav').removeClass('shownav');
-    }else
-    {
-      m.removeClass('moveMain');
-      a.css('display', 'block').removeClass('fadeOut');
-      o.css('display', 'none');
-      
-      $('#toc.toc-aside').css('display', 'none');
-        
-    }
-  });
-  c.click(function(){
-    a.addClass('fadeOut').css('display', 'none');
-    o.css('display', 'block').addClass('fadeIn');
-    m.addClass('moveMain');
-  });
-  o.click(function(){
-    o.css('display', 'none').removeClass('beforeFadeIn');
-    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
-    m.removeClass('moveMain');
-  });
-  $(window).scroll(function(){
-    o.css("top",Math.max(80,260-$(this).scrollTop()));
-  });
-});
-</script>
-
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var ai = $('.article-content>iframe'),
-      ae = $('.article-content>embed'),
-      t  = $('#toc'),
-      h  = $('article h2')
-      ah = $('article h2'),
-      ta = $('#toc.toc-aside'),
-      o  = $('.openaside'),
-      c  = $('.closeaside');
-  if(ai.length>0){
-    ai.wrap('<div class="video-container" />');
-  };
-  if(ae.length>0){
-   ae.wrap('<div class="video-container" />');
-  };
-  if(ah.length==0){
-    t.css('display','none');
-  }else{
-    c.click(function(){
-      ta.css('display', 'block').addClass('fadeIn');
-    });
-    o.click(function(){
-      ta.css('display', 'none');
-    });
-    $(window).scroll(function(){
-      ta.css("top",Math.max(140,320-$(this).scrollTop()));
-    });
-  };
-});
-</script>
-
-
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var $this = $('.share'),
-      url = $this.attr('data-url'),
-      encodedUrl = encodeURIComponent(url),
-      title = $this.attr('data-title'),
-      tsina = $this.attr('data-tsina');
-  var html = [
-  '<a href="#" class="overlay" id="qrcode"></a>',
-  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
-  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
-  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
-  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
-  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
-  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
-  '<span title="Share to"></span>'
-  ].join('');
-  $this.append(html);
-  $('.article-share-qrcode').click(function(){
-    var imgSrc = $('#qrcode-pic').attr('data-src');
-    $('#qrcode-pic').attr('src', imgSrc);
-    $('#qrcode-pic').load(function(){
-        $('.qrcode strong').text(' ');
-    });
-  });
-});     
-</script>
-
-
-
-
-
-
-  </body>
-</html>
+block pageOnly
+  if theme.toc.enable == true 
+    script(type='text/javascript', src=url_for(theme.js) + '/toctotop.js' + '?v=' + theme.version, async)
+  else 
+    script(type='text/javascript', src=url_for(theme.js) + '/totop.js' + '?v=' + theme.version, async)
+  include _partial/comments_js

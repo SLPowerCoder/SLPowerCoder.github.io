@@ -1,379 +1,45 @@
+extends base
 
- <!DOCTYPE HTML>
-<html lang="zh-Hans">
-<head>
-  <meta charset="UTF-8">
-  
-    <title>Objective-C 消息转发机制 | 枫叶</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
-    
-    <meta name="author" content="枫叶">
-    
-    <meta name="description" content="一图胜千言，习惯性的先来一张图以便对消息转发有个整体的把握
-运行时系统库方法查询流程图
+block title
+  title= page.title + ' | ' + config.title
 
-对于对象无法处理的消息，如果不做转发处理的话，程序最终会调用NSObjective的doesNotRecognizeSelector:消息将程序crash掉。
+block content
+  .post
+    h1.post-title= page.title
+    .post-meta
+      if theme.comment
+        include _partial/comment_count
+        +comment-count(page.path)
+      p
+        span.date= page.date.format(theme.date_formats.post)
+        if page.categories.length > 0
+          span
+            for category in page.categories.toArray()
+              a.category(href=url_for(category.path))= category.name 
+        if theme.busuanzi == true
+          span
+            i#busuanzi_container_page_pv
+              i#busuanzi_value_page_pv
+              i= '' + __('hits')
+    .post-content
+      != page.content
+    include _partial/tag
+    .post-share
+      include _partial/share
+    include _partial/post_nav
+    #comments
+      include _partial/comments
 
-Objective-C提供了两种消息转发选项
-快">
-    
-    
-    
-    
-    
-    <link rel="icon" href="/img/favicon.ico">
-    
-    
-    <link rel="apple-touch-icon" href="/img/pacman.jpg">
-    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
-    
-    <link rel="stylesheet" href="/css/style.css">
-</head>
+block tocmodel
+  if theme.toc.enable == true 
+    .widget(id='toc')
+      .widget-title
+        i(class='fa fa-fei')= __('contents')
+      != toc(page.content, {list_number: theme.toc.number})
 
-  <body>
-    <header>
-      <div>
-		
-			<div id="imglogo">
-				<a href="/"><img src="/img/logo.svg" alt="枫叶" title="枫叶"/></a>
-			</div>
-			
-			<div id="textlogo">
-				<h1 class="site-name"><a href="/" title="枫叶">枫叶</a></h1>
-				<h2 class="blog-motto">枫叶</h2>
-			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
-			</a></div>
-			<nav class="animated">
-				<ul>
-					
-						<li><a href="/">Home</a></li>
-					
-						<li><a href="/archives">Archives</a></li>
-					
-					<li>
-					
-					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
-						<label>Search</label>
-						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
-						<input type="hidden" name="q" value="site:slpowercoder.github.io">
-					</form>
-					
-					</li>
-				</ul>
-			</nav>			
-</div>
-
-    </header>
-    <div id="container">
-      <div id="main" class="post" itemscope itemprop="blogPost">
-	<article itemprop="articleBody"> 
-		<header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2017/02/11/Objective-C 消息转发机制/" title="Objective-C 消息转发机制" itemprop="url">Objective-C 消息转发机制</a>
-  </h1>
-  <p class="article-author">By
-    
-      <a href="https://slpowercoder.github.io" title="枫叶">枫叶</a>
-    </p>
-  <p class="article-time">
-    <time datetime="2017-02-11T15:41:29.000Z" itemprop="datePublished">2017-02-11</time>
-    Updated:<time datetime="2017-03-01T07:06:47.000Z" itemprop="dateModified">2017-03-01</time>
-    
-  </p>
-</header>
-	<div class="article-content">
-		
-		
-		<div id="toc" class="toc-article">
-			<strong class="toc-title">Contents</strong>
-		<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#运行时系统库方法查询流程图"><span class="toc-number">1.</span> <span class="toc-text">运行时系统库方法查询流程图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Objective-C提供了两种消息转发选项"><span class="toc-number">2.</span> <span class="toc-text">Objective-C提供了两种消息转发选项</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#写了一大推字感觉很抽象，下面来点干货"><span class="toc-number">3.</span> <span class="toc-text">写了一大推字感觉很抽象，下面来点干货</span></a></li></ol>
-		</div>
-		
-		<p>一图胜千言，习惯性的先来一张图以便对消息转发有个整体的把握</p>
-<h3 id="运行时系统库方法查询流程图"><a href="#运行时系统库方法查询流程图" class="headerlink" title="运行时系统库方法查询流程图"></a>运行时系统库方法查询流程图</h3><p><img src="http://upload-images.jianshu.io/upload_images/1229960-edd81dfe76dacf77.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="运行时系统库方法查询"></p>
-<blockquote>
-<p>对于对象无法处理的消息，如果不做转发处理的话，程序最终会调用NSObjective的doesNotRecognizeSelector:消息将程序crash掉。</p>
-</blockquote>
-<h3 id="Objective-C提供了两种消息转发选项"><a href="#Objective-C提供了两种消息转发选项" class="headerlink" title="Objective-C提供了两种消息转发选项"></a>Objective-C提供了两种消息转发选项</h3><ul>
-<li>快速转发：NSObject类的子类A可以通过重写NSObject类的forwardingTargetForSelector:方法，将A的实例无法识别的消息转发给目标对象B，从而实现快速转发。<em>该技巧就像是将对象的实现代码与转发对象合并到一起。这类似于实现的多继承行为。如果你有一个定了对象 能够消化哪些消息的目标类，这个技巧可以取得很好的效果</em></li>
-<li>标准（完整）转发：NSObject类的子类A可以通过重写NSObject类的forwardInvocation:方法，实现标准转发。标准转发巧可以通过methodSignatureForSelector：方法获取一个methodsignature对象最终被封为NSInvocation对象传递给forwardInvocation:方法（注意如果methodSignatureForSelector：方法返回一个nil，程序会crash）从该对象能获取消息的全部内容（包含目标，方法名，和参数）。</li>
-</ul>
-<p>如果你拥有了一个定义了对象能够消化哪些消息的目标类，快速转发可以取得很好的效果。如果你没有这样目标类或想要执行其他处理过程（如记录日志并‘吞下’消息），就应该使用完整转发。</p>
-<h3 id="写了一大推字感觉很抽象，下面来点干货"><a href="#写了一大推字感觉很抽象，下面来点干货" class="headerlink" title="写了一大推字感觉很抽象，下面来点干货"></a>写了一大推字感觉很抽象，下面来点干货</h3><p>下面我要把Test实例的logName消息转发给Target实例，代码如下<br>Test头文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">//</div><div class="line">//  Test.h</div><div class="line">//  ForwardMsg</div><div class="line">//</div><div class="line">//  Created by 孙磊 on 2017/2/25.</div><div class="line">//  Copyright © 2017年 孙磊. All rights reserved.</div><div class="line">//</div><div class="line"></div><div class="line">#import &lt;Foundation/Foundation.h&gt;</div><div class="line"></div><div class="line">@interface Test : NSObject</div><div class="line"></div><div class="line">-(void)logName;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure></p>
-<p>Test实现文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div></pre></td><td class="code"><pre><div class="line">//</div><div class="line">//  Test.m</div><div class="line">//  ForwardMsg</div><div class="line">//</div><div class="line">//  Created by 孙磊 on 2017/2/25.</div><div class="line">//  Copyright © 2017年 孙磊. All rights reserved.</div><div class="line">//</div><div class="line"></div><div class="line">#import &quot;Test.h&quot;</div><div class="line">#import &quot;Target.h&quot;</div><div class="line">#import &lt;objc/runtime.h&gt;</div><div class="line"></div><div class="line">@implementation Test&#123;</div><div class="line">    Target *mTarget;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (instancetype)init</div><div class="line">&#123;</div><div class="line">    self = [super init];</div><div class="line">    if (self) &#123;</div><div class="line">        </div><div class="line">        //创建目标对象</div><div class="line">        mTarget = [Target new];</div><div class="line">    &#125;</div><div class="line">    return self;</div><div class="line">&#125;</div><div class="line"></div><div class="line">#if 0</div><div class="line">//当一个对象无法识别消息后，会执行resolveInstanceMethod或者resolveClassMethod方法</div><div class="line">//如果不想进行消息转发，可以在此方法中动态添加消息来做处理</div><div class="line">//如果不重写此方法或者此方法返回NO，系统会执行forwardingTargetForSelector进行快速转发</div><div class="line"></div><div class="line">+ (BOOL)resolveInstanceMethod:(SEL)sel</div><div class="line">&#123;</div><div class="line">    </div><div class="line">    if(sel == @selector(logName))&#123;</div><div class="line">        //第四个参数详解地址  https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/ObjCRuntimeGuide/Articles/ocrtTypeEncodings.html</div><div class="line">        //v代表返回类型为void</div><div class="line">        //@代表一个对象</div><div class="line">        //:代表一个selector</div><div class="line">        //因为OC中的每个方法都有默认的两个参数sel 和 selector，所以一般都是v@:</div><div class="line">        class_addMethod([self class],sel,(IMP)dynamicMethodIMP,&quot;v@:&quot;);</div><div class="line">        return YES;</div><div class="line">    &#125;</div><div class="line">    return [super resolveInstanceMethod:sel];</div><div class="line">&#125;</div><div class="line"></div><div class="line">//万年备胎</div><div class="line">void dynamicMethodIMP(id self, SEL _cmd)</div><div class="line">&#123;</div><div class="line">    //对无法识别的消息做处理</div><div class="line">    NSLog(@&quot;该对象无法识别 %@ 方法------%s&quot;, NSStringFromSelector(_cmd),__func__);</div><div class="line">&#125;</div><div class="line"></div><div class="line">#else </div><div class="line"></div><div class="line">/***************==========1、快速消息转发，快速转发只可以获取到方法签名==========*******************/</div><div class="line"></div><div class="line">-(id)forwardingTargetForSelector:(SEL)aSelector&#123;</div><div class="line">    NSLog(@&quot;%s&quot;,__func__);</div><div class="line">    if ([mTarget respondsToSelector:aSelector]) &#123;</div><div class="line">        //目标对象有对应的处理方法，则就会快速消息转发，不会再执行完整消息转发了</div><div class="line">        return mTarget;</div><div class="line">    &#125;</div><div class="line">    //目标对象也没有对应的方法，此时系统会执行forwardInvocation进行完整消息转发</div><div class="line">    return nil;</div><div class="line">&#125;</div><div class="line"></div><div class="line">/***********=============2、标准（完整）消息转发，完整消息转发，可以获取方法签名，参数等详细信息==========*********/</div><div class="line"></div><div class="line">//返回一个完整的方法签名，提供给forwardInvocation以便完整转发消息</div><div class="line">-(NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector&#123;</div><div class="line">    </div><div class="line">    NSMethodSignature* signature = [super methodSignatureForSelector:aSelector];</div><div class="line">    </div><div class="line">     if (!signature)</div><div class="line">        signature = [mTarget methodSignatureForSelector:aSelector];</div><div class="line"></div><div class="line">     return signature;</div><div class="line">&#125;</div><div class="line"></div><div class="line">-(void)forwardInvocation:(NSInvocation *)anInvocation&#123;</div><div class="line">    NSLog(@&quot;%s-----完整消息转发------&quot;,__func__);</div><div class="line">    SEL invSEL = anInvocation.selector;</div><div class="line">    if ([mTarget respondsToSelector:invSEL])&#123;</div><div class="line">        </div><div class="line">        //利用forwardInvocation方法来重新指定消息处理对象</div><div class="line">        [anInvocation invokeWithTarget:mTarget];</div><div class="line">    &#125;</div><div class="line">    else &#123;</div><div class="line">        [self doesNotRecognizeSelector:invSEL];</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">#endif</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
-<p>目标文件的头文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">//</div><div class="line">//  Target.h</div><div class="line">//  ForwardMsg</div><div class="line">//</div><div class="line">//  Created by 孙磊 on 2017/2/25.</div><div class="line">//  Copyright © 2017年 孙磊. All rights reserved.</div><div class="line">//</div><div class="line"></div><div class="line">#import &lt;Foundation/Foundation.h&gt;</div><div class="line"></div><div class="line">@interface Target : NSObject</div><div class="line"></div><div class="line">-(void)logName;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure></p>
-<p>目标文件的实现文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">//</div><div class="line">//  Target.m</div><div class="line">//  ForwardMsg</div><div class="line">//</div><div class="line">//  Created by 孙磊 on 2017/2/25.</div><div class="line">//  Copyright © 2017年 孙磊. All rights reserved.</div><div class="line">//</div><div class="line"></div><div class="line">#import &quot;Target.h&quot;</div><div class="line"></div><div class="line">@implementation Target</div><div class="line"></div><div class="line">-(void)logName&#123;</div><div class="line">NSLog(@&quot;我是备用方法---%s&quot;,__func__);</div><div class="line">&#125;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure></p>
-<p><a href="https://github.com/nicklockwood/NullSafe" target="_blank" rel="external">推荐一个国外大大利用消息转发避免后台返回NSNull（后台有时候会返回<null>）而引起的奔溃问题，例如你需要一个字符串他却给你返回了一个“<null>”这样一个NSNull对象。用法很简单，直接把NullSafe.m拖到项目中即可，该文件会在运行时自动加载</null></null></a></p>
-<p>扩展：简单说一下NULL，nil，Nil，NSNull的用处<br>NULL：用于普通类型，例如NSInteger<br>nil：用于OC对象（除了类这个对象）,给nil对象发送消息不会crash<br>Nil：用于Class类型对象的赋值（类是元类的实例，也是对象）<br>NSNull：用于OC对象的站位，一般会作为集合中的占位元素，给NSNull对象发送消息会crash的，后台给我们返回的<null>就是NSNull对象</null></p>
-  
-	</div>
-		<footer class="article-footer clearfix">
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/消息转发/">消息转发</a>
-  </div>
-
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/iOS/">iOS</a>
-</div>
-
-
-
-<div class="article-share" id="share">
-
-  <div data-url="https://slpowercoder.github.io/2017/02/11/Objective-C 消息转发机制/" data-title="Objective-C 消息转发机制 | 枫叶" data-tsina="null" class="share clearfix">
-  </div>
-
-</div>
-</footer>   	       
-	</article>
-	
-<nav class="article-nav clearfix">
- 
- <div class="prev" >
- <a href="/2017/02/11/iOS 深拷贝和浅拷贝/" title="iOS 深拷贝和浅拷贝">
-  <strong>PREVIOUS:</strong><br/>
-  <span>
-  iOS 深拷贝和浅拷贝</span>
-</a>
-</div>
-
-
-<div class="next">
-<a href="/2017/02/11/iOS中assign与weak，retain与strong的区别/"  title="iOS中assign与weak，retain与strong的区别">
- <strong>NEXT:</strong><br/> 
- <span>iOS中assign与weak，retain与strong的区别
-</span>
-</a>
-</div>
-
-</nav>
-
-	
-</div>  
-      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
-
-  <div id="toc" class="toc-aside">
-  <strong class="toc-title">Contents</strong>
-  <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#运行时系统库方法查询流程图"><span class="toc-number">1.</span> <span class="toc-text">运行时系统库方法查询流程图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Objective-C提供了两种消息转发选项"><span class="toc-number">2.</span> <span class="toc-text">Objective-C提供了两种消息转发选项</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#写了一大推字感觉很抽象，下面来点干货"><span class="toc-number">3.</span> <span class="toc-text">写了一大推字感觉很抽象，下面来点干货</span></a></li></ol>
-  </div>
-
-<div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
-<aside class="clearfix">
-
-  
-<div class="categorieslist">
-	<p class="asidetitle">Categories</p>
-		<ul>
-		
-			<li><a href="/categories/hexo/" title="hexo">hexo<sup>1</sup></a></li>
-		
-			<li><a href="/categories/iOS/" title="iOS">iOS<sup>9</sup></a></li>
-		
-			<li><a href="/categories/react-native/" title="react-native">react-native<sup>6</sup></a></li>
-		
-		</ul>
-</div>
-
-
-  
-<div class="tagslist">
-	<p class="asidetitle">Tags</p>
-		<ul class="clearfix">
-		
-			<li><a href="/tags/assign/" title="assign">assign<sup>1</sup></a></li>
-		
-			<li><a href="/tags/audio/" title="audio">audio<sup>1</sup></a></li>
-		
-			<li><a href="/tags/block/" title="block">block<sup>1</sup></a></li>
-		
-			<li><a href="/tags/category/" title="category">category<sup>1</sup></a></li>
-		
-			<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
-		
-			<li><a href="/tags/iOS/" title="iOS">iOS<sup>2</sup></a></li>
-		
-			<li><a href="/tags/masonry/" title="masonry">masonry<sup>1</sup></a></li>
-		
-			<li><a href="/tags/react-native/" title="react-native">react-native<sup>6</sup></a></li>
-		
-			<li><a href="/tags/react-redux/" title="react-redux">react-redux<sup>1</sup></a></li>
-		
-			<li><a href="/tags/redux/" title="redux">redux<sup>1</sup></a></li>
-		
-			<li><a href="/tags/retain/" title="retain">retain<sup>1</sup></a></li>
-		
-			<li><a href="/tags/runtime/" title="runtime">runtime<sup>1</sup></a></li>
-		
-			<li><a href="/tags/strong/" title="strong">strong<sup>1</sup></a></li>
-		
-			<li><a href="/tags/weak/" title="weak">weak<sup>1</sup></a></li>
-		
-			<li><a href="/tags/博客/" title="博客">博客<sup>1</sup></a></li>
-		
-			<li><a href="/tags/浅拷贝/" title="浅拷贝">浅拷贝<sup>1</sup></a></li>
-		
-			<li><a href="/tags/消息转发/" title="消息转发">消息转发<sup>1</sup></a></li>
-		
-			<li><a href="/tags/深拷贝/" title="深拷贝">深拷贝<sup>1</sup></a></li>
-		
-			<li><a href="/tags/通信/" title="通信">通信<sup>1</sup></a></li>
-		
-			<li><a href="/tags/面试/" title="面试">面试<sup>1</sup></a></li>
-		
-		</ul>
-</div>
-
-
-  <div class="rsspart">
-	<a href="null" target="_blank" title="rss">RSS</a>
-</div>
-
-</aside>
-</div>
-    </div>
-    <footer><div id="footer" >
-	
-	<div class="line">
-		<span></span>
-		<div class="author"></div>
-	</div>
-	
-	
-	<div class="social-font clearfix">
-		
-		
-		
-		
-		
-	</div>
-		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2018 
-		
-		<a href="https://slpowercoder.github.io" target="_blank" title="枫叶">枫叶</a>
-		
-		</p>
-</div>
-</footer>
-    <script src="/js/jquery-2.1.0.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){ 
-  $('.navbar').click(function(){
-    $('header nav').toggleClass('shownav');
-  });
-  var myWidth = 0;
-  function getSize(){
-    if( typeof( window.innerWidth ) == 'number' ) {
-      myWidth = window.innerWidth;
-    } else if( document.documentElement && document.documentElement.clientWidth) {
-      myWidth = document.documentElement.clientWidth;
-    };
-  };
-  var m = $('#main'),
-      a = $('#asidepart'),
-      c = $('.closeaside'),
-      o = $('.openaside');
-  $(window).resize(function(){
-    getSize(); 
-    if (myWidth >= 1024) {
-      $('header nav').removeClass('shownav');
-    }else
-    {
-      m.removeClass('moveMain');
-      a.css('display', 'block').removeClass('fadeOut');
-      o.css('display', 'none');
-      
-      $('#toc.toc-aside').css('display', 'none');
-        
-    }
-  });
-  c.click(function(){
-    a.addClass('fadeOut').css('display', 'none');
-    o.css('display', 'block').addClass('fadeIn');
-    m.addClass('moveMain');
-  });
-  o.click(function(){
-    o.css('display', 'none').removeClass('beforeFadeIn');
-    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
-    m.removeClass('moveMain');
-  });
-  $(window).scroll(function(){
-    o.css("top",Math.max(80,260-$(this).scrollTop()));
-  });
-});
-</script>
-
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var ai = $('.article-content>iframe'),
-      ae = $('.article-content>embed'),
-      t  = $('#toc'),
-      h  = $('article h2')
-      ah = $('article h2'),
-      ta = $('#toc.toc-aside'),
-      o  = $('.openaside'),
-      c  = $('.closeaside');
-  if(ai.length>0){
-    ai.wrap('<div class="video-container" />');
-  };
-  if(ae.length>0){
-   ae.wrap('<div class="video-container" />');
-  };
-  if(ah.length==0){
-    t.css('display','none');
-  }else{
-    c.click(function(){
-      ta.css('display', 'block').addClass('fadeIn');
-    });
-    o.click(function(){
-      ta.css('display', 'none');
-    });
-    $(window).scroll(function(){
-      ta.css("top",Math.max(140,320-$(this).scrollTop()));
-    });
-  };
-});
-</script>
-
-
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var $this = $('.share'),
-      url = $this.attr('data-url'),
-      encodedUrl = encodeURIComponent(url),
-      title = $this.attr('data-title'),
-      tsina = $this.attr('data-tsina');
-  var html = [
-  '<a href="#" class="overlay" id="qrcode"></a>',
-  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
-  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
-  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
-  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
-  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
-  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
-  '<span title="Share to"></span>'
-  ].join('');
-  $this.append(html);
-  $('.article-share-qrcode').click(function(){
-    var imgSrc = $('#qrcode-pic').attr('data-src');
-    $('#qrcode-pic').attr('src', imgSrc);
-    $('#qrcode-pic').load(function(){
-        $('.qrcode strong').text(' ');
-    });
-  });
-});     
-</script>
-
-
-
-
-
-
-  </body>
-</html>
+block pageOnly
+  if theme.toc.enable == true 
+    script(type='text/javascript', src=url_for(theme.js) + '/toctotop.js' + '?v=' + theme.version, async)
+  else 
+    script(type='text/javascript', src=url_for(theme.js) + '/totop.js' + '?v=' + theme.version, async)
+  include _partial/comments_js
