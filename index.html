@@ -730,10 +730,16 @@
 
 <article class="post">
     
+        <div class="post-media">
+            <a href="/2017/02/11/Objective-C 消息转发机制/">
+                <img class="img-ajax" src="/img/loading.gif"  data-src="http://upload-images.jianshu.io/upload_images/1229960-edd81dfe76dacf77.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"   alt="Objective-C 消息转发机制">
+            </a>
+        </div>
+    
     <div class="post-content">
         <div class="post-head home-post-head">
             <h1 class="post-title">
-                <a href="/2017/02/11/iOS中assign与weak，retain与strong的区别/">iOS中assign与weak，retain与strong的区别</a>
+                <a href="/2017/02/11/Objective-C 消息转发机制/">Objective-C 消息转发机制</a>
             </h1>
             <div class="post-meta">  &bull;
                 <time class="post-date" datetime="" title="">
@@ -743,8 +749,10 @@
         </div>
         <p class="brief">
             
-                以前在没有ARC的时候我们使用assign与retain来修饰属性，后来引入了更安全的weak和strong来修饰属性
-assign与weak两者都是弱引用，assign通常用于普通类型属性（如int,NSInteger），还有代理属...
+                一图胜千言，习惯性的先来一张图以便对消息转发有个整体的把握
+运行时系统库方法查询流程图
+
+对于对象无法处理的消息，如果不做转发处理的话，程序最终会调用NSObjective的doesNotRecognizeSelector:消息将程序...
             
         </p>
     </div>
@@ -768,16 +776,8 @@ assign与weak两者都是弱引用，assign通常用于普通类型属性（如i
         <span class="tags-meta">
             
                 
-                    <a href="/tags/assign" title='assign'>
-                        assign
-                    </a>
-                
-                    <a href="/tags/weak" title='weak'>
-                        weak
-                    </a>
-                
-                    <a href="/tags/retain" title='retain'>
-                        retain
+                    <a href="/tags/消息转发" title='消息转发'>
+                        消息转发
                     </a>
                 
             
@@ -791,7 +791,7 @@ assign与weak两者都是弱引用，assign通常用于普通类型属性（如i
             </div>
 
             <div class="post-permalink">
-                <a href="/2017/02/11/iOS中assign与weak，retain与strong的区别/" class="btn btn-default">Read</a>
+                <a href="/2017/02/11/Objective-C 消息转发机制/" class="btn btn-default">Read</a>
             </div>
         </footer>
     
@@ -838,19 +838,6 @@ assign与weak两者都是弱引用，assign通常用于普通类型属性（如i
                     </div>
                 </template>
             </div>
-        </div>
-    </div>
-
-        
-        
-    <div class="widget">
-        <h3 class="title">Notification</h3>
-        <div class="notification">
-            <p>
-    主题下载：<a href="https://github.com/shenliyang/hexo-theme-snippet" title="fork me" target="_blank">Snippet主题</a> <br/>
-    主题使用：<a href="https://github.com/shenliyang/hexo-theme-snippet/blob/master/README.md#常见问题" title="" target="_blank">常见使用问题</a> <br/>
-    支持主题：<a href="https://github.com/shenliyang/hexo-theme-snippet/stargazers">Star一下</a>
-</p>
         </div>
     </div>
 
