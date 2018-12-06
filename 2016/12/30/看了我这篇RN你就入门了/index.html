@@ -1,0 +1,429 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>看了我这篇RN你就入门了 | 枫叶</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="枫叶">
+    
+    <meta name="description" content="前言React认为每个组件都是一个有限状态机，状态与UI是一一对应的。我们只需管理好APP的state就能控制UI的显示，我们可以在每个component类中来通过this.state和this.setState来管理组件的state，但是如果APP交互比较多比较复杂，或者说该组件的某一状态需要和其">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="枫叶" title="枫叶"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="枫叶">枫叶</a></h1>
+				<h2 class="blog-motto">枫叶</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:slpowercoder.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/12/30/看了我这篇RN你就入门了/" title="看了我这篇RN你就入门了" itemprop="url">看了我这篇RN你就入门了</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="https://slpowercoder.github.io" title="枫叶">枫叶</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2016-12-30T08:44:51.000Z" itemprop="datePublished">2016-12-30</time>
+    Updated:<time datetime="2018-10-10T09:55:25.737Z" itemprop="dateModified">2018-10-10</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#redux的设计思想"><span class="toc-number">2.</span> <span class="toc-text">redux的设计思想</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#redux概念"><span class="toc-number">3.</span> <span class="toc-text">redux概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#action"><span class="toc-number">3.1.</span> <span class="toc-text">action</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#reducer"><span class="toc-number">3.2.</span> <span class="toc-text">reducer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#store"><span class="toc-number">3.3.</span> <span class="toc-text">store</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#react-redux基础"><span class="toc-number">4.</span> <span class="toc-text">react-redux基础</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Provider："><span class="toc-number">4.0.1.</span> <span class="toc-text">Provider：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#connect-mapStateToProps-mapDispatchToProps-mergeProps-options"><span class="toc-number">4.0.2.</span> <span class="toc-text">connect([mapStateToProps], [mapDispatchToProps], [mergeProps], [options])</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#redux-redux使用"><span class="toc-number">5.</span> <span class="toc-text">redux-redux使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#react-native-组件的生命周期"><span class="toc-number">6.</span> <span class="toc-text">react native 组件的生命周期</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#弄明白了这个图我认为你就能基本掌握RN了"><span class="toc-number">6.1.</span> <span class="toc-text">弄明白了这个图我认为你就能基本掌握RN了</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#项目的推荐目录"><span class="toc-number">6.2.</span> <span class="toc-text">项目的推荐目录</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#热更新"><span class="toc-number">7.</span> <span class="toc-text">热更新</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#相关文章"><span class="toc-number">8.</span> <span class="toc-text">相关文章</span></a></li></ol>
+		</div>
+		
+		<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>React认为每个组件都是一个有限状态机，状态与UI是一一对应的。我们只需管理好APP的state就能控制UI的显示，我们可以在每个component类中来通过<code>this.state</code>和<code>this.setState</code>来管理组件的state，但是如果APP交互比较多比较复杂，或者说该组件的某一状态需要和其他组件共享的话，这种方式就有点复杂了。<br>有没有一种能统一管理APP状态的框架呢，这时候Redux就应用而生了，它是一个用于统一管理APP 所有的state的一个的js框架，它不建议我们在component中直接操作state，而是交给redux的store中进行处理。而react-redux是在react的基础上为移动端定制的状态管理容器。</p>
+<h2 id="redux的设计思想"><a href="#redux的设计思想" class="headerlink" title="redux的设计思想"></a>redux的设计思想</h2><p><code>（1）Web 应用是一个状态机，视图与状态是一一对应的。</code><br><code>（2）所有的状态，保存在一个对象里面，由其统一管理。</code><br><code>（3）遵循严格的单项数据流，一个组件所需要的数据，必须由父组件传过来，而不能像flux中直接从store取。</code><br><code>（4）状态在组件中是‘只读’的，要交给redux处理</code></p>
+<h2 id="redux概念"><a href="#redux概念" class="headerlink" title="redux概念"></a>redux概念</h2><p>有图有真相，先来一张redux数据流图，让你有一个整体的把握<br><img src="http://upload-images.jianshu.io/upload_images/1229960-9cae53256b3bba52.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="redux flow"></p>
+<h3 id="action"><a href="#action" class="headerlink" title="action"></a>action</h3><p>一般是不允许用户直接操作类的state，而是通过触发消息来执行对应的操作来产生一个新的state，用户或后台服务器可以通过store.dispatch(action)来向store发送一个消息（消息至少一个标识该消息的字段type，还可以添加其他字段用于数据传送），store会在内部根据消息的类型type去reducer中执行相应的处理，这个消息我们就叫他为Action，Action本质上是一个JavaScript对象。</p>
+<p>实际编码中一般会把整个应用的消息类型统一放在一个文件ActionTypes.js中</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="keyword">const</span> ADD_TODO = <span class="string">'ADD_TODO'</span></div></pre></td></tr></table></figure>
+<p>Action的结构如下，各个字段的key的名字可以随意命名，但是类型的key一般都是type，数据类型最好为字符串</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  type: ADD_TODO,</div><div class="line">  text: <span class="string">'Build my first Redux app'</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>随着程序越来越大，你会发现一个组件中的action太多太乱了，所以我们也会把action按业务分类放在各个指定的文件中，但是又有一个问题，若果每个action的字段都有五六个，我们在如下写法岂不是太乱了</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">store.dispatch(&#123;</div><div class="line">  type: ADD_TODO,</div><div class="line">  text: <span class="string">'Build my first Redux app'</span></div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>于是乎我们就想起来可以将action对象封装在函数中，这个函数返回一个action对象，这个返回一个action对象的函数我们就称之为ActionCreator，如下所示</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="keyword">let</span> todo = ()=&gt; &#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">	 	type: ADD_TODO,</div><div class="line">  		text: <span class="string">'Build my first Redux app'</span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我们直接store.dispatch(todo)就好了，看着是不是整洁多了啊</p>
+<h3 id="reducer"><a href="#reducer" class="headerlink" title="reducer"></a>reducer</h3><p>它是一个纯函数，要求有相同的输入（参数）就一定会有相同的输出，它会根据当前的state和action来进行逻辑处理返回一个新的state<br>参数一：当前的state对象<br>参数二：action对象<br>返回值：产生一个新的state对象</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123; VisibilityFilters &#125; <span class="keyword">from</span> <span class="string">'./actions'</span></div><div class="line"><span class="comment">//初始state</span></div><div class="line"><span class="keyword">const</span> initialState = &#123;</div><div class="line">  visibilityFilter: VisibilityFilters.SHOW_ALL,</div><div class="line">  todos: []</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">todoApp</span>(<span class="params">state = initialState, action</span>) </span>&#123;</div><div class="line">  <span class="keyword">switch</span> (action.type) &#123;</div><div class="line">    <span class="keyword">case</span> SET_VISIBILITY_FILTER:</div><div class="line">      <span class="keyword">return</span> <span class="built_in">Object</span>.assign(&#123;&#125;, state, &#123;</div><div class="line">        visibilityFilter: action.filter</div><div class="line">      &#125;)</div><div class="line">    <span class="keyword">default</span>:</div><div class="line">      <span class="keyword">return</span> state</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>注意</strong>：reducer函数中一定不要去修改state，而是用Object.assign()函数生成一个新的state对象，如上所示</p>
+<p><strong>combineReducers</strong>：随着应用变得复杂，把APP的所有状态都放在一个reducer中处理会造成reducer函数非常庞大，因此需要对 reducer 函数 进行拆分，拆分后的每一个子reducer独立负责管理 APP state 的一部分。combineReducers 辅助函数的作用是，把多个不同子reducer 函数合并成一个最终的根reducer ，最后将根 reducer 作为createStore的参数就可以创建store对象了。合并后的 reducer 可以调用各个子 reducer，并把它们的结果合并成一个 state 对象。state 对象的结构由传入的多个 reducer 的 key 决定。</p>
+<p>最终，state 对象的结构会是这样的：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  reducer1: ...</div><div class="line">  reducer2: ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>使用方法如下所示</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123; combineReducers &#125; <span class="keyword">from</span> <span class="string">'redux'</span>;</div><div class="line"><span class="keyword">import</span> Strolling <span class="keyword">from</span> <span class="string">'./strollingReducer'</span>;</div><div class="line"><span class="keyword">import</span> Foods <span class="keyword">from</span> <span class="string">'./foodsReducer'</span>;</div><div class="line"><span class="keyword">import</span> FoodsList <span class="keyword">from</span> <span class="string">'./foodsListReducer'</span>;</div><div class="line"><span class="keyword">import</span> FoodCompare <span class="keyword">from</span> <span class="string">'./foodCompareReducer'</span>;</div><div class="line"><span class="keyword">import</span> FoodInfo <span class="keyword">from</span> <span class="string">'./foodInfoReducer'</span>;</div><div class="line"><span class="keyword">import</span> Search <span class="keyword">from</span> <span class="string">'./searchReducer'</span>;</div><div class="line"><span class="keyword">import</span> User <span class="keyword">from</span> <span class="string">'./userReducer'</span>;</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> rootReducer = combineReducers(&#123;</div><div class="line">    Strolling,</div><div class="line">    Foods,</div><div class="line">    FoodsList,</div><div class="line">    FoodCompare,</div><div class="line">    FoodInfo,</div><div class="line">    Search,</div><div class="line">    User,</div><div class="line">&#125;)</div><div class="line"></div><div class="line"><span class="comment">// export default rootReducer = combineReducers(&#123;</span></div><div class="line"><span class="comment">//     Strolling:Strolling,</span></div><div class="line"><span class="comment">//     Foods:Foods,  </span></div><div class="line"><span class="comment">//     FoodsList:FoodsList,</span></div><div class="line"><span class="comment">//     FoodCompare:FoodCompare,</span></div><div class="line"><span class="comment">//     FoodInfo:FoodInfo,</span></div><div class="line"><span class="comment">//     Search:Search,</span></div><div class="line"><span class="comment">//     User:User,</span></div><div class="line"><span class="comment">// &#125;)</span></div><div class="line"> </div><div class="line"><span class="comment">// export default function rootReducer(state = &#123;&#125;,action)&#123;</span></div><div class="line"></div><div class="line"><span class="comment">//     return&#123;</span></div><div class="line"><span class="comment">//         Strolling: Strolling(state.Strolling,action),</span></div><div class="line"><span class="comment">//         Foods:Foods(state.Foods,action),</span></div><div class="line"><span class="comment">//         FoodsList:FoodsList(state.FoodsList,action),</span></div><div class="line"><span class="comment">//         FoodCompare:FoodCompare(state.FoodCompare,action),</span></div><div class="line"><span class="comment">//         FoodInfo:FoodInfo(state.FoodInfo,action),</span></div><div class="line"><span class="comment">//         Search:Search(state.Search,action),</span></div><div class="line"><span class="comment">//         User:User(state.User,action)</span></div><div class="line"><span class="comment">//     &#125;</span></div><div class="line"><span class="comment">// &#125;</span></div><div class="line"></div><div class="line"><span class="comment">//以上三种方式是等价的,key可以设置也可以省略</span></div></pre></td></tr></table></figure>
+<p><strong>注意：我们不一定非要用combineReducers来组合子reducer，我们可以自定义类似功能的方法来组合，state的结构完全由我们决定。</strong></p>
+<h3 id="store"><a href="#store" class="headerlink" title="store"></a>store</h3><p>一个应用只有一个store，store 就是用来维持应用所有的 state 树 的一个对象。 改变 store 内 state 的惟一途径是对它 dispatch 一个 action，它有三个函数</p>
+<ul>
+<li><strong>getState()</strong><br>  返回应用当前的 state 树。</li>
+<li><strong>dispatch(action)</strong><br>  分发 action。这是触发 state 变化的惟一途径。<br>  会使用当前 getState() 的结果和传入的 action 以同步方式的调用 store 的 reduce 函数。返回值会被作为下一个 state。从现在开始，这就成为了 getState() 的返回值，同时变化监听器(change listener)会被触发。</li>
+<li><p><strong>subscribe(listener)</strong><br>  当state树发生变化的时候store会调用subscribe函数，我们可以传一个我们订制的函数作为参数来进行处理<br>  参数：一个函数<br>  返回值：返回一个解绑定函数</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//添加监听</span></div><div class="line"><span class="keyword">let</span> unsubscribe = store.subscribe(handleChange)</div><div class="line"><span class="comment">//解除监听</span></div><div class="line">unsubscribe()</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>replaceReducer(nextReducer)</strong><br> 替换 store 当前用来计算 state 的 reducer。<br> 这是一个高级 API。只有在你需要实现代码分隔，而且需要立即加载一些 reducer 的时候才可能会用到它。在实现 Redux 热加载机制的时候也可能会用到。</p>
+</li>
+</ul>
+<h2 id="react-redux基础"><a href="#react-redux基础" class="headerlink" title="react-redux基础"></a>react-redux基础</h2><p>前言已经提到过react-redux的由来，这里在啰嗦一下，react-redux是redux作者专门为react native订制的，这样使用起来更方便，我们只需在我们的组件中通过属性props获取dispatch方法，就可以直接向store发送一个action，而不需要再获取store对象，通过store对象的dispatch方法发送。<br>react-redux有两宝，<strong>provider</strong>和<strong>connect</strong>，下面详细介绍一下。</p>
+<h4 id="Provider："><a href="#Provider：" class="headerlink" title="Provider："></a>Provider：</h4><p>有一个store属性，我们要将应用的根标签放到Provider标签中，这样应用的所有标签就可以通过context来获取store对象了，但是我们一般不会通过此法来获取store对象，Provider是为了给connect函数使用的，这样才能通过connect函数的参数获取到store的state和dispatch了。</p>
+<h4 id="connect-mapStateToProps-mapDispatchToProps-mergeProps-options"><a href="#connect-mapStateToProps-mapDispatchToProps-mergeProps-options" class="headerlink" title="connect([mapStateToProps], [mapDispatchToProps], [mergeProps], [options])"></a>connect([mapStateToProps], [mapDispatchToProps], [mergeProps], [options])</h4><p>connect是一个高阶函数，<code>connect()</code>本身会返回一个函数变量（假如名字为func），给这个函数变量传递一个参数func(MainContainer)会生成一个MainContainer容器组件，形如下面的写法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">export default connect((state) =&gt; &#123;</div><div class="line">    const &#123; Main &#125; = state;</div><div class="line">    return &#123;</div><div class="line">        Main</div><div class="line">    &#125;</div><div class="line">&#125;)(MainContainer);</div></pre></td></tr></table></figure>
+<p>参数一：[mapStateToProps(state, [ownProps]): stateProps] (Function)</p>
+<blockquote>
+<p>如果定义该参数，组件将会监听 Redux store 的变化。任何时候，只要 Redux store 发生改变，mapStateToProps 函数就会被调用。该回调函数必须返回一个纯对象，这个对象会与组件的 props 合并。如果你省略了这个参数，你的组件将不会监听 Redux store。如果指定了该回调函数中的第二个参数 ownProps，则该参数的值为传递到组件的 props，而且只要组件接收到新的 props，mapStateToProps 也会被调用（例如，当 props 接收到来自父组件一个小小的改动，那么你所使用的 ownProps 参数，mapStateToProps 都会被重新计算）。</p>
+</blockquote>
+<p>参数二：[mapDispatchToProps(dispatch, [ownProps]): dispatchProps] (Object or Function):</p>
+<blockquote>
+<p>如果传递的是一个对象，那么每个定义在该对象的函数都将被当作 Redux action creator，而且这个对象会与 Redux store 绑定在一起，其中所定义的方法名将作为属性名，合并到组件的 props 中。如果传递的是一个函数，该函数将接收一个 dispatch 函数，然后由你来决定如何返回一个对象，这个对象通过 dispatch 函数与 action creator 以某种方式绑定在一起（提示：你也许会用到 Redux 的辅助函数 bindActionCreators()）。<code>如果你省略这个 mapDispatchToProps 参数，默认情况下，dispatch 会注入到你的组件 props 中。</code>如果指定了该回调函数中第二个参数 ownProps，该参数的值为传递到组件的 props，而且只要组件接收到新 props，mapDispatchToProps 也会被调用。</p>
+</blockquote>
+<p>参数三：[mergeProps(stateProps, dispatchProps, ownProps): props] (Function)</p>
+<blockquote>
+<p>如果指定了这个参数，mapStateToProps() 与 mapDispatchToProps() 的执行结果和组件自身的 props 将传入到这个回调函数中。该回调函数返回的对象将作为 props 传递到被包装的组件中。你也许可以用这个回调函数，根据组件的 props 来筛选部分的 state 数据，或者把 props 中的某个特定变量与 action creator 绑定在一起。如果你省略这个参数，默认情况下返回 Object.assign({}, ownProps, stateProps, dispatchProps) 的结果。<br>[options] (Object) 如果指定这个参数，可以定制 connector 的行为。</p>
+</blockquote>
+<p>参数四：[options] (Object) 如果指定这个参数，可以定制 connector 的行为。</p>
+<blockquote>
+<p>[pure = true] (Boolean): 如果为 true，connector 将执行 shouldComponentUpdate 并且浅对比 mergeProps 的结果，避免不必要的更新，前提是当前组件是一个“纯”组件，它不依赖于任何的输入或 state 而只依赖于 props 和 Redux store 的 state。默认值为 true。<br>[withRef = false] (Boolean): 如果为 true，connector 会保存一个对被包装组件实例的引用，该引用通过 getWrappedInstance() 方法获得。默认值为 false。</p>
+</blockquote>
+<h2 id="redux-redux使用"><a href="#redux-redux使用" class="headerlink" title="redux-redux使用"></a>redux-redux使用</h2><p>上面说了provider和connect方法，下面是实用讲解</p>
+<p>创建store对象的js文件</p>
+<p>下面的代码里包括应用中间件redux-thunk，和创建store对象两步，<a href="http://www.ruanyifeng.com/blog/2016/09/redux_tutorial_part_two_async_operations.html" target="_blank" rel="external">这里有更多关于中间件的详情</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">import &#123; createStore, applyMiddleware &#125; from &apos;redux&apos;;</div><div class="line">import thunk from &apos;redux-thunk&apos;;</div><div class="line">import rootReducer from &apos;../reducers/rootRudcer&apos;;</div><div class="line">//使用thunk中间件</div><div class="line">let createStoreWithMiddleware = applyMiddleware(thunk)(createStore);</div><div class="line">//创建store对象，一个APP只有一个store对象</div><div class="line">let store = createStoreWithMiddleware(rootReducer);</div><div class="line">export default store;</div></pre></td></tr></table></figure>
+<p>程序的入口文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">import React from &apos;react&apos;;</div><div class="line">import &#123; Provider &#125; from &apos;react-redux&apos;;</div><div class="line">import store from &apos;./store/store&apos;;</div><div class="line"></div><div class="line">import App from &apos;./containers/app&apos;;</div><div class="line"></div><div class="line">export default class Root extends React.Component &#123;</div><div class="line">    render() &#123;</div><div class="line">        return (</div><div class="line">        	//将APP的根视图组件包含在provider标签中</div><div class="line">            &lt;Provider store = &#123;store&#125; &gt;</div><div class="line">                &lt;App /&gt;</div><div class="line">            &lt;/Provider&gt;</div><div class="line">        )</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在容器组件中，将redux和容器组件关联起来，这里是redux与组件关联的地方，大多数童鞋使用redux最迷惑的地方估计就在这一块了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">import React from &apos;react&apos;;</div><div class="line">import &#123;connect&#125; from &apos;react-redux&apos;;</div><div class="line">import Brand from &apos;../Components/Brand&apos;;</div><div class="line"></div><div class="line">//BrandContainer容器组件</div><div class="line">class BrandContainer extends React.Component &#123;</div><div class="line">    </div><div class="line">    render() &#123;</div><div class="line">        return (</div><div class="line">        	//把容器组件的属性传递给UI组件</div><div class="line">            &lt;Brand &#123;...this.props&#125; /&gt;</div><div class="line">        )</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">export default connect((state) =&gt; &#123;</div><div class="line">    const &#123; BrandReducer &#125; = state;</div><div class="line">    return &#123;</div><div class="line">        BrandReducer</div><div class="line">    &#125;</div><div class="line">&#125;)(BrandContainer);</div></pre></td></tr></table></figure>
+<p>这样UI组件Brand中就可以通过属性获取dispatch方法以及处理后的最新state了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">const &#123;dispatch, BrandReducer&#125; = this.props;</div></pre></td></tr></table></figure>
+<p>下面来解释一下上面的代码</p>
+<p>将当前的BrandContainer组件关联起来，上面介绍了store中的state对象的结构会是这样的：</p>
+<p>{<br><br>  reducer1: …<br><br>  reducer2: …<br><br>}</p>
+<p>所以可以通过解构的方式，获取对应模块的state，如下面的const { BrandReducer } = state;</p>
+<p>下面这一块代码的作用就是将store中state传递给关联的容器组件中，当store中的state发生变化的时候，connect的第一参数mapStateToProps回调函数就会被调用，并且将该回调函数的返回值映射成其关联组件的一个属性，这样容器组件的属性就会发生变化，而UI组件又通过{…this.props}将容器组件的属性传递给了UI组件，所以UI组件的属性也会发生变化，我们知道属性的变化会导致UI组件重新render。好了，我们就能知道为什么我们在UI组件中dispatch一个action后UI组件能更新了，因为UI组件的属性发生变化导致RN重绘了UI。</p>
+<h2 id="react-native-组件的生命周期"><a href="#react-native-组件的生命周期" class="headerlink" title="react native 组件的生命周期"></a>react native 组件的生命周期</h2><h3 id="弄明白了这个图我认为你就能基本掌握RN了"><a href="#弄明白了这个图我认为你就能基本掌握RN了" class="headerlink" title="弄明白了这个图我认为你就能基本掌握RN了"></a>弄明白了这个图我认为你就能基本掌握RN了</h3><p><img src="https://github.com/SLPowerCoder/SLPowerCoder.github.io/blob/master/uploads/react-native%E5%A3%B0%E6%98%8E%E5%91%A8%E6%9C%9F.PNG?raw=true" alt="react-native lifecircle"><br>注意：上图的最右边componentWillMount改成componentWillUnmount</p>
+<h3 id="项目的推荐目录"><a href="#项目的推荐目录" class="headerlink" title="项目的推荐目录"></a>项目的推荐目录</h3><p>这种结构适合业务逻辑不太复杂的中小型项目，其优点是逻辑模块清晰，缺点是文件目录跨度较大，对于大型项目建议按项目的功能模块来划分。<br><img src="http://upload-images.jianshu.io/upload_images/1229960-e38436556eda2e19.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="项目的推荐目录"></p>
+<h2 id="热更新"><a href="#热更新" class="headerlink" title="热更新"></a>热更新</h2><p>暂时不说了，苹果粑粑这两天不高兴了，凡是热更新的APP不能上架，已上线的APP也应该收到了一份批评邮件了。<br><img src="http://upload-images.jianshu.io/upload_images/1229960-24ed9d2bcfd08bde.JPG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="你尽管hot patch吧"></p>
+<h2 id="相关文章"><a href="#相关文章" class="headerlink" title="相关文章"></a>相关文章</h2><p><a href="http://www.tuicool.com/articles/MrmYN36" target="_blank" rel="external">React 实践心得：react-redux 之 connect 方法详解</a><br><a href="http://www.ruanyifeng.com/blog/2016/09/redux_tutorial_part_one_basic_usages.html" target="_blank" rel="external">Redux 入门教程（一）：基本用法</a><br><a href="http://www.redux.org.cn/" target="_blank" rel="external">redux中文文档</a></p>
+<p><em>注：部分图片来源于互联网</em></p>
+<p><a href="https://slpowercoder.github.io/2016/12/30/一名iOSer对react-redux的理解/">原文链接，转载请注明此链接</a></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/react-native/">react-native</a><a href="/tags/redux/">redux</a><a href="/tags/react-redux/">react-redux</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/react-native/">react-native</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="https://slpowercoder.github.io/2016/12/30/看了我这篇RN你就入门了/" data-title="看了我这篇RN你就入门了 | 枫叶" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2017/01/07/运行react native 官方例子出错/" title="运行react native 官方例子出错的解决办法">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  运行react native 官方例子出错的解决办法</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/09/02/iOS你可能不知道的小技巧/"  title="iOS小知识">
+ <strong>NEXT:</strong><br/> 
+ <span>iOS小知识
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#redux的设计思想"><span class="toc-number">2.</span> <span class="toc-text">redux的设计思想</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#redux概念"><span class="toc-number">3.</span> <span class="toc-text">redux概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#action"><span class="toc-number">3.1.</span> <span class="toc-text">action</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#reducer"><span class="toc-number">3.2.</span> <span class="toc-text">reducer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#store"><span class="toc-number">3.3.</span> <span class="toc-text">store</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#react-redux基础"><span class="toc-number">4.</span> <span class="toc-text">react-redux基础</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Provider："><span class="toc-number">4.0.1.</span> <span class="toc-text">Provider：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#connect-mapStateToProps-mapDispatchToProps-mergeProps-options"><span class="toc-number">4.0.2.</span> <span class="toc-text">connect([mapStateToProps], [mapDispatchToProps], [mergeProps], [options])</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#redux-redux使用"><span class="toc-number">5.</span> <span class="toc-text">redux-redux使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#react-native-组件的生命周期"><span class="toc-number">6.</span> <span class="toc-text">react native 组件的生命周期</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#弄明白了这个图我认为你就能基本掌握RN了"><span class="toc-number">6.1.</span> <span class="toc-text">弄明白了这个图我认为你就能基本掌握RN了</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#项目的推荐目录"><span class="toc-number">6.2.</span> <span class="toc-text">项目的推荐目录</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#热更新"><span class="toc-number">7.</span> <span class="toc-text">热更新</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#相关文章"><span class="toc-number">8.</span> <span class="toc-text">相关文章</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+			<li><a href="/categories/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS/" title="iOS">iOS<sup>9</sup></a></li>
+		
+			<li><a href="/categories/react-native/" title="react-native">react-native<sup>6</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/assign/" title="assign">assign<sup>1</sup></a></li>
+		
+			<li><a href="/tags/audio/" title="audio">audio<sup>1</sup></a></li>
+		
+			<li><a href="/tags/block/" title="block">block<sup>1</sup></a></li>
+		
+			<li><a href="/tags/category/" title="category">category<sup>1</sup></a></li>
+		
+			<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+		
+			<li><a href="/tags/iOS/" title="iOS">iOS<sup>2</sup></a></li>
+		
+			<li><a href="/tags/masonry/" title="masonry">masonry<sup>1</sup></a></li>
+		
+			<li><a href="/tags/react-native/" title="react-native">react-native<sup>6</sup></a></li>
+		
+			<li><a href="/tags/react-redux/" title="react-redux">react-redux<sup>1</sup></a></li>
+		
+			<li><a href="/tags/redux/" title="redux">redux<sup>1</sup></a></li>
+		
+			<li><a href="/tags/retain/" title="retain">retain<sup>1</sup></a></li>
+		
+			<li><a href="/tags/runtime/" title="runtime">runtime<sup>1</sup></a></li>
+		
+			<li><a href="/tags/strong/" title="strong">strong<sup>1</sup></a></li>
+		
+			<li><a href="/tags/weak/" title="weak">weak<sup>1</sup></a></li>
+		
+			<li><a href="/tags/博客/" title="博客">博客<sup>1</sup></a></li>
+		
+			<li><a href="/tags/浅拷贝/" title="浅拷贝">浅拷贝<sup>1</sup></a></li>
+		
+			<li><a href="/tags/消息转发/" title="消息转发">消息转发<sup>1</sup></a></li>
+		
+			<li><a href="/tags/深拷贝/" title="深拷贝">深拷贝<sup>1</sup></a></li>
+		
+			<li><a href="/tags/通信/" title="通信">通信<sup>1</sup></a></li>
+		
+			<li><a href="/tags/面试/" title="面试">面试<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2018 
+		
+		<a href="https://slpowercoder.github.io" target="_blank" title="枫叶">枫叶</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
