@@ -5,13 +5,13 @@
     
     <entry>
       <title><![CDATA[react-native组件间的通信]]></title>
-      <url>https://slpowercoder.github.io/2018/09/03/react-native%E7%BB%84%E4%BB%B6%E9%97%B4%E7%9A%84%E9%80%9A%E4%BF%A1/</url>
+      <url>https://sunleic.github.io/2018/09/03/react-native%E7%BB%84%E4%BB%B6%E9%97%B4%E7%9A%84%E9%80%9A%E4%BF%A1/</url>
       <content type="html"></content>
     </entry>
     
     <entry>
       <title><![CDATA[RN与原生之间的通信方式]]></title>
-      <url>https://slpowercoder.github.io/2018/07/29/RN%E5%8E%9F%E7%94%9F%E4%B9%8B%E9%97%B4%E7%9A%84%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F/</url>
+      <url>https://sunleic.github.io/2018/07/29/RN%E5%8E%9F%E7%94%9F%E4%B9%8B%E9%97%B4%E7%9A%84%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F/</url>
       <content type="html"><![CDATA[<h3 id="从原生到RN的通信"><a href="#从原生到RN的通信" class="headerlink" title="从原生到RN的通信"></a>从原生到RN的通信</h3><p>可以通过bridge发送通知的方式来向RN通信</p>
 <h3 id="从RN到原生的通信"><a href="#从RN到原生的通信" class="headerlink" title="从RN到原生的通信"></a>从RN到原生的通信</h3><p>通过实现RN的一些协议来用原生代码封装RN接口</p>
 ]]></content>
@@ -19,7 +19,7 @@
     
     <entry>
       <title><![CDATA[React Native的性能优化]]></title>
-      <url>https://slpowercoder.github.io/2018/06/27/React%20Native%E7%9A%84%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</url>
+      <url>https://sunleic.github.io/2018/06/27/React%20Native%E7%9A%84%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</url>
       <content type="html"><![CDATA[<h3 id="React-Native的性能优化"><a href="#React-Native的性能优化" class="headerlink" title="React Native的性能优化"></a>React Native的性能优化</h3><p>众所周知RN由于应用了virtual DOM 、diff算法等一些列调优机制，使RN应用几乎达到了与原生一样的体验，但是毕竟RN只是原生APP的一个线程而已，RN和原生还隔着一道桥梁batch bridge，最终RN的代码还是要通过jscore引擎转换成原生代码来执行，这就决定了RN不可能超越原生，除非RN能越过这道坎，尽管官方替我们做了一些优化，但是有些优化只能交给了用户来决定，比如<code>sholdComponentUpdate</code>是返回true还是false，这是需要我们来决定的，再比如APP的页面如果非常多的话，打包之后bundle非常大，而加载和初始化bundle又很耗时间，这又需要拆分bundle，所以还是有许多需要人工来优化。</p>
 <p>既然是性能优化那就肯定得找出RN的性能瓶颈在哪</p>
 <h3 id="一、基础优化（目的是尽量减少页面的渲染）"><a href="#一、基础优化（目的是尽量减少页面的渲染）" class="headerlink" title="一、基础优化（目的是尽量减少页面的渲染）"></a>一、基础优化（目的是尽量减少页面的渲染）</h3><ol>
@@ -48,7 +48,7 @@
     
     <entry>
       <title><![CDATA[滴滴面试总结]]></title>
-      <url>https://slpowercoder.github.io/2018/06/15/%E6%BB%B4%E6%BB%B4%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%93/</url>
+      <url>https://sunleic.github.io/2018/06/15/%E6%BB%B4%E6%BB%B4%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%93/</url>
       <content type="html"><![CDATA[<p><strong>下面是面试滴滴的经历，总共出了四道技术面试题，说不出的辛酸。。。<br>日后有时间在总结答案，先记录下来</strong></p>
 <hr>
 <p><strong>1、实现一个游戏人物GameRole，包含年龄、性别、装备（可以动态增减），不是Xcode，是一个没有提示的编辑器，徒手写，类名忘写了。。。</strong></p>
@@ -65,7 +65,7 @@
     
     <entry>
       <title><![CDATA[写这篇blog内心是崩溃的]]></title>
-      <url>https://slpowercoder.github.io/2017/05/13/%E4%B8%80%E6%AC%A1masonry%E5%B8%83%E5%B1%80%E9%94%99%E8%AF%AF%E5%90%8E%E7%9A%84%E8%87%AA%E6%A3%80/</url>
+      <url>https://sunleic.github.io/2017/05/13/%E4%B8%80%E6%AC%A1masonry%E5%B8%83%E5%B1%80%E9%94%99%E8%AF%AF%E5%90%8E%E7%9A%84%E8%87%AA%E6%A3%80/</url>
       <content type="html"><![CDATA[<p>在某一个月黑风高的夜里，他正在伏案敲代码，敲完之后一脸自信的cmd + run，结果不愉快的事情就此发生了，心塞。。😂<br>事情是这样的，我们美丽的UI设计了一套图，本来想自定义个flowLayout走个捷径的，事实却发现走了个大弯路，图是下面这样子的👇</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/1229960-fd829b12d38e19b5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/480" alt="图.png"><br>约束报错，很是无奈，于是我又到GitHub上查看了一遍masonry的使用方式，现总一下。</p>
 <p>iOS布局有这么几种方式：<br><strong>frame：</strong>你要看吗？我并不打算写<br><strong>autoResize：</strong>autoresizingMask是view的一个布局属性，默认值是UIViewAutoresizingNone，这个枚举值有很多值，具体自己查看<br><strong>autoLayout：</strong>自动布局出来以后，很受欢迎，为此苹果还设计了<a href="http://www.tuicool.com/articles/QrUfemz" target="_blank" rel="external">VFL</a>可视化语言，但是程序员是很懒的（不是说不会偷懒的程序员不是好程序员吗，所以我说程序员懒并不是贬义词），然后<a href="https://github.com/SnapKit/Masonry" target="_blank" rel="external">masonry</a>就诞生了，masonry是一个对NSLayoutConstraint的封装具备链式语法的三方布局库，很受大家欢迎，我不敢说没人用frame布局，但是我敢说没几个人还在用NSLayoutConstraint来布局了吧</p>
@@ -94,7 +94,7 @@
     
     <entry>
       <title><![CDATA[react native集成到原有的项目中(iOS)]]></title>
-      <url>https://slpowercoder.github.io/2017/05/02/react%20native%E9%9B%86%E6%88%90%E5%88%B0%E5%8E%9F%E6%9C%89%E7%9A%84%E9%A1%B9%E7%9B%AE%E4%B8%AD(iOS)/</url>
+      <url>https://sunleic.github.io/2017/05/02/react%20native%E9%9B%86%E6%88%90%E5%88%B0%E5%8E%9F%E6%9C%89%E7%9A%84%E9%A1%B9%E7%9B%AE%E4%B8%AD(iOS)/</url>
       <content type="html"><![CDATA[<p>接触RN也有一段时间了，基本上来说算是入门了，到目前RN的应用还没有达到期望的广泛度，大部分还是以原生+RN的方式进行混合开发，今天抽空写一下关于RN嵌入到iOS原生项目中的知识点。</p>
 <h3 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h3><p>现在大部分嵌入方式都是采用cocoapods的方式引入RN依赖库到原生项目中，当然你也可以选择手动方式，不过很麻烦，本文采用的cocoapods来管理依赖。<br>RN所需要的环境也要装好，<a href="http://reactnative.cn/docs/0.43/getting-started.html#content" target="_blank" rel="external">中文网有</a>，具体我就不说了</p>
 <h3 id="集成"><a href="#集成" class="headerlink" title="集成"></a>集成</h3><p>用Xcode创建一个项目，然后在项目中创建一个目录，把RN相关的都放在里面，如下图，我创建了一个js目录（这个目录你也可以放到iOS项目的根目录，任意）。<br><img src="http://upload-images.jianshu.io/upload_images/1229960-a6e617a8586a6cfa.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="示例.png"><br>然后cd到刚刚创建的js目录中，执行<code>npm init</code>，这时js目录中会多出一个package.json文件，这个文件和iOS中的Podfile类似，是用来记录着RN工程中要安装的依赖，目前你只需要关注dependencies这一项(把下面的内容覆盖到你生成的package.json文件中)，该项中记录着RN项目要安装的依赖库。</p>
@@ -119,7 +119,7 @@
     
     <entry>
       <title><![CDATA[Block深入理解]]></title>
-      <url>https://slpowercoder.github.io/2017/03/14/block/</url>
+      <url>https://sunleic.github.io/2017/03/14/block/</url>
       <content type="html"><![CDATA[<h2 id="block-你应该了解的知识"><a href="#block-你应该了解的知识" class="headerlink" title="block 你应该了解的知识"></a>block 你应该了解的知识</h2><p>为什么不把本部分放到本质部分的下面呢，我以为实用为大，还是先把block的使用及其注意点写在前面吧。</p>
 <p>1、为了方便声明block类型的变量，我们一般用typedef <code>typedef void (^Block)(void)</code>给block类型起个别名，这样我们就可以直接按如下方式声明block变量了。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">typedef void (^Block)(void);</div><div class="line">int main(int argc, const char * argv[]) &#123;</div><div class="line">//这样声明</div><div class="line">Block block = ^&#123;&#125;;</div><div class="line">//而不是这样</div><div class="line">//void(^block)(void)=^&#123;&#125;;</div><div class="line"></div><div class="line">return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -169,14 +169,14 @@
     
     <entry>
       <title><![CDATA[iOS音频的播放以及录制]]></title>
-      <url>https://slpowercoder.github.io/2017/03/10/iOS%E9%9F%B3%E9%A2%91%E7%9A%84%E6%92%AD%E6%94%BE%E4%BB%A5%E5%8F%8A%E5%BD%95%E5%88%B6/</url>
+      <url>https://sunleic.github.io/2017/03/10/iOS%E9%9F%B3%E9%A2%91%E7%9A%84%E6%92%AD%E6%94%BE%E4%BB%A5%E5%8F%8A%E5%BD%95%E5%88%B6/</url>
       <content type="html"><![CDATA[<p>iOS中的音频包括两种类型，一种是时间比较短无需监听播放时间等属性的音效，一种是时间比较长的音乐</p>
 ]]></content>
     </entry>
     
     <entry>
       <title><![CDATA[iOS 深拷贝和浅拷贝]]></title>
-      <url>https://slpowercoder.github.io/2017/02/11/iOS%20%E6%B7%B1%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B5%85%E6%8B%B7%E8%B4%9D/</url>
+      <url>https://sunleic.github.io/2017/02/11/iOS%20%E6%B7%B1%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B5%85%E6%8B%B7%E8%B4%9D/</url>
       <content type="html"><![CDATA[<p><strong>浅拷贝</strong>只是增加了一个对被引用对象的一个指向，拷贝出的对象与原对象共用一块内存区域。<br>retain：只是retainCount加一，实际上还是共用一块内存<br>copy：不论拷贝的是不是集合对象，只要被拷贝的对象是不可变的，那就是浅拷贝，仅仅retainCount加一</p>
 <p><strong>深拷贝</strong>会分配出一块内存，然后将引用的内容拷贝进去，也就是说拷贝出来的对象与原对象是独立的。<br>copy：拷贝可变对象则是深拷贝<br>mutableCopy：不论被拷贝的是不是集合对象，是可变的还是不可变的，都是深拷贝</p>
 <p><strong>注意：</strong>如果mutableCopy的是集合对象，深拷贝的是该集合对象，不是指该集合对象里面的元素，称之为<strong>单层深拷贝</strong>，对于集合对象内的元素依然是指针拷贝</p>
@@ -185,8 +185,18 @@
     </entry>
     
     <entry>
+      <title><![CDATA[iOS中assign与weak，retain与strong的区别]]></title>
+      <url>https://sunleic.github.io/2017/02/11/iOS%E4%B8%ADassign%E4%B8%8Eweak%EF%BC%8Cretain%E4%B8%8Estrong%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
+      <content type="html"><![CDATA[<p>以前在没有ARC的时候我们使用assign与retain来修饰属性，后来引入了更安全的weak和strong来修饰属性</p>
+<h3 id="assign与weak"><a href="#assign与weak" class="headerlink" title="assign与weak"></a>assign与weak</h3><p>两者都是弱引用，assign通常用于普通类型属性（如int,NSInteger），还有代理属性的修饰，基本上来说两者是可以通用的。<br>只是后者比前者多了一个功能，后者会在引用的对象被释放的时候将该属性置为nil，而前者依然会指向原来的位置，这样就会变成野指针。在oc中你给你一个nil对象发送消息不会crash，但是给一个对象（野指针）发送他不能解析的消息是会crash的，所以总的来说weak要比assign安全一些。<br>像delegate属性建议用weak修饰而不是assign。</p>
+<h3 id="retain和strong"><a href="#retain和strong" class="headerlink" title="retain和strong"></a>retain和strong</h3><p>他俩都是强引用，除了某些情况下不一样，其他的时候也是可以通用的。</p>
+<p>在修饰block属性的时候，相信大家都知道要用copy，如果不copy的话，他的生命周期会随着函数的结束而结束，copy之后会放在堆里面，延长block的生命周期。<br>strong在修饰block的时候就相当于copy，而retain修饰栈block的时候就相当于assign，这样block会出现提前被释放掉的危险。</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[Objective-C 消息转发机制]]></title>
-      <url>https://slpowercoder.github.io/2017/02/11/Objective-C%20%E6%B6%88%E6%81%AF%E8%BD%AC%E5%8F%91%E6%9C%BA%E5%88%B6/</url>
+      <url>https://sunleic.github.io/2017/02/11/Objective-C%20%E6%B6%88%E6%81%AF%E8%BD%AC%E5%8F%91%E6%9C%BA%E5%88%B6/</url>
       <content type="html"><![CDATA[<p>一图胜千言，习惯性的先来一张图以便对消息转发有个整体的把握</p>
 <h3 id="运行时系统库方法查询流程图"><a href="#运行时系统库方法查询流程图" class="headerlink" title="运行时系统库方法查询流程图"></a>运行时系统库方法查询流程图</h3><p><img src="http://upload-images.jianshu.io/upload_images/1229960-edd81dfe76dacf77.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="运行时系统库方法查询"></p>
 <blockquote>
@@ -208,18 +218,8 @@
     </entry>
     
     <entry>
-      <title><![CDATA[iOS中assign与weak，retain与strong的区别]]></title>
-      <url>https://slpowercoder.github.io/2017/02/11/iOS%E4%B8%ADassign%E4%B8%8Eweak%EF%BC%8Cretain%E4%B8%8Estrong%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
-      <content type="html"><![CDATA[<p>以前在没有ARC的时候我们使用assign与retain来修饰属性，后来引入了更安全的weak和strong来修饰属性</p>
-<h3 id="assign与weak"><a href="#assign与weak" class="headerlink" title="assign与weak"></a>assign与weak</h3><p>两者都是弱引用，assign通常用于普通类型属性（如int,NSInteger），还有代理属性的修饰，基本上来说两者是可以通用的。<br>只是后者比前者多了一个功能，后者会在引用的对象被释放的时候将该属性置为nil，而前者依然会指向原来的位置，这样就会变成野指针。在oc中你给你一个nil对象发送消息不会crash，但是给一个对象（野指针）发送他不能解析的消息是会crash的，所以总的来说weak要比assign安全一些。<br>像delegate属性建议用weak修饰而不是assign。</p>
-<h3 id="retain和strong"><a href="#retain和strong" class="headerlink" title="retain和strong"></a>retain和strong</h3><p>他俩都是强引用，除了某些情况下不一样，其他的时候也是可以通用的。</p>
-<p>在修饰block属性的时候，相信大家都知道要用copy，如果不copy的话，他的生命周期会随着函数的结束而结束，copy之后会放在堆里面，延长block的生命周期。<br>strong在修饰block的时候就相当于copy，而retain修饰栈block的时候就相当于assign，这样block会出现提前被释放掉的危险。</p>
-]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[iOS中为什么非要用runtime才能在分类中扩展属性呢]]></title>
-      <url>https://slpowercoder.github.io/2017/02/11/iOS%E4%B8%AD%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9D%9E%E8%A6%81%E7%94%A8runtime%E6%89%8D%E8%83%BD%E5%9C%A8%E5%88%86%E7%B1%BB%E4%B8%AD%E6%89%A9%E5%B1%95%E5%B1%9E%E6%80%A7%E5%91%A2/</url>
+      <url>https://sunleic.github.io/2017/02/11/iOS%E4%B8%AD%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9D%9E%E8%A6%81%E7%94%A8runtime%E6%89%8D%E8%83%BD%E5%9C%A8%E5%88%86%E7%B1%BB%E4%B8%AD%E6%89%A9%E5%B1%95%E5%B1%9E%E6%80%A7%E5%91%A2/</url>
       <content type="html"><![CDATA[<p>想必大家都知道在分类中能扩展属性，而对于能不能扩展属性，能不能扩展成员变量是不是有点模糊，今天元宵节，我就清清嗓子说上两句吧</p>
 <h5 id="论点"><a href="#论点" class="headerlink" title="论点"></a>论点</h5><p>1.分类中是能扩展属性的<br>2.分类是不能给一个类扩展成员变量的</p>
 <h5 id="先唠唠嗑"><a href="#先唠唠嗑" class="headerlink" title="先唠唠嗑"></a>先唠唠嗑</h5><p>强调一下，分类不是类，它只是对类的一个扩展，没有ISA指针，我们知道我们可以通过runtime在不影响原来模块的情况下给模块扩展方法，有没有感觉这一句话好像也可以描述分类，<em>所以你可以认为分类是实现这一功能的捷径</em>，不然你觉得是用分类扩展方法容易还是用runtime来实现容易啊（正值年轻，说话有点冲~_~ !!）。</p>
@@ -233,7 +233,7 @@
     
     <entry>
       <title><![CDATA[运行react native 官方例子出错的解决办法]]></title>
-      <url>https://slpowercoder.github.io/2017/01/07/%E8%BF%90%E8%A1%8Creact%20native%20%E5%AE%98%E6%96%B9%E4%BE%8B%E5%AD%90%E5%87%BA%E9%94%99/</url>
+      <url>https://sunleic.github.io/2017/01/07/%E8%BF%90%E8%A1%8Creact%20native%20%E5%AE%98%E6%96%B9%E4%BE%8B%E5%AD%90%E5%87%BA%E9%94%99/</url>
       <content type="html"><![CDATA[<p>学习一样新的东西官网文档和官方源码例子无疑是最好的选择，所以今天clone了官方的例子，100多兆，如果网速不好的话会等待很长时间 ~_~!!，然后直接cd到根目录执行了npm install安装了依赖，可是安装的过程中出错了（也有可能安装成功了，但是运行失败了），估计例子上的版本跟我安装的rn版本不兼容吧。<br>我目前的RN版本是0.39，命令行的版本是react-native-cli:2.0.1</p>
 <p>先上官方运行效果图：<br><img src="http://upload-images.jianshu.io/upload_images/1229960-edb9d9b477259960.gif?imageMogr2/auto-orient/strip" alt="官方效果图"></p>
 <h3 id="解决办法："><a href="#解决办法：" class="headerlink" title="解决办法："></a>解决办法：</h3><p>情况一：如果npm install安装失败的话<br><br>1、git checkout 0.xx-stable切换到稳定的分支，我切换的是0.41-stable版本，安装运行成功。<br><br>2、npm install<br><br>3、找到Examples，里面有四个例子，可以用Xcode打开运行<br></p>
@@ -243,7 +243,7 @@
     
     <entry>
       <title><![CDATA[看了我这篇RN你就入门了]]></title>
-      <url>https://slpowercoder.github.io/2016/12/30/%E7%9C%8B%E4%BA%86%E6%88%91%E8%BF%99%E7%AF%87RN%E4%BD%A0%E5%B0%B1%E5%85%A5%E9%97%A8%E4%BA%86/</url>
+      <url>https://sunleic.github.io/2016/12/30/%E7%9C%8B%E4%BA%86%E6%88%91%E8%BF%99%E7%AF%87RN%E4%BD%A0%E5%B0%B1%E5%85%A5%E9%97%A8%E4%BA%86/</url>
       <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>React认为每个组件都是一个有限状态机，状态与UI是一一对应的。我们只需管理好APP的state就能控制UI的显示，我们可以在每个component类中来通过<code>this.state</code>和<code>this.setState</code>来管理组件的state，但是如果APP交互比较多比较复杂，或者说该组件的某一状态需要和其他组件共享的话，这种方式就有点复杂了。<br>有没有一种能统一管理APP状态的框架呢，这时候Redux就应用而生了，它是一个用于统一管理APP 所有的state的一个的js框架，它不建议我们在component中直接操作state，而是交给redux的store中进行处理。而react-redux是在react的基础上为移动端定制的状态管理容器。</p>
 <h2 id="redux的设计思想"><a href="#redux的设计思想" class="headerlink" title="redux的设计思想"></a>redux的设计思想</h2><p><code>（1）Web 应用是一个状态机，视图与状态是一一对应的。</code><br><code>（2）所有的状态，保存在一个对象里面，由其统一管理。</code><br><code>（3）遵循严格的单项数据流，一个组件所需要的数据，必须由父组件传过来，而不能像flux中直接从store取。</code><br><code>（4）状态在组件中是‘只读’的，要交给redux处理</code></p>
 <h2 id="redux概念"><a href="#redux概念" class="headerlink" title="redux概念"></a>redux概念</h2><p>有图有真相，先来一张redux数据流图，让你有一个整体的把握<br><img src="http://upload-images.jianshu.io/upload_images/1229960-9cae53256b3bba52.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="redux flow"></p>
@@ -316,14 +316,14 @@
 <h2 id="热更新"><a href="#热更新" class="headerlink" title="热更新"></a>热更新</h2><p>暂时不说了，苹果粑粑这两天不高兴了，凡是热更新的APP不能上架，已上线的APP也应该收到了一份批评邮件了。<br><img src="http://upload-images.jianshu.io/upload_images/1229960-24ed9d2bcfd08bde.JPG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="你尽管hot patch吧"></p>
 <h2 id="相关文章"><a href="#相关文章" class="headerlink" title="相关文章"></a>相关文章</h2><p><a href="http://www.tuicool.com/articles/MrmYN36" target="_blank" rel="external">React 实践心得：react-redux 之 connect 方法详解</a><br><a href="http://www.ruanyifeng.com/blog/2016/09/redux_tutorial_part_one_basic_usages.html" target="_blank" rel="external">Redux 入门教程（一）：基本用法</a><br><a href="http://www.redux.org.cn/" target="_blank" rel="external">redux中文文档</a></p>
 <p><em>注：部分图片来源于互联网</em></p>
-<p><a href="https://slpowercoder.github.io/2016/12/30/一名iOSer对react-redux的理解/">原文链接，转载请注明此链接</a></p>
+<p><a href="https://slpowercoder.github.io/2016/12/30/一名iOSer对react-redux的理解/" target="_blank" rel="external">原文链接，转载请注明此链接</a></p>
 ]]></content>
     </entry>
     
     <entry>
       <title><![CDATA[iOS小知识]]></title>
-      <url>https://slpowercoder.github.io/2016/09/02/iOS%E4%BD%A0%E5%8F%AF%E8%83%BD%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84%E5%B0%8F%E6%8A%80%E5%B7%A7/</url>
-      <content type="html"><![CDATA[<p>原文<a href="https://slpowercoder.github.io/">https://slpowercoder.github.io/</a></p>
+      <url>https://sunleic.github.io/2016/09/02/iOS%E4%BD%A0%E5%8F%AF%E8%83%BD%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84%E5%B0%8F%E6%8A%80%E5%B7%A7/</url>
+      <content type="html"><![CDATA[<p>原文<a href="https://slpowercoder.github.io/" target="_blank" rel="external">https://slpowercoder.github.io/</a></p>
 <ol>
 <li><p>去掉按钮的高亮黑</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[funcImgBtn setAdjustsImageWhenHighlighted:NO];</div></pre></td></tr></table></figure>
@@ -367,7 +367,7 @@
     
     <entry>
       <title><![CDATA[Mac上 Hexo安装与配置]]></title>
-      <url>https://slpowercoder.github.io/2016/09/02/hexo%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/</url>
+      <url>https://sunleic.github.io/2016/09/02/hexo%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/</url>
       <content type="html"><![CDATA[<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><h4 id="1-安装node-js传送"><a href="#1-安装node-js传送" class="headerlink" title="1. 安装node.js传送"></a>1. 安装node.js<a href="https://nodejs.org/en/" target="_blank" rel="external">传送</a></h4><p>下载node的pkg包，点击直接安装，安装的过程下一步下一步就行了，新版的node.js包含有npm（npm用来安装hexo）</p>
 <h4 id="2-安装hexo"><a href="#2-安装hexo" class="headerlink" title="2. 安装hexo"></a>2. 安装hexo</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo npm install -g hexo-cli</div></pre></td></tr></table></figure>
 <p><strong>注意：</strong>如果没有用sudo来执行命令可能会出现错误</p>
